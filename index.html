@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>We Are Azizstan | สภานักเรียน</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="announce" class="announce">
+    <div class="container announce-inner">
+      <div id="announceText"></div>
+      <a id="announceLink" href="news.html">ดูรายละเอียด</a>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo">WA</div>
+        <div>
+          <div class="brand-title">We Are Azizstan</div>
+          <div class="brand-sub">โรงเรียนมูลนิธิอาซิซสถาน • ศูนย์กลางข่าวสารและการสื่อสารของสภานักเรียน</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="active" href="index.html">หน้าแรก</a>
+        <a href="news.html">ข่าวสาร</a>
+        <a href="council.html">โครงสร้างสภา</a>
+        <a href="projects.html">โครงการ</a>
+        <a href="forms.html">แบบฟอร์ม</a>
+        <a href="contact.html">ติดต่อ</a>
+      </nav>
+
+      <div class="lang">
+        <span class="chip">TH</span>
+        <span class="chip soon">EN</span>
+        <span class="chip soon">AR</span>
+        <span class="chip soon">MS</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="panel">
+          <div class="kicker">STUDENT COUNCIL WEBSITE</div>
+          <h1>พื้นที่กลางของเสียงนักเรียน และข่าวสารสภา</h1>
+          <p>
+            เวอร์ชันเริ่มต้นพร้อมใช้งานจริง: ดูข่าวล่าสุด แจ้งปัญหา เสนอไอเดีย และติดต่อสภานักเรียนได้ทันที
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn primary" href="news.html">ดูข่าวล่าสุด</a>
+            <a class="btn" href="forms.html">ไปที่แบบฟอร์ม</a>
+            <a class="btn" href="council.html">ดูโครงสร้างสภา</a>
+          </div>
+
+          <div class="badge">ปลอดภัย: ใช้ Google Forms รับข้อมูล / เว็บไม่มีฐานข้อมูลสาธารณะ</div>
+        </div>
+
+        <div class="mini">
+          <div class="stat">
+            <div class="label">ปุ่มลัด</div>
+            <div class="value">แบบฟอร์มหลัก</div>
+            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn" id="formIdea" href="https://forms.google.com" target="_blank" rel="noopener">เสนอไอเดีย</a>
+              <a class="btn" id="formRepair" href="https://forms.google.com" target="_blank" rel="noopener">แจ้งชำรุด</a>
+              <a class="btn" id="formComplaint" href="https://forms.google.com" target="_blank" rel="noopener">ร้องเรียน</a>
+              <a class="btn" id="formCoordinate" href="https://forms.google.com" target="_blank" rel="noopener">ขอประสานงาน</a>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">หมายเหตุ</div>
+            <div class="value">อัปเดตได้ง่าย</div>
+            <div style="margin-top:8px; color:rgba(232,238,252,.75)">
+              ข่าวอัปเดตจากไฟล์ <b>data/news.json</b> โดยครู/ทีมสภา (แก้ไฟล์เดียว)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>ข่าวล่าสุด</h2>
+        <div class="muted">เด่นสุดตามคอนเซป</div>
+      </div>
+      <div id="latestNews" class="grid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>แบบฟอร์ม (รองลงมา)</h2>
+        <div class="muted">กดแล้วใช้งานได้ทันที</div>
+      </div>
+
+      <div class="grid">
+        <a class="card" id="formIdea" href="https://forms.google.com" target="_blank" rel="noopener">
+          <div class="meta"><span class="pill">ฟอร์ม</span><span>เสนอไอเดีย</span></div>
+          <h3>🧠 เสนอไอเดียโครงการ</h3>
+          <p>ส่งข้อเสนอ/กิจกรรมที่อยากให้สภาดำเนินการ</p>
+        </a>
+
+        <a class="card" id="formRepair" href="https://forms.google.com" target="_blank" rel="noopener">
+          <div class="meta"><span class="pill">ฟอร์ม</span><span>แจ้งปัญหา</span></div>
+          <h3>🛠 แจ้งของชำรุด/ปัญหาห้องเรียน</h3>
+          <p>แจ้งรายละเอียด + รูปถ่าย (ถ้ามี) เพื่อส่งต่อหน่วยงาน</p>
+        </a>
+
+        <a class="card" id="formComplaint" href="https://forms.google.com" target="_blank" rel="noopener">
+          <div class="meta"><span class="pill">ฟอร์ม</span><span>รับฟัง</span></div>
+          <h3>📢 ร้องเรียน/แจ้งปัญหา</h3>
+          <p>ข้อมูลเป็นส่วนตัว อยู่ใน Google Sheet ที่จำกัดสิทธิ์ผู้ดูแลเท่านั้น</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน</div>
+      <div style="display:flex; gap:12px">
+        <a id="socialLine" href="#" target="_blank" rel="noopener">Line</a>
+        <a id="socialFb" href="#" target="_blank" rel="noopener">Facebook</a>
+        <a id="socialIg" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a id="socialEmail" href="mailto:contact@example.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    SC.renderLatestNews("#latestNews", 6);
+  </script>
+</body>
+</html>

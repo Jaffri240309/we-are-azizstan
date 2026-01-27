@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ติดต่อ | We Are Azizstan</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="announce" class="announce">
+    <div class="container announce-inner">
+      <div id="announceText"></div>
+      <a id="announceLink" href="news.html">ดูรายละเอียด</a>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo">WA</div>
+        <div>
+          <div class="brand-title">ติดต่อสภานักเรียน</div>
+          <div class="brand-sub">ช่องทางสื่อสารอย่างเป็นทางการ (ใส่ลิงก์จริงทีหลัง)</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">หน้าแรก</a>
+        <a href="news.html">ข่าวสาร</a>
+        <a href="council.html">โครงสร้างสภา</a>
+        <a href="projects.html">โครงการ</a>
+        <a href="forms.html">แบบฟอร์ม</a>
+        <a class="active" href="contact.html">ติดต่อ</a>
+      </nav>
+
+      <div class="lang">
+        <span class="chip">TH</span>
+        <span class="chip soon">EN</span>
+        <span class="chip soon">AR</span>
+        <span class="chip soon">MS</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <h1>ติดต่อ</h1>
+    <p class="lead">
+      ตอนนี้เป็นโครงร่างพร้อมใช้ ปุ่มลิงก์จะดึงจาก <b>data/site-config.json</b> อัตโนมัติ
+    </p>
+
+    <div class="grid">
+      <a class="card" id="socialLine" href="#" target="_blank" rel="noopener">
+        <div class="meta"><span class="pill">Line</span><span>Official</span></div>
+        <h3>Line</h3>
+        <p>ช่องทางประกาศ/สอบถามแบบรวดเร็ว</p>
+        <div style="margin-top:12px"><span class="btn">เปิด</span></div>
+      </a>
+
+      <a class="card" id="socialFb" href="#" target="_blank" rel="noopener">
+        <div class="meta"><span class="pill">Facebook</span><span>Official</span></div>
+        <h3>Facebook</h3>
+        <p>ข่าวสาร กิจกรรม และภาพอัปเดต</p>
+        <div style="margin-top:12px"><span class="btn">เปิด</span></div>
+      </a>
+
+      <a class="card" id="socialIg" href="#" target="_blank" rel="noopener">
+        <div class="meta"><span class="pill">Instagram</span><span>Official</span></div>
+        <h3>Instagram</h3>
+        <p>สื่อประชาสัมพันธ์และภาพกิจกรรม</p>
+        <div style="margin-top:12px"><span class="btn">เปิด</span></div>
+      </a>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <div class="kicker">EMAIL</div>
+      <h2 style="margin:8px 0 6px">อีเมล</h2>
+      <p style="margin:0; color:rgba(232,238,252,.75)">
+        สำหรับการติดต่อทางการ/เอกสารสำคัญ
+      </p>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn primary" id="socialEmail" href="mailto:contact@example.com">ส่งอีเมล</a>
+        <a class="btn" href="forms.html">ไปที่แบบฟอร์ม</a>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px">
+      <div class="kicker">NOTE</div>
+      <h2 style="margin:8px 0 6px">แนวทางการสื่อสาร</h2>
+      <p style="margin:0; color:rgba(232,238,252,.75)">
+        หากเป็น “ร้องเรียน/แจ้งเหตุ” แนะนำใช้แบบฟอร์ม เพื่อเก็บข้อมูลเป็นระบบและเป็นส่วนตัว
+      </p>
+      <div style="margin-top:12px">
+        <a class="btn" href="forms.html">ไปที่แบบฟอร์มร้องเรียน</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© <span id="year"></span> We Are Azizstan</div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

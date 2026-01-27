@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ข่าวสาร | We Are Azizstan</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="announce" class="announce">
+    <div class="container announce-inner">
+      <div id="announceText"></div>
+      <a id="announceLink" href="news.html">ดูรายละเอียด</a>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo">WA</div>
+        <div>
+          <div class="brand-title">ข่าวสาร & ประกาศ</div>
+          <div class="brand-sub">We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">หน้าแรก</a>
+        <a class="active" href="news.html">ข่าวสาร</a>
+        <a href="council.html">โครงสร้างสภา</a>
+        <a href="projects.html">โครงการ</a>
+        <a href="forms.html">แบบฟอร์ม</a>
+        <a href="contact.html">ติดต่อ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="section-head" style="align-items:center">
+      <div>
+        <h1>ข่าวสาร</h1>
+        <p class="lead">ค้นหา/อ่านรายละเอียดข่าวได้ (อัปเดตจากไฟล์เดียว news.json)</p>
+      </div>
+      <input id="q" class="search" placeholder="ค้นหาข่าว เช่น ประกาศ, กิจกรรม, เว็บไซต์..." />
+    </div>
+
+    <div id="newsDetail" style="margin-bottom:14px;"></div>
+    <div id="newsList" class="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">อัปเดตข่าวโดยครูผู้ดูแลระบบและทีมสภานักเรียน</div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    // ถ้ามี ?id= จะโชว์รายละเอียดข่าวด้านบน
+    SC.renderNewsDetail("#newsDetail");
+    SC.renderNewsList("#newsList");
+
+    document.getElementById("q").addEventListener("input", (e) => {
+      SC.renderNewsList("#newsList", e.target.value);
+    });
+  </script>
+</body>
+</html>

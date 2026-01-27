@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>คำถามที่พบบ่อย | We Are Azizstan</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="announce" class="announce">
+    <div class="container announce-inner">
+      <div id="announceText"></div>
+      <a id="announceLink" href="news.html">ดูรายละเอียด</a>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo">WA</div>
+        <div>
+          <div class="brand-title">คำถามที่พบบ่อย (FAQ)</div>
+          <div class="brand-sub">ตอบคำถามพื้นฐานเกี่ยวกับเว็บและการติดต่อสภา</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">หน้าแรก</a>
+        <a href="news.html">ข่าวสาร</a>
+        <a href="council.html">โครงสร้างสภา</a>
+        <a href="projects.html">โครงการ</a>
+        <a href="forms.html">แบบฟอร์ม</a>
+        <a href="contact.html">ติดต่อ</a>
+      </nav>
+
+      <div class="lang">
+        <span class="chip">TH</span>
+        <span class="chip soon">EN</span>
+        <span class="chip soon">AR</span>
+        <span class="chip soon">MS</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <h1>คำถามที่พบบ่อย</h1>
+    <p class="lead">ตอนนี้ใส่ FAQ ตัวอย่างไว้ก่อน อาจารย์แก้ข้อความได้ตามจริงภายหลัง</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="meta"><span class="pill">FAQ</span><span>ทั่วไป</span></div>
+        <h3>ทำไมต้องใช้ Google Forms?</h3>
+        <p>เพื่อความปลอดภัยและความเป็นส่วนตัว ข้อมูลจะไม่ถูกแสดงบนเว็บสาธารณะ</p>
+      </div>
+
+      <div class="card">
+        <div class="meta"><span class="pill">FAQ</span><span>ร้องเรียน</span></div>
+        <h3>ข้อมูลร้องเรียนคนอื่นเห็นไหม?</h3>
+        <p>ไม่เห็น ข้อมูลอยู่ใน Google Sheet ที่จำกัดสิทธิ์เฉพาะผู้ดูแลระบบเท่านั้น</p>
+      </div>
+
+      <div class="card">
+        <div class="meta"><span class="pill">FAQ</span><span>ข่าวสาร</span></div>
+        <h3>ข่าวอัปเดตอย่างไร?</h3>
+        <p>อัปเดตจากไฟล์เดียว <b>data/news.json</b> แล้วเผยแพร่เว็บใหม่</p>
+      </div>
+
+      <div class="card">
+        <div class="meta"><span class="pill">FAQ</span><span>ติดต่อ</span></div>
+        <h3>ต้องติดต่อสภายังไงเร็วที่สุด?</h3>
+        <p>ดูที่หน้า “ติดต่อ” หรือใช้แบบฟอร์มในหน้า “แบบฟอร์ม”</p>
+      </div>
+
+      <div class="card">
+        <div class="meta"><span class="pill">FAQ</span><span>หลายภาษา</span></div>
+        <h3>เว็บมีภาษาอังกฤษ/อาหรับ/มลายูไหม?</h3>
+        <p>มีแผนทำในอนาคต ตอนนี้เป็นภาษาไทยเป็นหลัก (ปุ่มขึ้น Coming soon)</p>
+      </div>
+
+      <div class="card">
+        <div class="meta"><span class="pill">FAQ</span><span>ช่วยเหลือ</span></div>
+        <h3>มีปัญหาเว็บโหลดไม่ขึ้นทำยังไง?</h3>
+        <p>ลองรีเฟรชหน้า/เปลี่ยนเครือข่าย หากยังมีปัญหาให้แจ้งผ่านหน้าแบบฟอร์ม</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <div class="kicker">NEED HELP?</div>
+      <h2 style="margin:8px 0 6px">ต้องการให้สภาช่วยอะไร</h2>
+      <p style="margin:0; color:rgba(232,238,252,.75)">
+        ไปที่หน้าแบบฟอร์มเพื่อเสนอไอเดีย/แจ้งปัญหา หรือไปที่หน้าติดต่อ
+      </p>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn primary" href="forms.html">ไปที่แบบฟอร์ม</a>
+        <a class="btn" href="contact.html">ไปที่ติดต่อ</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© <span id="year"></span> We Are Azizstan</div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
