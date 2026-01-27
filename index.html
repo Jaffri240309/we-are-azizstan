@@ -2,179 +2,299 @@
 <html lang="th">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="google-site-verification" content="6mEBB5odAY2K2M8oRTxamcENr7WFmHQCFgXSNe2MiZA" />
-
   <title>We Are Azizstan | สภานักเรียน</title>
-  <meta name="description" content="เว็บไซต์สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน ศูนย์กลางข่าวสาร การสื่อสาร และเสียงของนักเรียน" />
-
-  <!-- ✅ CSS หลัก (ตัวนี้เท่านั้น) -->
-  <link rel="stylesheet" href="/style.css" />
+  <meta name="description" content="ศูนย์กลางข่าวสาร กิจกรรม และการสื่อสารของสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-
 <body>
-
-  <!-- Announcement Bar -->
-  <div id="announce" class="announce">
+  <!-- Announcement (ทางการ-สุภาพ) -->
+  <div id="announce" class="announce" style="display:none">
     <div class="container announce-inner">
-      <div id="announceText">📢 ยินดีต้อนรับสู่เว็บไซต์สภานักเรียน We Are Azizstan</div>
-      <a id="announceLink" href="news.html">ดูรายละเอียด</a>
+      <div class="announce-left">
+        <span class="pill pill-announce">ประกาศ</span>
+        <div id="announceText" class="announce-text"></div>
+      </div>
+      <a id="announceLink" class="btn btn-sm btn-ghost" href="news.html">อ่านต่อ</a>
     </div>
   </div>
 
-  <!-- Header / Navigation -->
+  <!-- Navbar (ต้องทางการ) -->
   <header class="topbar">
     <div class="container topbar-inner">
-
-      <div class="brand">
-        <div class="logo">WA</div>
-        <div>
+      <a class="brand" href="index.html">
+        <div class="logo" aria-hidden="true">WA</div>
+        <div class="brand-txt">
           <div class="brand-title">We Are Azizstan</div>
-          <div class="brand-sub">
-            โรงเรียนมูลนิธิอาซิซสถาน • ศูนย์กลางข่าวสารและการสื่อสารของสภานักเรียน
-          </div>
+          <div class="brand-sub">โรงเรียนมูลนิธิอาซิซสถาน • สภานักเรียน</div>
         </div>
-      </div>
+      </a>
 
       <nav class="nav">
         <a class="active" href="index.html">หน้าแรก</a>
         <a href="news.html">ข่าวสาร</a>
-        <a href="council.html">โครงสร้างสภา</a>
-        <a href="projects.html">โครงการ</a>
+        <a href="projects.html">กิจกรรม</a>
         <a href="forms.html">แบบฟอร์ม</a>
+        <a href="council.html">เกี่ยวกับสภา</a>
         <a href="contact.html">ติดต่อ</a>
       </nav>
 
       <div class="lang">
-        <span class="chip">TH</span>
-        <span class="chip soon">EN</span>
-        <span class="chip soon">AR</span>
-        <span class="chip soon">MS</span>
+        <span class="chip active">TH</span>
+        <span class="chip">EN <small>soon</small></span>
+        <span class="chip">AR <small>soon</small></span>
+        <span class="chip">MS <small>soon</small></span>
       </div>
-
     </div>
   </header>
 
-  <!-- Main -->
-  <main class="container">
+  <!-- Hero (ภาพจริง + ทางการ แต่ดูทันสมัย) -->
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="ภาพกิจกรรมโรงเรียน"></div>
+    <div class="hero-overlay"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-grid">
+    <div class="container hero-inner">
+      <div class="hero-card">
+        <div class="kicker">STUDENT COUNCIL WEBSITE</div>
+        <h1>พื้นที่กลางของเสียงนักเรียน<br/>และข่าวสารสภานักเรียน</h1>
+        <p>
+          ศูนย์กลางสำหรับติดตามข่าวประชาสัมพันธ์ กิจกรรม แจ้งปัญหา เสนอไอเดีย และติดต่อสภานักเรียน
+          โรงเรียนมูลนิธิอาซิซสถาน
+        </p>
 
-        <div class="panel">
-          <div class="kicker">STUDENT COUNCIL WEBSITE</div>
-          <h1>พื้นที่กลางของเสียงนักเรียน<br>และข่าวสารสภานักเรียน</h1>
-
-          <p>
-            เว็บไซต์ศูนย์กลางสำหรับติดตามข่าวสาร แจ้งปัญหา เสนอไอเดีย
-            และติดต่อสภานักเรียนโรงเรียนมูลนิธิอาซิซสถาน
-          </p>
-
-          <div class="hero-cta">
-            <a class="btn primary" href="news.html">ดูข่าวล่าสุด</a>
-            <a class="btn" href="forms.html">ไปที่แบบฟอร์ม</a>
-            <a class="btn" href="council.html">ดูโครงสร้างสภา</a>
-          </div>
-
-          <div class="badge">
-            🔒 ปลอดภัย: ใช้ Google Forms รับข้อมูล / เว็บไม่มีฐานข้อมูลสาธารณะ
-          </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="news.html">ดูข่าวสาร</a>
+          <a class="btn btn-outline" href="projects.html">ดูกิจกรรม</a>
+          <a class="btn btn-ghost" href="council.html">เกี่ยวกับสภา</a>
         </div>
 
-        <div class="mini">
-          <div class="stat">
-            <div class="label">ปุ่มลัด</div>
-            <div class="value">แบบฟอร์มหลัก</div>
-
-            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
-              <a class="btn" href="https://forms.google.com" target="_blank" rel="noopener">เสนอไอเดีย</a>
-              <a class="btn" href="https://forms.google.com" target="_blank" rel="noopener">แจ้งชำรุด</a>
-              <a class="btn" href="https://forms.google.com" target="_blank" rel="noopener">ร้องเรียน</a>
-              <a class="btn" href="https://forms.google.com" target="_blank" rel="noopener">ขอประสานงาน</a>
-            </div>
-          </div>
-
-          <div class="stat">
-            <div class="label">หมายเหตุ</div>
-            <div class="value">อัปเดตง่าย</div>
-            <div class="note">
-              ข่าวอัปเดตจากไฟล์ <b>data/news.json</b><br>
-              โดยครูหรือทีมสภานักเรียน (แก้ไฟล์เดียว)
-            </div>
-          </div>
+        <div class="note">
+          <span class="note-icon" aria-hidden="true">🔒</span>
+          ปลอดภัย: ใช้ Google Forms รับข้อมูล / ไม่มีฐานข้อมูลสาธารณะ
         </div>
-
       </div>
+
+      <!-- ปุ่มลัดแบบฟอร์ม (ลูกเล่นได้ แต่ยังดูทางการ) -->
+      <aside class="side-card">
+        <div class="side-head">
+          <div>
+            <div class="side-title">แบบฟอร์มหลัก</div>
+            <div class="side-sub">กดแล้วใช้งานได้ทันที</div>
+          </div>
+          <span class="pill">Quick</span>
+        </div>
+
+        <div class="quick-grid">
+          <a class="quick" id="formIdea" href="forms.html#idea">เสนอไอเดีย</a>
+          <a class="quick" id="formRepair" href="forms.html#repair">แจ้งชำรุด</a>
+          <a class="quick" id="formComplaint" href="forms.html#complaint">ร้องเรียน</a>
+          <a class="quick" id="formCoordinate" href="forms.html#coordinate">ขอประสานงาน</a>
+        </div>
+
+        <div class="side-divider"></div>
+
+        <div class="side-mini">
+          <div class="side-mini-title">อัปเดตง่าย</div>
+          <div class="side-mini-sub">
+            ข่าว/แบนเนอร์ดึงจาก <b>data/news.json</b> (แก้ไฟล์เดียว)
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main class="container main">
+    <!-- แบนเนอร์กิจกรรม (ข่าวแบบ c: news + banner) -->
+    <section class="section">
+      <div class="section-head">
+        <h2>ไฮไลท์กิจกรรม</h2>
+        <a class="link" href="projects.html">ดูทั้งหมด</a>
+      </div>
+
+      <div id="bannerGrid" class="banner-grid"></div>
     </section>
 
-    <!-- Latest News -->
+    <!-- ข่าวล่าสุด -->
     <section class="section">
       <div class="section-head">
         <h2>ข่าวล่าสุด</h2>
-        <div class="muted">อัปเดตจากสภานักเรียน</div>
+        <a class="link" href="news.html">ดูทั้งหมด</a>
       </div>
 
       <div id="latestNews" class="grid"></div>
     </section>
 
-    <!-- Forms -->
+    <!-- แบบฟอร์ม (รองลงมา) -->
     <section class="section">
       <div class="section-head">
-        <h2>แบบฟอร์ม (รองลงมา)</h2>
-        <div class="muted">กดแล้วใช้งานได้ทันที</div>
+        <h2>แบบฟอร์ม</h2>
+        <a class="link" href="forms.html">ไปที่หน้าแบบฟอร์ม</a>
       </div>
 
       <div class="grid">
-
-        <a class="card" href="https://forms.google.com" target="_blank" rel="noopener">
-          <div class="meta"><span class="pill">ฟอร์ม</span> เสนอไอเดีย</div>
-          <h3>🧠 เสนอไอเดียโครงการ</h3>
-          <p>เสนอแนวคิดหรือกิจกรรมที่อยากให้สภาดำเนินการ</p>
+        <a class="card" href="forms.html#idea">
+          <div class="meta">
+            <span class="pill">ฟอร์ม</span><span>เสนอไอเดีย</span>
+          </div>
+          <h3>เสนอไอเดียโครงการ</h3>
+          <p>ส่งข้อเสนอ/กิจกรรมที่อยากให้สภาดำเนินการ</p>
         </a>
 
-        <a class="card" href="https://forms.google.com" target="_blank" rel="noopener">
-          <div class="meta"><span class="pill">ฟอร์ม</span> แจ้งปัญหา</div>
-          <h3>🛠 แจ้งของชำรุด</h3>
-          <p>แจ้งปัญหาห้องเรียนหรืออุปกรณ์ในโรงเรียน</p>
+        <a class="card" href="forms.html#repair">
+          <div class="meta">
+            <span class="pill">ฟอร์ม</span><span>แจ้งปัญหา</span>
+          </div>
+          <h3>แจ้งของชำรุด/ปัญหาห้องเรียน</h3>
+          <p>แจ้งรายละเอียด + รูปถ่าย (ถ้ามี) เพื่อส่งต่อหน่วยงาน</p>
         </a>
 
-        <a class="card" href="https://forms.google.com" target="_blank" rel="noopener">
-          <div class="meta"><span class="pill">ฟอร์ม</span> ร้องเรียน</div>
-          <h3>📢 ร้องเรียน / รับฟังปัญหา</h3>
-          <p>ข้อมูลเป็นส่วนตัว เฉพาะผู้ดูแลระบบเท่านั้น</p>
+        <a class="card" href="forms.html#complaint">
+          <div class="meta">
+            <span class="pill">ฟอร์ม</span><span>รับฟัง</span>
+          </div>
+          <h3>ร้องเรียน/รับฟังปัญหา</h3>
+          <p>ข้อมูลเป็นส่วนตัว จำกัดสิทธิ์ผู้ดูแล</p>
         </a>
-
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div>
-        © <span id="year"></span> We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน
-      </div>
-
-      <div class="social">
-        <a href="#" target="_blank" rel="noopener">Line</a>
-        <a href="#" target="_blank" rel="noopener">Facebook</a>
-        <a href="#" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:contact@example.com">Email</a>
+      <div>© <span id="year"></span> We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน</div>
+      <div class="footer-links">
+        <a id="socialFb" href="#" target="_blank" rel="noopener">Facebook</a>
+        <a id="socialIg" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a id="socialLine" href="#" target="_blank" rel="noopener">Line</a>
+        <a id="socialEmail" href="mailto:contact@example.com">Email</a>
       </div>
     </div>
   </footer>
 
-  <!-- JS -->
-  <script src="assets/js/app.js"></script>
   <script>
+    // ====== ตั้งค่าทั่วไป ======
     document.getElementById("year").textContent = new Date().getFullYear();
-    if (window.SC) {
-      SC.renderLatestNews("#latestNews", 6);
-    }
-  </script>
 
+    // ====== ดึงข่าว/แบนเนอร์จาก data/news.json ======
+    // โครงสร้างที่รองรับ (ยืดหยุ่น):
+    // { announce: { text, link }, banners:[{title,image,link,date}], news:[{title,excerpt,image,link,date,tag}] }
+    // หรือถ้าไฟล์คุณเป็น array ก็จะพยายามเดาให้เอง
+    async function loadHomeData(){
+      try{
+        const res = await fetch("data/news.json", { cache: "no-store" });
+        const data = await res.json();
+
+        const normalized = normalizeData(data);
+
+        renderAnnounce(normalized.announce);
+        renderBanners(normalized.banners);
+        renderLatestNews(normalized.news, 6);
+      }catch(e){
+        console.warn("โหลด data/news.json ไม่สำเร็จ", e);
+      }
+    }
+
+    function normalizeData(raw){
+      // ถ้า raw เป็น array ให้ถือว่าเป็นข่าว
+      if(Array.isArray(raw)){
+        return { announce:null, banners:[], news: raw };
+      }
+      const announce = raw.announce || null;
+      const banners = raw.banners || raw.highlight || [];
+      const news = raw.news || raw.items || [];
+      return { announce, banners, news };
+    }
+
+    function renderAnnounce(announce){
+      if(!announce || !announce.text) return;
+      const box = document.getElementById("announce");
+      const txt = document.getElementById("announceText");
+      const link = document.getElementById("announceLink");
+      txt.textContent = announce.text;
+      if(announce.link) link.href = announce.link;
+      box.style.display = "block";
+    }
+
+    function el(tag, cls){
+      const x = document.createElement(tag);
+      if(cls) x.className = cls;
+      return x;
+    }
+
+    function renderBanners(items){
+      const wrap = document.getElementById("bannerGrid");
+      wrap.innerHTML = "";
+      const list = (items || []).slice(0, 3);
+
+      // ถ้าไม่มีแบนเนอร์ ให้ซ่อนไว้ (หน้าไม่โล่ง)
+      if(list.length === 0){
+        wrap.style.display = "none";
+        return;
+      }
+
+      list.forEach(it=>{
+        const a = el("a", "banner");
+        a.href = it.link || "projects.html";
+        a.title = it.title || "กิจกรรม";
+        a.style.backgroundImage = it.image ? `url('${it.image}')` : "none";
+
+        const overlay = el("div","banner-overlay");
+        const meta = el("div","banner-meta");
+
+        const pill = el("span","pill pill-pink");
+        pill.textContent = "กิจกรรม";
+        const h = el("div","banner-title");
+        h.textContent = it.title || "กิจกรรม/ประชาสัมพันธ์";
+        const d = el("div","banner-date");
+        d.textContent = it.date || "";
+
+        meta.appendChild(pill);
+        meta.appendChild(h);
+        if(d.textContent) meta.appendChild(d);
+
+        a.appendChild(overlay);
+        a.appendChild(meta);
+        wrap.appendChild(a);
+      });
+    }
+
+    function renderLatestNews(items, limit){
+      const wrap = document.getElementById("latestNews");
+      wrap.innerHTML = "";
+      const list = (items || []).slice(0, limit);
+
+      list.forEach(it=>{
+        const a = el("a","card card-news");
+        a.href = it.link || "news.html";
+
+        const img = el("div","card-img");
+        if(it.image) img.style.backgroundImage = `url('${it.image}')`;
+
+        const meta = el("div","meta");
+        const pill = el("span","pill");
+        pill.textContent = it.tag || "ข่าว";
+        const date = el("span","");
+        date.textContent = it.date || "";
+        meta.appendChild(pill);
+        if(date.textContent) meta.appendChild(date);
+
+        const h = el("h3","");
+        h.textContent = it.title || "ข่าวประชาสัมพันธ์";
+        const p = el("p","");
+        p.textContent = it.excerpt || it.desc || "ดูรายละเอียดเพิ่มเติม";
+
+        a.appendChild(img);
+        a.appendChild(meta);
+        a.appendChild(h);
+        a.appendChild(p);
+
+        wrap.appendChild(a);
+      });
+    }
+
+    loadHomeData();
+  </script>
 </body>
 </html>
