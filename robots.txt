@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://we-are-azizstan.pages.dev/sitemap.xml
