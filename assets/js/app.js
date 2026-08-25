@@ -159,13 +159,17 @@ window.addEventListener("DOMContentLoaded", () => {
   const mobileNav = document.getElementById("mobileNav");
   if (menuBtn && mobileNav) {
     menuBtn.addEventListener("click", () => {
+      menuBtn.classList.toggle("open");
       mobileNav.classList.toggle("open");
+      document.body.style.overflow = mobileNav.classList.contains("open") ? "hidden" : "";
     });
     
     // Close nav when clicking outside the panel
     mobileNav.addEventListener("click", (e) => {
       if (e.target === mobileNav) {
+        menuBtn.classList.remove("open");
         mobileNav.classList.remove("open");
+        document.body.style.overflow = "";
       }
     });
   }
