@@ -118,17 +118,40 @@ function initEditor() {
       locale: 'th',
       messages: { th: thaiLang }
     },
-    plugins: ['gjs-preset-webpage', 'grapesjs-custom-code'],
-    pluginsOpts: {
-      'gjs-preset-webpage': {
-        blocksBasicOpts: { flexGrid: true },
-        navbarOpts: false,
-        countdownOpts: false,
-        formsOpts: false,
-        exportOpts: false,
-        blocks: ['column1', 'column2', 'column3', 'column3-7', 'text', 'link', 'image', 'video', 'map']
-      }
+    assetManager: {
+      embedAsBase64: true, // Auto-convert dropped images to base64
+      dropzone: 1,
+      dropzoneContent: '<div style="padding: 20px; font-size: 16px;">📥 ลากรูปภาพจากเครื่องของคุณมาวางที่นี่ <br><small>(หรือคลิกไอคอน + ด้านบนซ้าย)</small></div>',
+      modalTitle: 'จัดการรูปภาพ (Asset Manager)',
     },
+    blockManager: {
+      blocks: [
+        { id: 'text', label: '📝 ข้อความ', content: '<div data-gjs-type="text">คลิกเพื่อพิมพ์ข้อความ...</div>' },
+        { id: 'image', label: '🖼️ รูปภาพ', content: { type: 'image', style: { width: '200px', height: 'auto' } } },
+        { id: 'button', label: '🖱️ ปุ่มกด (สีชมพู)', content: '<a class="btn btn-primary" href="#">คลิกเพื่อเปลี่ยนลิงก์</a>' },
+        { id: 'button-outline', label: '🖱️ ปุ่มกด (โปร่งแสง)', content: '<a class="btn btn-outline" href="#">คลิกเพื่อเปลี่ยนลิงก์</a>' },
+        { id: 'card', label: '📦 การ์ดใส่เนื้อหา', content: `
+          <div class="card" style="width: 300px; display: inline-block;">
+            <img src="https://via.placeholder.com/400x200?text=รูปภาพ" class="card-img" />
+            <h3 style="padding: 10px 15px 0;">พิมพ์หัวข้อที่นี่</h3>
+            <p style="padding: 0 15px 15px;">เนื้อหารายละเอียด...</p>
+          </div>
+        ` }
+      ]
+    },
+    styleManager: {
+      clearProperties: 1,
+      sectors: [{
+        name: 'ตัวอักษรและสี',
+        open: true,
+        buildProps: ['font-size', 'color', 'text-align', 'font-weight'],
+      }, {
+        name: 'ขนาดและขอบโค้ง',
+        open: false,
+        buildProps: ['width', 'height', 'border-radius', 'opacity'],
+      }]
+    },
+    plugins: ['grapesjs-custom-code'],
     canvas: {
       styles: [
         '../style.css', 
