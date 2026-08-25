@@ -16,7 +16,7 @@
   "forms": {
     "idea": "idea-form.html",
     "repair": "https://forms.google.com",
-    "complaint": "https://forms.google.com",
+    "complaint": "complaint-form.html",
     "coordinate": "https://forms.google.com"
   }
 }
