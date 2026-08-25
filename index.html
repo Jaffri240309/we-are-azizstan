@@ -6,11 +6,13 @@
   <meta name="google-site-verification" content="6mEBB5odAY2K2M8oRTxamcENr7WFmHQCFgXSNe2MiZA" />
   <title>We Are Azizstan | สภานักเรียน</title>
   <meta name="description" content="ศูนย์กลางข่าวสาร กิจกรรม และการสื่อสารของสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
-  <!-- Announcement (ทางการ-สุภาพ) -->
+  <!-- Announcement -->
   <div id="announce" class="announce" style="display:none">
     <div class="container announce-inner">
       <div class="announce-left">
@@ -21,32 +23,33 @@
     </div>
   </div>
 
-  <!-- Navbar (ต้องทางการ) -->
+  <!-- Navbar (Light/White Theme) -->
   <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand" href="index.html">
-        <img src="https://via.placeholder.com/150x150.png?text=WA" alt="Logo" class="logo" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
+        <div class="brand-logos">
+          <!-- Placeholder logos to match the 2-logo layout of the school -->
+          <img src="https://via.placeholder.com/150x150.png?text=AZ" alt="School Logo" class="logo">
+          <img src="https://via.placeholder.com/150x150.png?text=WA" alt="Council Logo" class="logo">
+        </div>
         <div class="brand-txt">
           <div class="brand-title">We Are Azizstan</div>
-          <div class="brand-sub">โรงเรียนมูลนิธิอาซิซสถาน • สภานักเรียน</div>
+          <div class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</div>
         </div>
       </a>
 
       <nav class="nav">
-        <a class="active" href="index.html">หน้าแรก</a>
-        <a href="news.html">ข่าวสาร</a>
-        <a href="projects.html">กิจกรรม</a>
-        <a href="forms.html">แบบฟอร์ม</a>
-        <a href="council.html">เกี่ยวกับสภา</a>
-        <a href="contact.html">ติดต่อ</a>
+        <a class="active" href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
+        <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
+        <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
+        <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
+        <a href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
       </nav>
 
-      <div class="lang">
-        <span class="chip active">TH</span>
-        <span class="chip">EN <small>soon</small></span>
-        <span class="chip">AR <small>soon</small></span>
-        <span class="chip">MS <small>soon</small></span>
-      </div>
+      <!-- Admin/Login button -->
+      <a class="btn btn-primary btn-sm btn-login" href="admin/index.html">
+        <i class="ph ph-user-circle"></i> แอดมิน
+      </a>
 
       <button class="hamburger" id="menuBtn" aria-label="เปิดเมนู">
         <span></span><span></span><span></span>
@@ -57,67 +60,79 @@
   <!-- Mobile Nav Overlay -->
   <div class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-panel">
-      <a class="active" href="index.html">หน้าแรก</a>
-      <a href="news.html">ข่าวสาร</a>
-      <a href="projects.html">กิจกรรม</a>
-      <a href="forms.html">แบบฟอร์ม</a>
-      <a href="council.html">เกี่ยวกับสภา</a>
-      <a href="contact.html">ติดต่อ</a>
+      <a class="active" href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
+      <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
+      <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
+      <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
+      <a href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
+      <a href="admin/index.html"><i class="ph ph-user-circle"></i> แอดมิน</a>
     </div>
   </div>
 
-  <!-- Hero (ภาพจริง + ทางการ แต่ดูทันสมัย) -->
+  <!-- Hero (Full screen, Left aligned, vibrant overlay) -->
   <section class="hero">
     <div class="hero-bg" role="img" aria-label="ภาพกิจกรรมโรงเรียน"></div>
     <div class="hero-overlay"></div>
 
     <div class="container hero-inner">
-      <div class="hero-card">
-        <div class="kicker">STUDENT COUNCIL WEBSITE</div>
-        <h1>พื้นที่กลางของเสียงนักเรียน<br/>และข่าวสารสภานักเรียน</h1>
+      <div class="hero-content">
+        <div class="kicker"><i class="ph-fill ph-check-circle"></i> ศูนย์รวมบริการออนไลน์</div>
+        <h1>We Are Azizstan<br>สภานักเรียน</h1>
         <p>
-          ศูนย์กลางสำหรับติดตามข่าวประชาสัมพันธ์ กิจกรรม แจ้งปัญหา เสนอไอเดีย และติดต่อสภานักเรียน
-          โรงเรียนมูลนิธิอาซิซสถาน
+          ศูนย์รวมการติดต่อข่าวสาร กิจกรรม และสื่อสารสำหรับนักเรียน ผู้ปกครอง และบุคลากร
+          พร้อมด้วยระบบแบบฟอร์มออนไลน์ที่ทันสมัย
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="news.html">ดูข่าวสาร</a>
-          <a class="btn btn-outline" href="projects.html">ดูกิจกรรม</a>
-          <a class="btn btn-ghost" href="council.html">เกี่ยวกับสภา</a>
-        </div>
-
-        <div class="note">
-          <span class="note-icon" aria-hidden="true">🔒</span>
-          ปลอดภัย: ใช้ Google Forms รับข้อมูล / ไม่มีฐานข้อมูลสาธารณะ
+          <a class="btn btn-primary btn-lg" href="news.html">
+            <i class="ph ph-megaphone"></i> ติดตามข่าวสารสภา
+          </a>
+          <a class="btn btn-outline btn-lg" href="forms.html">
+            <i class="ph ph-pencil-simple"></i> ส่งแบบฟอร์มออนไลน์
+          </a>
         </div>
       </div>
+    </div>
 
-      <!-- ปุ่มลัดแบบฟอร์ม (ลูกเล่นได้ แต่ยังดูทางการ) -->
-      <aside class="side-card">
-        <div class="side-head">
-          <div>
-            <div class="side-title">แบบฟอร์มหลัก</div>
-            <div class="side-sub">กดแล้วใช้งานได้ทันที</div>
+    <div class="scroll-down">
+      <i class="ph ph-caret-down"></i>
+      <p>เลื่อนลง</p>
+    </div>
+  </section>
+
+  <!-- Quick Links Grid (Ease of use, directly below hero) -->
+  <section class="quick-links-section">
+    <div class="container">
+      <div class="quick-grid">
+        <a class="quick-card" href="forms.html#idea">
+          <div class="icon-wrap"><i class="ph ph-lightbulb"></i></div>
+          <div class="quick-text">
+            <h3>เสนอไอเดีย</h3>
+            <p>เสนอโครงการหรือกิจกรรมใหม่ๆ</p>
           </div>
-          <span class="pill">Quick</span>
-        </div>
-
-        <div class="quick-grid">
-          <a class="quick" id="formIdea" href="forms.html#idea">เสนอไอเดีย</a>
-          <a class="quick" id="formRepair" href="forms.html#repair">แจ้งชำรุด</a>
-          <a class="quick" id="formComplaint" href="forms.html#complaint">ร้องเรียน</a>
-          <a class="quick" id="formCoordinate" href="forms.html#coordinate">ขอประสานงาน</a>
-        </div>
-
-        <div class="side-divider"></div>
-
-        <div class="side-mini">
-          <div class="side-mini-title">อัปเดตง่าย</div>
-          <div class="side-mini-sub">
-            ข่าว/แบนเนอร์ดึงจาก <b>data/news.json</b> (แก้ไฟล์เดียว)
+        </a>
+        <a class="quick-card" href="forms.html#repair">
+          <div class="icon-wrap"><i class="ph ph-wrench"></i></div>
+          <div class="quick-text">
+            <h3>แจ้งชำรุด</h3>
+            <p>แจ้งซ่อมแซมปัญหาในโรงเรียน</p>
           </div>
-        </div>
-      </aside>
+        </a>
+        <a class="quick-card" href="forms.html#complaint">
+          <div class="icon-wrap"><i class="ph ph-warning-circle"></i></div>
+          <div class="quick-text">
+            <h3>ร้องเรียน</h3>
+            <p>ส่งเรื่องร้องเรียน (ข้อมูลลับ)</p>
+          </div>
+        </a>
+        <a class="quick-card" href="council.html">
+          <div class="icon-wrap"><i class="ph ph-users-three"></i></div>
+          <div class="quick-text">
+            <h3>ทำความรู้จัก</h3>
+            <p>โครงสร้างคณะกรรมการสภา</p>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -125,8 +140,8 @@
     <!-- แบนเนอร์กิจกรรม (ข่าวแบบ c: news + banner) -->
     <section class="section">
       <div class="section-head">
-        <h2>ไฮไลท์กิจกรรม</h2>
-        <a class="link" href="projects.html">ดูทั้งหมด</a>
+        <h2><i class="ph-fill ph-star"></i> ไฮไลท์กิจกรรม</h2>
+        <a class="link" href="projects.html">ดูทั้งหมด <i class="ph ph-arrow-right"></i></a>
       </div>
 
       <div id="bannerGrid" class="banner-grid"></div>
@@ -135,45 +150,11 @@
     <!-- ข่าวล่าสุด -->
     <section class="section">
       <div class="section-head">
-        <h2>ข่าวล่าสุด</h2>
-        <a class="link" href="news.html">ดูทั้งหมด</a>
+        <h2><i class="ph-fill ph-article"></i> ข่าวประชาสัมพันธ์ล่าสุด</h2>
+        <a class="link" href="news.html">ดูทั้งหมด <i class="ph ph-arrow-right"></i></a>
       </div>
 
       <div id="latestNews" class="grid"></div>
-    </section>
-
-    <!-- แบบฟอร์ม (รองลงมา) -->
-    <section class="section">
-      <div class="section-head">
-        <h2>แบบฟอร์ม</h2>
-        <a class="link" href="forms.html">ไปที่หน้าแบบฟอร์ม</a>
-      </div>
-
-      <div class="grid">
-        <a class="card" href="forms.html#idea">
-          <div class="meta">
-            <span class="pill">ฟอร์ม</span><span>เสนอไอเดีย</span>
-          </div>
-          <h3>เสนอไอเดียโครงการ</h3>
-          <p>ส่งข้อเสนอ/กิจกรรมที่อยากให้สภาดำเนินการ</p>
-        </a>
-
-        <a class="card" href="forms.html#repair">
-          <div class="meta">
-            <span class="pill">ฟอร์ม</span><span>แจ้งปัญหา</span>
-          </div>
-          <h3>แจ้งของชำรุด/ปัญหาห้องเรียน</h3>
-          <p>แจ้งรายละเอียด + รูปถ่าย (ถ้ามี) เพื่อส่งต่อหน่วยงาน</p>
-        </a>
-
-        <a class="card" href="forms.html#complaint">
-          <div class="meta">
-            <span class="pill">ฟอร์ม</span><span>รับฟัง</span>
-          </div>
-          <h3>ร้องเรียน/รับฟังปัญหา</h3>
-          <p>ข้อมูลเป็นส่วนตัว จำกัดสิทธิ์ผู้ดูแล</p>
-        </a>
-      </div>
     </section>
   </main>
 
@@ -181,10 +162,10 @@
     <div class="container footer-inner">
       <div>© <span id="year"></span> We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน</div>
       <div class="footer-links">
-        <a id="socialFb" href="#" target="_blank" rel="noopener">Facebook</a>
-        <a id="socialIg" href="#" target="_blank" rel="noopener">Instagram</a>
-        <a id="socialLine" href="#" target="_blank" rel="noopener">Line</a>
-        <a id="socialEmail" href="mailto:contact@example.com">Email</a>
+        <a id="socialFb" href="#" target="_blank" rel="noopener"><i class="ph ph-facebook-logo"></i> Facebook</a>
+        <a id="socialIg" href="#" target="_blank" rel="noopener"><i class="ph ph-instagram-logo"></i> Instagram</a>
+        <a id="socialLine" href="#" target="_blank" rel="noopener"><i class="ph ph-chat-circle-dots"></i> Line</a>
+        <a id="socialEmail" href="mailto:contact@example.com"><i class="ph ph-envelope-simple"></i> Email</a>
       </div>
     </div>
   </footer>
@@ -212,16 +193,11 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // ====== ดึงข่าว/แบนเนอร์จาก data/news.json ======
-    // โครงสร้างที่รองรับ (ยืดหยุ่น):
-    // { announce: { text, link }, banners:[{title,image,link,date}], news:[{title,excerpt,image,link,date,tag}] }
-    // หรือถ้าไฟล์คุณเป็น array ก็จะพยายามเดาให้เอง
     async function loadHomeData(){
       try{
         const res = await fetch("data/news.json", { cache: "no-store" });
         const data = await res.json();
-
         const normalized = normalizeData(data);
-
         renderAnnounce(normalized.announce);
         renderBanners(normalized.banners);
         renderLatestNews(normalized.news, 6);
@@ -231,7 +207,6 @@
     }
 
     function normalizeData(raw){
-      // ถ้า raw เป็น array ให้ถือว่าเป็นข่าว
       if(Array.isArray(raw)){
         return { announce:null, banners:[], news: raw };
       }
@@ -262,7 +237,6 @@
       wrap.innerHTML = "";
       const list = (items || []).slice(0, 3);
 
-      // ถ้าไม่มีแบนเนอร์ ให้ซ่อนไว้ (หน้าไม่โล่ง)
       if(list.length === 0){
         wrap.style.display = "none";
         return;
@@ -272,13 +246,13 @@
         const a = el("a", "banner");
         a.href = it.link || "projects.html";
         a.title = it.title || "กิจกรรม";
-        a.style.backgroundImage = it.image ? `url('${it.image}')` : "none";
+        a.style.backgroundImage = it.image ? \`url('\${it.image}')\` : "none";
 
         const overlay = el("div","banner-overlay");
         const meta = el("div","banner-meta");
 
         const pill = el("span","pill pill-primary");
-        pill.textContent = "กิจกรรม";
+        pill.innerHTML = "<i class='ph-fill ph-star'></i> กิจกรรม";
         const h = el("div","banner-title");
         h.textContent = it.title || "กิจกรรม/ประชาสัมพันธ์";
         const d = el("div","banner-date");
@@ -304,7 +278,7 @@
         a.href = it.link || "news.html";
 
         const img = el("div","card-img");
-        if(it.image) img.style.backgroundImage = `url('${it.image}')`;
+        if(it.image) img.style.backgroundImage = \`url('\${it.image}')\`;
 
         const meta = el("div","meta");
         const pill = el("span","pill");
