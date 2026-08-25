@@ -153,4 +153,20 @@ const SC = (() => {
 
 window.addEventListener("DOMContentLoaded", () => {
   SC.bootCommon();
+
+  // Mobile navigation toggle
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileNav = document.getElementById("mobileNav");
+  if (menuBtn && mobileNav) {
+    menuBtn.addEventListener("click", () => {
+      mobileNav.classList.toggle("open");
+    });
+    
+    // Close nav when clicking outside the panel
+    mobileNav.addEventListener("click", (e) => {
+      if (e.target === mobileNav) {
+        mobileNav.classList.remove("open");
+      }
+    });
+  }
 });
