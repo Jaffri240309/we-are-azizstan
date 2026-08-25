@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Are Azizstan - Visual Editor</title>
+  
+  <!-- GrapesJS Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/grapes.min.js"></script>
+  <!-- GrapesJS Default Webpage Plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/grapesjs-preset-webpage/1.0.2/grapesjs-preset-webpage.min.js"></script>
+  <!-- GrapesJS Custom Code Plugin -->
+  <script src="https://unpkg.com/grapesjs-custom-code"></script>
+  
+  <!-- Editor Custom Styles -->
+  <link rel="stylesheet" href="css/admin.css">
+  <!-- Brand Font -->
+  <link href="https://cdn.lazywasabi.net/fonts/Anakotmai/Anakotmai.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="editor-topbar">
+    <div class="topbar-brand">
+      <div class="logo-box">WA</div>
+      <span>We Are Azizstan <b>Editor</b></span>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-outline" id="btn-settings">⚙️ ตั้งค่า Token</button>
+      <button class="btn btn-primary" id="btn-publish">🚀 เผยแพร่เว็บ (Publish)</button>
+    </div>
+  </div>
+
+  <!-- GrapesJS Container -->
+  <div id="gjs"></div>
+
+  <!-- Token Modal -->
+  <div class="modal" id="token-modal">
+    <div class="modal-content">
+      <h3>ตั้งค่า GitHub Token</h3>
+      <p>คุณต้องใช้ Personal Access Token จาก GitHub ที่มีสิทธิ์แก้ไข Repository นี้ (repo scope) เพื่อบันทึกการเปลี่ยนแปลง</p>
+      
+      <div class="form-group">
+        <label for="github-token">GitHub Token:</label>
+        <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      </div>
+      
+      <div class="form-group">
+        <label for="commit-msg">ข้อความอัปเดต (Commit Message):</label>
+        <input type="text" id="commit-msg" value="Update website via Visual Editor">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btn-modal-cancel">ยกเลิก</button>
+        <button class="btn btn-primary" id="btn-modal-save">บันทึก & พร้อมใช้งาน</button>
+      </div>
+      
+      <div class="modal-footer">
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=AzizstanEditor" target="_blank" class="help-link">คลิกที่นี่เพื่อสร้าง Token ใหม่</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader Overlay -->
+  <div class="loader-overlay" id="loader">
+    <div class="spinner"></div>
+    <div class="loader-text" id="loader-text">กำลังโหลดหน้าเว็บ...</div>
+  </div>
+
+  <script src="js/editor.js"></script>
+</body>
+</html>

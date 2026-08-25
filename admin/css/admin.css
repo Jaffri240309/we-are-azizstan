@@ -1,0 +1,95 @@
+:root {
+  --primary: #F43F5E;
+  --primary-hover: #E11D48;
+  --bg: #1e1e1e;
+  --surface: #2d2d2d;
+  --text: #ffffff;
+  --border: #444;
+}
+
+body, html {
+  margin: 0; padding: 0; height: 100%;
+  font-family: 'Anakotmai', system-ui, sans-serif;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Topbar ── */
+.editor-topbar {
+  height: 60px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.topbar-brand {
+  display: flex; align-items: center; gap: 12px; color: var(--text);
+}
+.logo-box {
+  background: linear-gradient(135deg, var(--primary), #8B5CF6);
+  color: white; font-weight: 800; font-size: 14px;
+  width: 32px; height: 32px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.topbar-actions { display: flex; gap: 12px; }
+
+/* ── Buttons ── */
+.btn {
+  padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 14px;
+  cursor: pointer; border: none; font-family: inherit; transition: 0.2s;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--text); }
+
+/* ── GrapesJS Reset ── */
+#gjs { height: calc(100vh - 60px); }
+.gjs-cv-canvas { top: 0; width: 100%; height: 100%; }
+
+/* ── Modal ── */
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: 0.3s;
+}
+.modal.active { opacity: 1; pointer-events: auto; }
+.modal-content {
+  background: var(--surface); width: 440px; border-radius: 12px;
+  padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  color: var(--text); border: 1px solid var(--border);
+}
+.modal-content h3 { margin-top: 0; color: white; }
+.modal-content p { color: #aaa; font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #ccc; }
+.form-group input {
+  width: 100%; box-sizing: border-box; padding: 10px 12px;
+  background: var(--bg); border: 1px solid var(--border);
+  color: white; border-radius: 6px; font-family: inherit;
+}
+.form-group input:focus { outline: none; border-color: var(--primary); }
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+.modal-footer { margin-top: 20px; text-align: center; font-size: 13px; }
+.help-link { color: var(--primary); text-decoration: none; }
+.help-link:hover { text-decoration: underline; }
+
+/* ── Loader ── */
+.loader-overlay {
+  position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.5s;
+}
+.loader-overlay.hidden { opacity: 0; pointer-events: none; }
+.spinner {
+  width: 40px; height: 40px; border: 3px solid var(--border);
+  border-top-color: var(--primary); border-radius: 50%;
+  animation: spin 1s linear infinite; margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text { color: #ccc; font-weight: 500; }
