@@ -40,12 +40,13 @@ html {
 body {
   font-family: var(--font-sans);
   background: 
-    radial-gradient(ellipse at 20% 0%, rgba(252,232,240,0.6) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 10%, rgba(221,214,254,0.5) 0%, transparent 45%),
-    radial-gradient(ellipse at 50% 60%, rgba(252,232,240,0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(199,210,254,0.35) 0%, transparent 40%),
-    radial-gradient(ellipse at 10% 90%, rgba(252,232,240,0.25) 0%, transparent 45%),
-    linear-gradient(180deg, #fefeff 0%, #faf8fc 25%, #f8f5fb 50%, #faf7fa 75%, #fefeff 100%);
+    radial-gradient(ellipse at 15% 0%, rgba(248,200,220,0.7) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 5%, rgba(196,181,253,0.65) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(252,220,235,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse at 95% 70%, rgba(186,200,255,0.5) 0%, transparent 45%),
+    radial-gradient(ellipse at 5% 85%, rgba(248,200,220,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(196,181,253,0.35) 0%, transparent 50%),
+    linear-gradient(180deg, #fefcfe 0%, #f8f0f5 20%, #f5f0fa 45%, #f0ecf8 65%, #f5f0f5 85%, #fefcfe 100%);
   background-attachment: fixed;
   color: var(--c-text);
   line-height: 1.6;
