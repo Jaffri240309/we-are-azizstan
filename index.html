@@ -7,8 +7,6 @@
   <title>We Are Azizstan | สภานักเรียน</title>
   <meta name="description" content="ศูนย์กลางข่าวสาร กิจกรรม และการสื่อสารของสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน" />
   <link rel="stylesheet" href="style.css" />
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -72,17 +70,8 @@
 
   <!-- Hero (Full screen, Left aligned, vibrant overlay) -->
   <section class="hero">
-    <!-- Swiper Background Slider -->
-    <div class="swiper hero-swiper" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="hero-bg" style="background-image: url('assets/hero1.jpg');"></div>
-        </div>
-        <div class="swiper-slide">
-          <div class="hero-bg" style="background-image: url('assets/hero2.jpg');"></div>
-        </div>
-      </div>
-    </div>
+    <div class="hero-bg hero-bg-1" role="img" aria-label="ภาพกิจกรรมโรงเรียน 1"></div>
+    <div class="hero-bg hero-bg-2" role="img" aria-label="ภาพกิจกรรมโรงเรียน 2"></div>
     <div class="hero-overlay"></div>
 
     <div class="container hero-inner">
@@ -315,20 +304,5 @@
 
     loadHomeData();
   </script>
-  <!-- Swiper JS -->
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script>
-    // Initialize Hero Swiper
-    var heroSwiper = new Swiper(".hero-swiper", {
-      loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-      },
-      grabCursor: true,
-    });
-  </script>
-  <script src="app.js"></script>
 </body>
 </html>
