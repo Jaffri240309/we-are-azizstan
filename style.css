@@ -723,6 +723,14 @@ h3 { font-size: 1.25rem; }
   .nav, .btn-login { display: none; }
   .hamburger { display: block; }
   
+  /* Hero BG Fix for Mobile (Show full width of image) */
+  .hero-bg {
+    background-size: 100% auto; 
+    background-position: top center; 
+    background-repeat: no-repeat;
+  }
+
+  
   /* Hero */
   .hero { min-height: 80vh; padding: 100px 0 60px; display: flex; align-items: center; justify-content: flex-start; }
   .hero-overlay {
