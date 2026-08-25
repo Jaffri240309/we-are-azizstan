@@ -357,7 +357,7 @@ h3 { font-size: 1.25rem; }
 .hero-bg {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop') center/cover;
+  background: url('assets/hero.jpg') center/cover;
   z-index: 1;
 }
 
