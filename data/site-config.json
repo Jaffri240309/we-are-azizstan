@@ -14,7 +14,7 @@
     "email": "mailto:contact@example.com"
   },
   "forms": {
-    "idea": "https://forms.google.com",
+    "idea": "idea-form.html",
     "repair": "https://forms.google.com",
     "complaint": "https://forms.google.com",
     "coordinate": "https://forms.google.com"
