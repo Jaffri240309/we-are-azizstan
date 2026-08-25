@@ -1,0 +1,22 @@
+{
+  "siteName": "We Are Azizstan",
+  "schoolNameTH": "โรงเรียนมูลนิธิอาซิซสถาน",
+  "announcement": {
+    "enabled": false,
+    "text": "ประกาศด่วน: ตัวอย่างข้อความประกาศ (ผู้ดูแลเปิดใช้งานได้)",
+    "linkText": "ดูรายละเอียด",
+    "linkUrl": "news.html"
+  },
+  "social": {
+    "line": "#",
+    "facebook": "#",
+    "instagram": "#",
+    "email": "mailto:contact@example.com"
+  },
+  "forms": {
+    "idea": "https://forms.google.com",
+    "repair": "https://forms.google.com",
+    "complaint": "https://forms.google.com",
+    "coordinate": "https://forms.google.com"
+  }
+}
