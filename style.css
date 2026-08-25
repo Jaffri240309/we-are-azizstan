@@ -928,6 +928,84 @@ h3 { font-size: 1.25rem; }
   mix-blend-mode: screen;
 }
 
+/* ====== Page Transition ====== */
+.page-transition {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 99999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Two-layer curtain wipe */
+.page-transition .curtain {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.page-transition .curtain-1 {
+  background: linear-gradient(135deg, #0f172a 0%, var(--c-primary) 50%, #8b5cf6 100%);
+  z-index: 1;
+}
+.page-transition .curtain-2 {
+  background: var(--c-bg);
+  z-index: 2;
+  transition-delay: 0.08s;
+}
+
+/* Logo that appears during transition */
+.page-transition .transit-logo {
+  position: relative;
+  z-index: 3;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(0.5) rotate(-20deg);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
+  filter: drop-shadow(0 8px 25px rgba(232,58,117,0.4));
+}
+
+/* Active state - wipe in */
+.page-transition.active .curtain {
+  transform: scaleX(1);
+}
+.page-transition.active .transit-logo {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Exit state - wipe out from right */
+.page-transition.exit .curtain {
+  transform-origin: right center;
+  transform: scaleX(0);
+}
+.page-transition.exit .curtain-1 {
+  transition-delay: 0.08s;
+}
+.page-transition.exit .curtain-2 {
+  transition-delay: 0s;
+}
+.page-transition.exit .transit-logo {
+  opacity: 0;
+  transform: scale(1.2);
+  transition-delay: 0s;
+}
+
+/* Page entrance animation */
+body {
+  animation: pageEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes pageEntrance {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ====== Responsive ====== */
 @media (max-width: 1024px) {
   .quick-grid { grid-template-columns: repeat(2, 1fr); }

@@ -309,4 +309,82 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     animateGlow();
   }
+
+  // ====== Page Transition System ======
+  // Create the transition overlay element
+  const transEl = document.createElement("div");
+  transEl.className = "page-transition";
+  transEl.innerHTML = `
+    <div class="curtain curtain-1"></div>
+    <div class="curtain curtain-2"></div>
+    <img class="transit-logo" src="assets/azizLogo.png" alt="">
+  `;
+  document.body.appendChild(transEl);
+
+  // Fix logo path for subpages
+  const logoImg = transEl.querySelector(".transit-logo");
+  if (logoImg) {
+    logoImg.onerror = () => {
+      logoImg.src = "assets/azizLogo.png";
+      logoImg.onerror = () => { logoImg.style.display = "none"; };
+    };
+  }
+
+  // On page load, play exit animation if transition was active
+  if (sessionStorage.getItem("pageTransition") === "active") {
+    sessionStorage.removeItem("pageTransition");
+    transEl.classList.add("active");
+    // Small delay then wipe out
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        transEl.classList.add("exit");
+        setTimeout(() => {
+          transEl.classList.remove("active", "exit");
+        }, 600);
+      }, 100);
+    });
+  }
+
+  // Intercept internal link clicks
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+    
+    const href = link.getAttribute("href");
+    if (!href) return;
+    
+    // Skip external links, anchors, javascript:, mailto:, tel:, new tabs
+    if (link.target === "_blank" || 
+        link.target === "_new" ||
+        href.startsWith("http") || 
+        href.startsWith("#") || 
+        href.startsWith("mailto:") || 
+        href.startsWith("tel:") ||
+        href.startsWith("javascript:") ||
+        e.ctrlKey || e.metaKey) {
+      return;
+    }
+    
+    // It's an internal navigation link - animate!
+    e.preventDefault();
+    
+    // Close mobile nav if open
+    if (mobileNav && mobileNav.classList.contains("open")) {
+      menuBtn.classList.remove("open");
+      mobileNav.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    // Mark transition in session
+    sessionStorage.setItem("pageTransition", "active");
+    
+    // Play curtain wipe in
+    transEl.classList.add("active");
+    transEl.style.pointerEvents = "all";
+    
+    // Navigate after animation completes
+    setTimeout(() => {
+      window.location.href = href;
+    }, 550);
+  });
 });
