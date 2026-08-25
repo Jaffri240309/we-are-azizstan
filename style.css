@@ -223,6 +223,10 @@ h3 { font-size: 1.25rem; }
   box-shadow: var(--shadow-sm);
 }
 
+.brand-logos img:nth-child(2) {
+  filter: contrast(1.4) saturate(1.3) brightness(0.95);
+}
+
 .logo-placeholder {
   width: 48px;
   height: 48px;
