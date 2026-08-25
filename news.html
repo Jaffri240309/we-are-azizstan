@@ -14,24 +14,37 @@
     </div>
   </div>
 
-  <header class="topbar">
+    <header class="topbar">
     <div class="container topbar-inner">
-      <div class="brand">
-        <div class="logo">WA</div>
-        <div>
-          <div class="brand-title">ข่าวสาร & ประกาศ</div>
-          <div class="brand-sub">We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน</div>
+      <a class="brand" href="index.html">
+        <div class="brand-logos">
+          <!-- Main School Logo -->
+          <img src="assets/azizLogo.png" alt="Azizstan Logo" class="logo">
+          <!-- DEPAZ Logo -->
+          <img src="assets/depazLogo.jpg" alt="DEPAZ Logo" class="logo">
         </div>
-      </div>
+        <div class="brand-txt">
+          <div class="brand-title">We Are Azizstan</div>
+          <div class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</div>
+        </div>
+      </a>
 
       <nav class="nav">
-        <a href="index.html">หน้าแรก</a>
-        <a class="active" href="news.html">ข่าวสาร</a>
-        <a href="council.html">โครงสร้างสภา</a>
-        <a href="projects.html">โครงการ</a>
-        <a href="forms.html">แบบฟอร์ม</a>
-        <a href="contact.html">ติดต่อ</a>
+        <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
+        <a class="active" href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
+        <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
+        <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
+        <a href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
       </nav>
+
+      <!-- Admin/Login button -->
+      <a class="btn btn-primary btn-sm btn-login" href="admin/index.html">
+        <i class="ph ph-user-circle"></i> แอดมิน
+      </a>
+
+      <button class="hamburger" id="menuBtn" aria-label="เปิดเมนู">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
