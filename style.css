@@ -368,7 +368,7 @@ h3 { font-size: 1.25rem; }
 }
 
 .hero-bg-2 {
-  background-image: url('assets/hero2.jpg');
+  background-image: url('assets/hero2.png');
   animation: fadeSlide2 10s infinite;
 }
 
