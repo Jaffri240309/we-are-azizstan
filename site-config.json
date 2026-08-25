@@ -8,10 +8,10 @@
     "linkUrl": "news.html"
   },
   "social": {
-    "line": "#",
-    "facebook": "#",
-    "instagram": "#",
-    "email": "mailto:contact@example.com"
+    "line": "",
+    "facebook": "https://www.facebook.com/profile.php?id=100022088562742",
+    "instagram": "https://www.instagram.com/mppa_aziz?igsi=MXNidWpneTV5MHN0cw==",
+    "email": ""
   },
   "forms": {
     "idea": "idea-form.html",
