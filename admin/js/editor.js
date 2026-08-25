@@ -113,6 +113,7 @@ function initEditor() {
     showOffsets: true,
     noticeOnUnload: false,
     storageManager: false, 
+    dragMode: 'absolute',
     i18n: {
       locale: 'th',
       messages: { th: thaiLang }
