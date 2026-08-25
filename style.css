@@ -363,12 +363,12 @@ h3 { font-size: 1.25rem; }
 }
 
 .hero-bg-1 {
-  background-image: url('assets/hero1.jpg');
+  background-image: url('assets/hero2.png');
   animation: fadeSlide1 10s infinite;
 }
 
 .hero-bg-2 {
-  background-image: url('assets/hero2.png');
+  background-image: url('assets/hero1.jpg');
   animation: fadeSlide2 10s infinite;
 }
 
