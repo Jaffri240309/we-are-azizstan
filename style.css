@@ -211,7 +211,7 @@ h3 { font-size: 1.25rem; }
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: navGradient 4s linear infinite;
+  animation: navGradient 12s linear infinite;
   opacity: 0.6;
 }
 @keyframes navGradient {
