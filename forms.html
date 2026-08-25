@@ -42,34 +42,50 @@
     </div>
   </header>
 
-  <main class="container page">
-    <h1>แบบฟอร์ม</h1>
-    <p class="lead">กดปุ่มแล้วใช้งานได้ทันที • ข้อมูลร้องเรียนเป็นส่วนตัว อยู่ในชีตที่จำกัดสิทธิ์</p>
+  <main class="container page" style="padding-top: 5rem; padding-bottom: 5rem;">
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <h1 style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">ศูนย์รวมแบบฟอร์ม</h1>
+      <p class="lead" style="color: var(--text-light); max-width: 600px; margin: 0 auto;">ช่องทางออนไลน์สำหรับติดต่อ เสนอแนะ และแจ้งปัญหาถึงสภานักเรียนโดยตรง รวดเร็ว ปลอดภัย และเป็นส่วนตัว</p>
+    </div>
 
-    <div class="grid">
-      <a class="card" id="formIdea" href="idea-form.html">
-        <div class="meta"><span class="pill">ฟอร์ม</span><span>โครงการ</span></div>
-        <h3>🧠 เสนอไอเดียโครงการ</h3>
-        <p>ส่งไอเดียกิจกรรม/โครงการที่อยากให้สภาทำ</p>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+      
+      <!-- Idea Form Card (Primary) -->
+      <a class="card" id="formIdea" href="idea-form.html" style="background: linear-gradient(135deg, rgba(232,58,117,0.05) 0%, rgba(232,58,117,0.15) 100%); border: 2px solid var(--primary); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(232,58,117,0.15);">
+        <div class="meta" style="margin-bottom: 1rem;"><span class="pill" style="background: var(--primary); color: white;">แนะนำ</span><span style="color: var(--primary); font-weight: bold;">ฟอร์มยอดฮิต</span></div>
+        <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem; color: var(--primary);">
+          <i class="ph-fill ph-lightbulb"></i> เสนอไอเดียโครงการ
+        </h3>
+        <p style="margin-top: 0.5rem;">มีไอเดียเจ๋งๆ หรือกิจกรรมที่อยากให้สภาจัดขึ้นไหม? ส่งมาให้พวกเราพิจารณาได้เลย!</p>
       </a>
 
+      <!-- Repair Form Card -->
       <a class="card" id="formRepair" href="https://forms.google.com" target="_blank" rel="noopener">
-        <div class="meta"><span class="pill">ฟอร์ม</span><span>ชำรุด</span></div>
-        <h3>🛠 แจ้งของชำรุด/ปัญหาห้องเรียน</h3>
-        <p>แจ้งรายละเอียด + รูปถ่าย (ถ้ามี)</p>
+        <div class="meta"><span class="pill">ฝ่ายอาคารสถานที่</span></div>
+        <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="ph-fill ph-wrench"></i> แจ้งซ่อม/ของชำรุด
+        </h3>
+        <p style="margin-top: 0.5rem;">หลอดไฟขาด โต๊ะพัง หรืออุปกรณ์ในห้องเรียนชำรุด แจ้งปุ๊บ สภาประสานงานให้ปั๊บ</p>
       </a>
 
+      <!-- Complaint Form Card -->
       <a class="card" id="formComplaint" href="https://forms.google.com" target="_blank" rel="noopener">
-        <div class="meta"><span class="pill">ฟอร์ม</span><span>ร้องเรียน</span></div>
-        <h3>📢 ร้องเรียน/แจ้งปัญหา</h3>
-        <p>ข้อมูลจะไม่แสดงบนเว็บสาธารณะ ผู้ดูแลเท่านั้นที่เข้าถึงได้</p>
+        <div class="meta"><span class="pill">ร้องเรียน</span></div>
+        <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="ph-fill ph-megaphone"></i> ร้องเรียน/แจ้งปัญหา
+        </h3>
+        <p style="margin-top: 0.5rem;">พบเห็นสิ่งที่ไม่ถูกต้อง หรือได้รับความไม่เป็นธรรม แจ้งปัญหาแบบเป็นส่วนตัว 100%</p>
       </a>
 
+      <!-- Coordinate Form Card -->
       <a class="card" id="formCoordinate" href="https://forms.google.com" target="_blank" rel="noopener">
-        <div class="meta"><span class="pill">ฟอร์ม</span><span>ประสานงาน</span></div>
-        <h3>🤝 ขอให้สภาช่วยประสานงาน</h3>
-        <p>กรณีต้องการให้สภาช่วยสื่อสาร/ประสานกับฝ่ายที่เกี่ยวข้อง</p>
+        <div class="meta"><span class="pill">ประสานงานทั่วไป</span></div>
+        <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="ph-fill ph-handshake"></i> ขอให้สภาช่วยเหลือ
+        </h3>
+        <p style="margin-top: 0.5rem;">ต้องการให้สภาช่วยสื่อสารกับคุณครู หรือประสานงานเรื่องอื่นๆ ภายในโรงเรียน</p>
       </a>
+
     </div>
   </main>
 
