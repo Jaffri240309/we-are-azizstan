@@ -311,12 +311,14 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // ====== Page Transition System ======
-  // Create the transition overlay element
   const transEl = document.createElement("div");
   transEl.className = "page-transition";
   transEl.innerHTML = `
     <div class="curtain curtain-1"></div>
     <div class="curtain curtain-2"></div>
+    <div class="curtain curtain-3"></div>
+    <div class="logo-ring"></div>
+    <div class="logo-ring logo-ring-2"></div>
     <img class="transit-logo" src="assets/azizLogo.png" alt="">
   `;
   document.body.appendChild(transEl);
@@ -330,22 +332,21 @@ window.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // On page load, play exit animation if transition was active
+  // On page load: if we arrived via transition, play the silky exit
   if (sessionStorage.getItem("pageTransition") === "active") {
     sessionStorage.removeItem("pageTransition");
     transEl.classList.add("active");
-    // Small delay then wipe out
     requestAnimationFrame(() => {
       setTimeout(() => {
         transEl.classList.add("exit");
         setTimeout(() => {
           transEl.classList.remove("active", "exit");
-        }, 600);
-      }, 100);
+        }, 1000);
+      }, 200);
     });
   }
 
-  // Intercept internal link clicks
+  // Intercept internal link clicks for smooth transition
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a");
     if (!link) return;
@@ -365,7 +366,7 @@ window.addEventListener("DOMContentLoaded", () => {
       return;
     }
     
-    // It's an internal navigation link - animate!
+    // Internal navigation - play luxurious transition
     e.preventDefault();
     
     // Close mobile nav if open
@@ -375,16 +376,15 @@ window.addEventListener("DOMContentLoaded", () => {
       document.body.style.overflow = "";
     }
 
-    // Mark transition in session
     sessionStorage.setItem("pageTransition", "active");
     
-    // Play curtain wipe in
+    // Play silky curtain wipe in
     transEl.classList.add("active");
     transEl.style.pointerEvents = "all";
     
-    // Navigate after animation completes
+    // Navigate after the curtain fully covers the screen
     setTimeout(() => {
       window.location.href = href;
-    }, 550);
+    }, 900);
   });
 });
