@@ -406,7 +406,7 @@ h3 { font-size: 1.25rem; }
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   /* Premium gradient: dark left to transparent pink right */
-  background: linear-gradient(90deg, rgba(15,23,42,0.9) 0%, rgba(232,58,117,0.7) 100%);
+  background: linear-gradient(90deg, rgba(15,23,42,0.98) 0%, rgba(200,40,95,0.88) 100%);
   z-index: 2;
 }
 
@@ -720,7 +720,7 @@ h3 { font-size: 1.25rem; }
   
   .hero { min-height: 100vh; }
   .hero-overlay {
-    background: linear-gradient(135deg, rgba(15,23,42,0.9) 0%, rgba(232,58,117,0.8) 100%);
+    background: linear-gradient(135deg, rgba(15,23,42,0.98) 0%, rgba(200,40,95,0.9) 100%);
   }
   .hero-content { padding: 20px 0; }
   .hero-content h1 { font-size: 2.5rem; }
