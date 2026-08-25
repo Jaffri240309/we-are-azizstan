@@ -8,6 +8,101 @@ let editor;
 let currentHtmlSha = null;
 let currentCssSha = null;
 
+// Thai Language Pack
+const thaiLang = {
+  panels: {
+    buttons: {
+      titles: {
+        preview: 'ดูตัวอย่าง',
+        fullscreen: 'เต็มจอ',
+        'sw-visibility': 'แสดงเส้นขอบ',
+        'export-template': 'ดูโค้ด',
+        'open-sm': 'ปรับแต่งดีไซน์ (สี/ขนาด/ขอบ)',
+        'open-tm': 'การตั้งค่า (ลิงก์/คลาส)',
+        'open-layers': 'เลเยอร์ (โครงสร้างหน้าเว็บ)',
+        'open-blocks': 'เพิ่มองค์ประกอบ (ลากวาง)',
+      }
+    }
+  },
+  align: {
+    'align-left': 'ชิดซ้าย',
+    'align-center': 'ตรงกลาง',
+    'align-right': 'ชิดขวา',
+    'align-justify': 'กระจาย',
+  },
+  styleManager: {
+    empty: 'คลิกเลือกส่วนที่ต้องการบนหน้าเว็บ เพื่อปรับแต่งดีไซน์',
+    layer: 'เลเยอร์',
+    fileButton: 'เลือกรูปภาพ',
+    sectors: {
+      general: 'ทั่วไป (General)',
+      layout: 'การจัดวาง (Layout)',
+      typography: 'ตัวอักษร (Typography)',
+      decorations: 'การตกแต่ง (Decorations)',
+      extra: 'เพิ่มเติม (Extra)',
+      flex: 'การจัดเรียง (Flexbox)',
+      dimension: 'ขนาด (Dimension)'
+    },
+    properties: {
+      display: 'รูปแบบการแสดงผล',
+      width: 'ความกว้าง',
+      height: 'ความสูง',
+      'max-width': 'กว้างสูงสุด',
+      'min-height': 'สูงต่ำสุด',
+      margin: 'ระยะห่างภายนอก',
+      padding: 'ระยะห่างภายใน',
+      'font-family': 'ฟอนต์',
+      'font-size': 'ขนาดตัวอักษร',
+      'font-weight': 'ความหนา',
+      'letter-spacing': 'ระยะห่างตัวอักษร',
+      color: 'สีตัวอักษร',
+      'line-height': 'ความสูงบรรทัด',
+      'text-align': 'จัดตำแหน่งอักษร',
+      'text-decoration': 'เส้นตกแต่ง',
+      'text-shadow': 'เงาตัวอักษร',
+      'background-color': 'สีพื้นหลัง',
+      'background-image': 'รูปภาพพื้นหลัง',
+      'border-radius': 'ความโค้งมุม',
+      border: 'เส้นขอบ',
+      'box-shadow': 'เงากล่อง',
+      opacity: 'ความโปร่งแสง',
+      transition: 'การเคลื่อนไหว',
+      transform: 'การแปลงรูปร่าง'
+    }
+  },
+  traitManager: {
+    empty: 'เลือกองค์ประกอบก่อนเพื่อตั้งค่า',
+    label: 'การตั้งค่า',
+    traits: {
+      labels: {
+        id: 'ไอดี (ID)',
+        title: 'ชื่อ (Title)',
+        href: 'ลิงก์ไปที่ (URL)',
+        target: 'เปิดหน้าต่างใหม่',
+        src: 'ไฟล์รูปภาพ (URL)',
+        alt: 'คำอธิบายรูปภาพ',
+      }
+    }
+  },
+  blockManager: {
+    labels: {
+      text: 'ข้อความ',
+      link: 'ลิงก์',
+      image: 'รูปภาพ',
+      video: 'วิดีโอ',
+      map: 'แผนที่',
+      'link-block': 'กล่องลิงก์',
+      quote: 'คำคม',
+      'text-section': 'ส่วนข้อความ',
+      'image-section': 'ส่วนรูปภาพ',
+      column1: '1 คอลัมน์',
+      column2: '2 คอลัมน์',
+      column3: '3 คอลัมน์',
+      'column3-7': 'คอลัมน์ (3/7)',
+    }
+  }
+};
+
 // Initialize Editor
 function initEditor() {
   editor = grapesjs.init({
@@ -17,7 +112,11 @@ function initEditor() {
     fromElement: false,
     showOffsets: true,
     noticeOnUnload: false,
-    storageManager: false, // We handle storage manually via GitHub API
+    storageManager: false, 
+    i18n: {
+      locale: 'th',
+      messages: { th: thaiLang }
+    },
     plugins: ['gjs-preset-webpage', 'grapesjs-custom-code'],
     pluginsOpts: {
       'gjs-preset-webpage': {
@@ -26,7 +125,7 @@ function initEditor() {
         countdownOpts: false,
         formsOpts: false,
         exportOpts: false,
-        blocks: ['column1', 'column2', 'column3', 'column3-7', 'text', 'link', 'image', 'video']
+        blocks: ['column1', 'column2', 'column3', 'column3-7', 'text', 'link', 'image', 'video', 'map']
       }
     },
     canvas: {
@@ -114,36 +213,24 @@ async function publishToGitHub() {
   const loader = document.getElementById('loader');
   const loaderText = document.getElementById('loader-text');
   
-  // Reconstruct full HTML Document
-  // GrapesJS `getHtml()` only returns the inner body. We need to reconstruct the full file.
-  // We'll fetch the original index.html and replace its body content.
   loader.classList.remove('hidden');
   loaderText.innerText = 'กำลังดึงข้อมูลล่าสุดจากเซิร์ฟเวอร์...';
   
   try {
-    // 1. Refresh SHAs to avoid conflict
     await fetchShas();
     if(!currentHtmlSha) throw new Error("ไม่พบไฟล์ index.html บน GitHub หรือ Token ไม่มีสิทธิ์");
 
-    // 2. Fetch original HTML to preserve <head>
     const htmlRes = await fetch('../index.html?t=' + Date.now());
     let fullHtml = await htmlRes.text();
     
-    // Replace body content with editor content
     const editorHtml = editor.getHtml();
     fullHtml = fullHtml.replace(/(<body[^>]*>)([\s\S]*?)(<\/body>)/i, `$1\n${editorHtml}\n$3`);
     
-    // 3. Get Editor CSS
     const editorCss = editor.getCss();
-
-    // 4. Base64 Encode (UTF-8 safe)
-    const encodeBase64 = (str) => btoa(unescape(encodeURIComponent(str)));
     
-    // 5. Commit HTML
     loaderText.innerText = 'กำลังอัปเดต index.html...';
     await commitFile('index.html', fullHtml, currentHtmlSha, commitMsg, token);
     
-    // 6. Commit CSS
     loaderText.innerText = 'กำลังอัปเดต style.css...';
     await commitFile('style.css', editorCss, currentCssSha, commitMsg, token);
     
@@ -159,17 +246,10 @@ async function publishToGitHub() {
 
 async function commitFile(path, content, sha, message, token) {
   const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
-  
-  // Encode string safely for Base64 (handles Thai chars)
   const encodedContent = btoa(new TextEncoder().encode(content).reduce((data, byte) => data + String.fromCharCode(byte), ''));
 
-  const body = {
-    message: message,
-    content: encodedContent,
-    branch: GITHUB_BRANCH
-  };
-  
-  if (sha) body.sha = sha; // Need SHA to update an existing file
+  const body = { message: message, content: encodedContent, branch: GITHUB_BRANCH };
+  if (sha) body.sha = sha;
 
   const res = await fetch(url, {
     method: 'PUT',
@@ -186,10 +266,8 @@ async function commitFile(path, content, sha, message, token) {
   }
   
   const data = await res.json();
-  // Update local SHA with the new commit's SHA
   if(path === 'index.html') currentHtmlSha = data.content.sha;
   if(path === 'style.css') currentCssSha = data.content.sha;
-  
   return data;
 }
 
@@ -214,7 +292,6 @@ document.getElementById('btn-modal-save').addEventListener('click', () => {
   if(token) {
     localStorage.setItem('gh_token', token);
     hideModal();
-    // Re-fetch SHAs now that we have a token
     fetchShas();
     alert('บันทึก Token เรียบร้อย');
   } else {
