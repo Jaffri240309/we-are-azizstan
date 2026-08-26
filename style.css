@@ -89,7 +89,7 @@ img {
 
 /* ====== Typography ====== */
 h1, h2, h3, h4 {
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   margin-bottom: 0.5em;
   color: var(--c-text);
