@@ -1,4 +1,21 @@
-@import url('https://cdn.lazywasabi.net/fonts/Anakotmai/Anakotmai.css');
+@font-face {
+  font-family: 'Anakotmai';
+  src: url('assets/fonts/anakotmai-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Anakotmai';
+  src: url('assets/fonts/anakotmai-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Anakotmai';
+  src: url('assets/fonts/anakotmai-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
 
 /* ====== Base Variables ====== */
 :root {
@@ -50,6 +67,7 @@ body {
   background-attachment: fixed;
   color: var(--c-text);
   line-height: 1.6;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -89,7 +107,7 @@ h3 { font-size: 1.25rem; }
   gap: 8px;
   padding: 10px 20px;
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
