@@ -5,389 +5,345 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ทำเนียบสภานักเรียน | We Are Azizstan</title>
   <link rel="stylesheet" href="/style.css?v=1787703023" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
   <style>
-    /* ====== Council Hero ====== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Full-page background ── */
+    .council-page {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 10% 20%, rgba(99,102,241,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 10%, rgba(232,58,117,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(147,51,234,0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #f5f0fa 0%, #fdf0f5 40%, #f0f4ff 100%);
+      padding-top: 80px;
+      overflow-x: hidden;
+    }
+
+    /* ── Floating ambient blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      animation: blobDrift ease-in-out infinite;
+    }
+    .blob-1 { width:500px;height:500px;background:rgba(232,58,117,0.12);top:-80px;right:-60px;animation-duration:12s;animation-delay:0s; }
+    .blob-2 { width:400px;height:400px;background:rgba(99,102,241,0.13);bottom:0;left:-80px;animation-duration:15s;animation-delay:3s; }
+    .blob-3 { width:300px;height:300px;background:rgba(147,51,234,0.1);top:40%;right:10%;animation-duration:10s;animation-delay:6s; }
+
+    @keyframes blobDrift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(30px,-25px) scale(1.06); }
+      66%      { transform: translate(-20px,15px) scale(0.96); }
+    }
+
+    /* ── Hero section ── */
     .council-hero {
       position: relative;
-      min-height: 100vh;
+      z-index: 1;
+      min-height: calc(100vh - 80px);
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 20px 80px;
+      align-items: stretch;
+    }
+
+    /* ── Left Photo Panel ── */
+    .photo-panel {
+      position: relative;
+      flex: 0 0 45%;
       overflow: hidden;
     }
 
-    /* Animated background blobs */
-    .council-hero::before,
-    .council-hero::after {
-      content: '';
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.55;
-      animation: blobFloat 8s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .council-hero::before {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(232,58,117,0.5), rgba(196,98,255,0.4));
-      top: -100px;
-      right: -100px;
-      animation-delay: 0s;
-    }
-
-    .council-hero::after {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(99,102,241,0.45), rgba(14,165,233,0.35));
-      bottom: -80px;
-      left: -80px;
-      animation-delay: 4s;
-    }
-
-    /* Extra floating blob */
-    .blob-mid {
-      position: fixed;
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(251,191,36,0.3), rgba(232,58,117,0.2));
-      top: 40%;
-      left: 30%;
-      filter: blur(70px);
-      opacity: 0.45;
-      animation: blobFloat 11s ease-in-out infinite;
-      animation-delay: 2s;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes blobFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33%       { transform: translate(40px, -30px) scale(1.08); }
-      66%       { transform: translate(-30px, 20px) scale(0.95); }
-    }
-
-    /* Floating particle dots */
-    .particle {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      animation: particleDrift linear infinite;
-      opacity: 0;
-    }
-
-    @keyframes particleDrift {
-      0%   { transform: translateY(110vh) scale(0); opacity: 0; }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.4; }
-      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-    }
-
-    /* Section title */
-    .council-section-title {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .council-section-title .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(232,58,117,0.12);
-      border: 1px solid rgba(232,58,117,0.25);
-      color: var(--c-primary);
-      padding: 6px 18px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-      backdrop-filter: blur(8px);
-    }
-
-    .council-section-title h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      background: linear-gradient(135deg, #e83a75, #9333ea, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin: 0;
-    }
-
-    .council-section-title p {
-      margin-top: 12px;
-      color: var(--c-text-muted);
-      font-size: 1.05rem;
-    }
-
-    /* ====== President Card ====== */
-    .president-card-outer {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    @keyframes cardEntrance {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .president-card {
-      position: relative;
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      border-radius: 36px;
-      box-shadow:
-        0 30px 80px rgba(0,0,0,0.12),
-        0 10px 30px rgba(232,58,117,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.7),
-        inset 0 -1px 0 rgba(0,0,0,0.03);
-      overflow: hidden;
-      max-width: 420px;
-      width: 100%;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
-      cursor: default;
-    }
-
-    .president-card:hover {
-      transform: translateY(-10px) scale(1.012);
-      box-shadow:
-        0 50px 100px rgba(0,0,0,0.15),
-        0 20px 50px rgba(232,58,117,0.14),
-        inset 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    /* Top shimmer line */
-    .president-card::before {
+    /* Curved right edge clip */
+    .photo-panel::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #e83a75, #9333ea, #3b82f6, #e83a75);
-      background-size: 200%;
-      animation: shimmerLine 3s linear infinite;
-      z-index: 3;
+      top: 0; right: -1px; bottom: 0;
+      width: 80px;
+      background: inherit;
+      clip-path: ellipse(80px 55% at 100% 50%);
+      background: radial-gradient(ellipse at 10% 20%, rgba(99,102,241,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 10%, rgba(232,58,117,0.15) 0%, transparent 50%),
+        linear-gradient(160deg, #f5f0fa 0%, #fdf0f5 40%, #f0f4ff 100%);
+      z-index: 2;
     }
 
-    @keyframes shimmerLine {
-      from { background-position: 0% 0%; }
-      to   { background-position: 200% 0%; }
+    .photo-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 80px);
     }
 
-    /* Inner glow */
-    .president-card::after {
-      content: '';
+    .president-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Overlay gradient on photo bottom */
+    .photo-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        145deg,
-        rgba(255,255,255,0.25) 0%,
-        rgba(255,255,255,0) 60%
+        to right,
+        rgba(0,0,0,0.08) 0%,
+        rgba(0,0,0,0) 60%
       );
-      border-radius: inherit;
+      z-index: 1;
+    }
+
+    /* Subtle diagonal light sweep */
+    .photo-inner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.15) 0%,
+        rgba(255,255,255,0) 50%
+      );
+      z-index: 1;
       pointer-events: none;
-      z-index: 1;
     }
 
-    /* Photo section */
-    .president-photo-wrap {
-      position: relative;
-      padding: 40px 40px 0;
-      display: flex;
-      justify-content: center;
-      z-index: 2;
-    }
-
-    .president-photo-ring {
-      position: relative;
-      width: 200px;
-      height: 200px;
-    }
-
-    /* Spinning gradient ring */
-    .president-photo-ring::before {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        #e83a75,
-        #9333ea,
-        #3b82f6,
-        #06b6d4,
-        #e83a75
-      );
-      animation: spinRing 4s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes spinRing {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Inner white gap */
-    .president-photo-ring::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      z-index: 1;
-    }
-
-    .president-photo {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center top;
-      z-index: 2;
-      border: 4px solid rgba(255,255,255,0.7);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    }
-
-    /* Badge */
-    .president-badge {
-      position: absolute;
-      bottom: 8px;
-      right: 4px;
-      background: linear-gradient(135deg, #e83a75, #9333ea);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 50px;
-      z-index: 4;
-      box-shadow: 0 4px 12px rgba(232,58,117,0.5);
-      letter-spacing: 0.05em;
-      border: 2px solid rgba(255,255,255,0.6);
-      white-space: nowrap;
-    }
-
-    /* Info section */
-    .president-info {
-      padding: 28px 36px 36px;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .president-role {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      color: var(--c-primary);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      background: rgba(232,58,117,0.08);
-      border: 1px solid rgba(232,58,117,0.2);
-      padding: 4px 14px;
-      border-radius: 50px;
-    }
-
-    .president-name-th {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--c-text);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin: 0 0 4px;
-    }
-
-    .president-name-en {
-      font-size: 1rem;
-      color: var(--c-text-muted);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      margin-bottom: 20px;
-    }
-
-    .president-divider {
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, #e83a75, #9333ea);
-      border-radius: 10px;
-      margin: 0 auto 20px;
-    }
-
-    .president-details {
+    /* ── Right Info Panel ── */
+    .info-panel {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
+      justify-content: center;
+      padding: 60px 60px 60px 80px;
+      position: relative;
+      z-index: 1;
     }
 
-    .president-detail-row {
+    /* Section label */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--c-primary);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .label-line {
+      display: inline-block;
+      width: 36px;
+      height: 2px;
+      background: var(--c-primary);
+      border-radius: 2px;
+    }
+
+    /* Main name */
+    .name-th {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+      font-weight: 700;
+      color: #1a1025;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      opacity: 0;
+      transform: translateY(25px);
+      animation: fadeUp 0.9s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .name-en {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #7c6f8e;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #e83a75, #9333ea);
+      border-radius: 2px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    /* Info rows */
+    .info-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.65s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(232,58,117,0.08);
+      border: 1px solid rgba(232,58,117,0.18);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      color: var(--c-text);
-      font-size: 0.95rem;
-    }
-
-    .president-detail-row i {
-      font-size: 1.1rem;
-      color: var(--c-primary);
       flex-shrink: 0;
+      color: var(--c-primary);
+      font-size: 1.1rem;
     }
 
-    .president-quote {
-      background: rgba(232,58,117,0.07);
-      border-left: 3px solid var(--c-primary);
-      border-radius: 0 14px 14px 0;
-      padding: 14px 18px;
-      text-align: left;
-      margin-top: 8px;
+    .info-text-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      color: #a090b8;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
-    .president-quote p {
-      font-size: 0.95rem;
-      color: var(--c-text);
-      font-style: italic;
-      margin: 0;
-      line-height: 1.6;
+    .info-text-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      color: #2d1f42;
+      font-weight: 500;
+      margin-top: 2px;
     }
 
-    .president-quote span {
-      font-size: 0.78rem;
-      color: var(--c-text-muted);
-      margin-top: 4px;
+    /* Quote — handwriting style */
+    .quote-block {
+      position: relative;
+      margin-bottom: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      line-height: 0.5;
+      color: rgba(232,58,117,0.2);
       display: block;
+      margin-bottom: 8px;
+    }
+
+    .quote-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2d1f42;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+    }
+
+    .quote-source {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      color: #a090b8;
+      margin-top: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    /* Role badge floating on photo */
+    .role-badge {
+      position: absolute;
+      bottom: 40px;
+      left: 30px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 18px;
+      padding: 14px 22px;
+      color: white;
+      z-index: 3;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    .role-badge .role-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    .role-badge .role-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Year tag on photo top */
+    .year-tag {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.85);
+      background: rgba(232,58,117,0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      padding: 6px 16px;
+      z-index: 3;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .council-hero { flex-direction: column; }
+      .photo-panel {
+        flex: none;
+        width: 100%;
+        height: 65vw;
+        max-height: 480px;
+      }
+      .photo-panel::after { display: none; }
+      .info-panel { padding: 40px 24px 60px; }
+      .name-th { font-size: 2.8rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating background particles -->
-  <div class="blob-mid"></div>
-  <div class="particle" style="width:8px;height:8px;background:rgba(232,58,117,0.6);left:15%;animation-duration:12s;animation-delay:0s;"></div>
-  <div class="particle" style="width:5px;height:5px;background:rgba(147,51,234,0.5);left:40%;animation-duration:16s;animation-delay:2s;"></div>
-  <div class="particle" style="width:10px;height:10px;background:rgba(59,130,246,0.4);left:70%;animation-duration:10s;animation-delay:4s;"></div>
-  <div class="particle" style="width:6px;height:6px;background:rgba(232,58,117,0.5);left:88%;animation-duration:14s;animation-delay:1s;"></div>
-  <div class="particle" style="width:9px;height:9px;background:rgba(6,182,212,0.4);left:55%;animation-duration:18s;animation-delay:6s;"></div>
-  <div class="particle" style="width:4px;height:4px;background:rgba(251,191,36,0.6);left:25%;animation-duration:13s;animation-delay:3s;"></div>
-  <div class="particle" style="width:7px;height:7px;background:rgba(147,51,234,0.5);left:80%;animation-duration:15s;animation-delay:5s;"></div>
+  <!-- Ambient blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 
   <header class="topbar">
     <div class="container topbar-inner">
@@ -401,7 +357,6 @@
           <div class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</div>
         </div>
       </a>
-
       <nav class="nav">
         <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
         <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
@@ -409,14 +364,13 @@
         <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
         <a class="active" href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
       </nav>
-
       <button class="hamburger" id="menuBtn" aria-label="เปิดเมนู">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- Mobile Nav Overlay -->
+  <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-panel">
       <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
@@ -427,53 +381,73 @@
     </div>
   </div>
 
-  <section class="council-hero">
+  <div class="council-page">
+    <section class="council-hero">
 
-    <div class="council-section-title">
-      <div class="tag">
-        <i class="ph-fill ph-users"></i> สภานักเรียน
-      </div>
-      <h1>ทำเนียบสภานักเรียน</h1>
-      <p>โรงเรียนมูลนิธิอาซิซสถาน • ปีการศึกษา 2568</p>
-    </div>
+      <!-- Left: Full Photo -->
+      <div class="photo-panel">
+        <div class="photo-inner">
+          <img src="assets/president.png" alt="ประธานนักเรียน ฮูซัยฟี เจ๊ะเลาะ" class="president-img">
+          <div class="photo-overlay"></div>
 
-    <!-- President Card -->
-    <div class="president-card-outer">
-      <div class="president-card">
-        <div class="president-photo-wrap">
-          <div class="president-photo-ring">
-            <img src="assets/president.png" alt="ประธานนักเรียน ฮูซัยฟี เจ๊ะเลาะ" class="president-photo">
-            <div class="president-badge">⭐ ประธาน</div>
+          <div class="year-tag">สภานักเรียน · 2568</div>
+
+          <div class="role-badge">
+            <div class="role-title">ตำแหน่ง</div>
+            <div class="role-name">ประธานนักเรียน</div>
           </div>
         </div>
+      </div>
 
-        <div class="president-info">
-          <div class="president-role">
-            <i class="ph-fill ph-crown"></i>
-            ประธานนักเรียน
-          </div>
+      <!-- Right: Info -->
+      <div class="info-panel">
 
-          <h2 class="president-name-th">ฮูซัยฟี เจ๊ะเลาะ</h2>
-          <div class="president-name-en">Husaifee Jehloh</div>
+        <span class="section-label">
+          <span class="label-line"></span>
+          We Are Azizstan
+        </span>
 
-          <div class="president-divider"></div>
+        <h1 class="name-th">ฮูซัยฟี<br>เจ๊ะเลาะ</h1>
+        <div class="name-en">Husaifee &nbsp;·&nbsp; Jehloh</div>
 
-          <div class="president-details">
-            <div class="president-detail-row">
-              <i class="ph-fill ph-graduation-cap"></i>
-              <span>ม.6 / Al-Khawarizmi</span>
+        <div class="divider"></div>
+
+        <div class="info-rows">
+          <div class="info-row">
+            <div class="info-icon"><i class="ph-fill ph-crown"></i></div>
+            <div>
+              <div class="info-text-label">ตำแหน่ง</div>
+              <div class="info-text-value">ประธานนักเรียน</div>
             </div>
           </div>
 
-          <div class="president-quote">
-            <p>❝ ซื่อสัตย์อย่างจริงใจ ❞</p>
-            <span>— คติประจำใจ</span>
+          <div class="info-row">
+            <div class="info-icon"><i class="ph-fill ph-graduation-cap"></i></div>
+            <div>
+              <div class="info-text-label">ระดับชั้น</div>
+              <div class="info-text-value">ม.6 / Al-Khawarizmi</div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-icon"><i class="ph-fill ph-buildings"></i></div>
+            <div>
+              <div class="info-text-label">โรงเรียน</div>
+              <div class="info-text-value">มูลนิธิอาซิซสถาน (Azizstan.net)</div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-  </section>
+        <!-- Handwriting quote -->
+        <div class="quote-block">
+          <span class="quote-mark">"</span>
+          <div class="quote-text">ซื่อสัตย์อย่างจริงใจ</div>
+          <div class="quote-source">— คติประจำใจ</div>
+        </div>
+
+      </div>
+    </section>
+  </div>
 
   <script src="assets/js/app.js?v=1787701351"></script>
 </body>
