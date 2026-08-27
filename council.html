@@ -5,277 +5,289 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ทำเนียบสภานักเรียน | We Are Azizstan</title>
   <link rel="stylesheet" href="/style.css?v=1787703023" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
   <style>
-    .council-page {
-      padding-top: 100px;
-      padding-bottom: 80px;
-    }
+    .council-page { padding-top: 20px; padding-bottom: 60px; }
 
-    /* ── Page Title ── */
+    /* ── Compact Page Title ── */
     .page-title {
       text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .page-title h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--c-text);
-      margin: 0 0 8px;
-    }
-
-    .page-title p {
-      font-family: 'Outfit', sans-serif;
-      color: var(--c-text-muted);
-      font-size: 1rem;
-    }
-
-    .page-title .accent-line {
-      display: block;
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--c-primary), #9333ea);
-      border-radius: 10px;
-      margin: 16px auto 0;
-    }
-
-    /* ── Member Profile ── */
-    .member-profile {
-      display: flex;
-      align-items: flex-start;
-      gap: 50px;
-      max-width: 900px;
-      margin: 0 auto 80px;
+      margin-bottom: 40px;
       padding: 0 20px;
     }
-
-    /* Photo */
-    .member-photo-side {
-      flex-shrink: 0;
-      width: 280px;
+    .page-title .small-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-primary);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .page-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0;
+      line-height: 1.3;
+    }
+    .page-title .subtitle {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      color: var(--c-text-muted);
+      margin-top: 4px;
     }
 
-    .member-photo-frame {
+    /* ── Profile Block ── */
+    .profile-block {
+      max-width: 960px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 0;
+      align-items: start;
       position: relative;
-      width: 280px;
-      height: 370px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     }
 
-    .member-photo-frame img {
+    /* Photo Column */
+    .profile-photo-col {
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-photo {
+      width: 320px;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 25px 50px rgba(0,0,0,0.15),
+        0 8px 20px rgba(232,58,117,0.08);
+    }
+
+    .profile-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
+      transition: transform 6s ease;
     }
 
-    /* Subtle gradient overlay at bottom of photo */
-    .member-photo-frame::after {
+    .profile-photo:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Subtle photo bottom fade */
+    .profile-photo::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 100px;
-      background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
+      height: 120px;
+      background: linear-gradient(to top, rgba(20,10,30,0.5), transparent);
       pointer-events: none;
     }
 
-    /* Position tag on photo */
-    .position-tag {
+    /* Name overlay on photo bottom */
+    .photo-name-overlay {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
-      text-align: center;
-      z-index: 2;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
+      bottom: 18px;
+      left: 20px;
+      z-index: 3;
       color: white;
-      letter-spacing: 0.08em;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
     }
-
-    /* Info side */
-    .member-info-side {
-      flex: 1;
-      padding-top: 10px;
-    }
-
-    .member-role-label {
+    .photo-name-overlay .pno-role {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--c-primary);
-      margin-bottom: 12px;
-    }
-
-    .member-name-th {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.6rem;
-      font-weight: 700;
-      color: var(--c-text);
-      line-height: 1.15;
-      margin-bottom: 4px;
-    }
-
-    .member-name-en {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: var(--c-text-muted);
-      letter-spacing: 0.08em;
-      margin-bottom: 28px;
-    }
-
-    /* Detail items */
-    .member-details {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin-bottom: 36px;
-    }
-
-    .detail-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .detail-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--c-primary);
-      flex-shrink: 0;
-    }
-
-    .detail-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.78rem;
-      color: var(--c-text-muted);
-      letter-spacing: 0.06em;
-      min-width: 65px;
-    }
-
-    .detail-value {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1rem;
-      color: var(--c-text);
+      opacity: 0.75;
       font-weight: 500;
     }
-
-    /* ── Signature / Motto ── */
-    .motto-section {
-      margin-top: 10px;
-      position: relative;
-      padding-left: 0;
-    }
-
-    .motto-label {
+    .photo-name-overlay .pno-name {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--c-text-muted);
-      margin-bottom: 12px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 2px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
 
-    .motto-signature {
-      position: relative;
-      display: inline-block;
-    }
-
-    /* SVG signature flourish */
-    .motto-signature svg.flourish {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0; left: 0;
-      pointer-events: none;
-      overflow: visible;
-    }
-
-    .motto-signature svg.flourish path {
-      fill: none;
-      stroke: var(--c-primary);
-      stroke-width: 1.2;
-      opacity: 0.35;
-      stroke-dasharray: 600;
-      stroke-dashoffset: 600;
-      animation: drawLine 2s 0.5s ease forwards;
-    }
-
-    @keyframes drawLine {
-      to { stroke-dashoffset: 0; }
-    }
-
-    .motto-text {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--c-text);
-      letter-spacing: 0.02em;
+    /* Info Column */
+    .profile-info-col {
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 0 20px 20px 0;
+      padding: 40px 44px 40px 50px;
+      margin-left: -20px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
       z-index: 1;
     }
 
-    /* Underline swoosh */
-    .motto-swoosh {
-      display: block;
-      margin-top: 4px;
-      overflow: visible;
+    /* Decorative vertical line */
+    .profile-info-col::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      bottom: 40px;
+      left: 24px;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--c-primary), #9333ea, transparent);
+      border-radius: 2px;
+      opacity: 0.3;
     }
 
-    .motto-swoosh path {
+    .info-role {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-primary);
+      margin-bottom: 8px;
+    }
+
+    .info-name-th {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--c-text);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 2px;
+    }
+
+    .info-name-en {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--c-text-muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 28px;
+    }
+
+    /* Details grid */
+    .info-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      margin-bottom: 28px;
+    }
+
+    .info-detail {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .info-detail::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--c-primary);
+    }
+
+    .info-detail-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .info-detail-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      color: var(--c-text);
+      font-weight: 600;
+    }
+
+    /* Motto / Signature */
+    .info-motto {
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 20px;
+      position: relative;
+    }
+
+    .info-motto-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .info-motto-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--c-text);
+      letter-spacing: 0.01em;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* SVG signature underline */
+    .sig-line {
+      display: block;
+      margin-top: 2px;
+      overflow: visible;
+    }
+    .sig-line path {
       fill: none;
-      stroke: url(#swooshGrad);
       stroke-width: 2;
       stroke-linecap: round;
-      stroke-dasharray: 400;
-      stroke-dashoffset: 400;
-      animation: drawLine 1.5s 1s ease forwards;
     }
 
     /* ── Section Divider ── */
-    .council-divider {
-      max-width: 900px;
-      margin: 0 auto 80px;
+    .profile-divider {
+      max-width: 960px;
+      margin: 0 auto 50px;
       padding: 0 20px;
     }
-
-    .council-divider hr {
+    .profile-divider hr {
       border: none;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(232,58,117,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(232,58,117,0.15), rgba(147,51,234,0.15), transparent);
     }
 
     /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .member-profile {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
+    @media (max-width: 800px) {
+      .profile-block {
+        grid-template-columns: 1fr;
+        gap: 0;
       }
-
-      .member-photo-side { width: 240px; }
-      .member-photo-frame { width: 240px; height: 320px; }
-      .member-info-side { text-align: center; padding-top: 0; }
-
-      .member-name-th { font-size: 2rem; }
-
-      .detail-item { justify-content: center; }
-
-      .motto-section { text-align: center; }
+      .profile-photo {
+        width: 100%;
+        height: 380px;
+        border-radius: 16px 16px 0 0;
+      }
+      .profile-info-col {
+        margin-left: 0;
+        border-radius: 0 0 16px 16px;
+        padding: 30px 24px;
+        min-height: auto;
+      }
+      .profile-info-col::before { display: none; }
+      .info-name-th { font-size: 1.8rem; }
+      .info-details { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -319,114 +331,108 @@
   <div class="council-page">
 
     <div class="page-title">
+      <div class="small-label">We Are Azizstan</div>
       <h1>ทำเนียบสภานักเรียน</h1>
-      <p>โรงเรียนมูลนิธิอาซิซสถาน · ปีการศึกษา 2568</p>
-      <span class="accent-line"></span>
+      <div class="subtitle">โรงเรียนมูลนิธิอาซิซสถาน · ปีการศึกษา 2568</div>
     </div>
 
     <!-- ═══ ประธานนักเรียน ═══ -->
-    <div class="member-profile">
-      <div class="member-photo-side">
-        <div class="member-photo-frame">
+    <div class="profile-block">
+      <div class="profile-photo-col">
+        <div class="profile-photo">
           <img src="assets/president.png" alt="ฮูซัยฟี เจ๊ะเลาะ">
-          <div class="position-tag">ประธานนักเรียน</div>
+          <div class="photo-name-overlay">
+            <div class="pno-role">President</div>
+            <div class="pno-name">ฮูซัยฟี เจ๊ะเลาะ</div>
+          </div>
         </div>
       </div>
-
-      <div class="member-info-side">
-        <div class="member-role-label">ประธานนักเรียน — President</div>
-        <h2 class="member-name-th">ฮูซัยฟี เจ๊ะเลาะ</h2>
-        <div class="member-name-en">Husaifee Jehloh</div>
-
-        <div class="member-details">
-          <div class="detail-item">
-            <span class="detail-dot"></span>
-            <span class="detail-label">ระดับชั้น</span>
-            <span class="detail-value">ม.6 / Al-Khawarizmi</span>
+      <div class="profile-info-col">
+        <div class="info-role">ประธานนักเรียน — President</div>
+        <h2 class="info-name-th">ฮูซัยฟี เจ๊ะเลาะ</h2>
+        <div class="info-name-en">Husaifee Jehloh</div>
+        <div class="info-details">
+          <div class="info-detail">
+            <div class="info-detail-label">ตำแหน่ง</div>
+            <div class="info-detail-value">ประธานนักเรียน</div>
           </div>
-          <div class="detail-item">
-            <span class="detail-dot"></span>
-            <span class="detail-label">ปีการศึกษา</span>
-            <span class="detail-value">2568</span>
+          <div class="info-detail">
+            <div class="info-detail-label">ระดับชั้น</div>
+            <div class="info-detail-value">ม.6 / Al-Khawarizmi</div>
+          </div>
+          <div class="info-detail">
+            <div class="info-detail-label">ปีการศึกษา</div>
+            <div class="info-detail-value">2568</div>
+          </div>
+          <div class="info-detail">
+            <div class="info-detail-label">สังกัด</div>
+            <div class="info-detail-value">สภานักเรียน</div>
           </div>
         </div>
-
-        <div class="motto-section">
-          <div class="motto-label">คติประจำใจ</div>
-          <div class="motto-signature">
-            <span class="motto-text">ซื่อสัตย์อย่างจริงใจ</span>
-            <!-- SVG underline swoosh — like a real signature stroke -->
-            <svg class="motto-swoosh" viewBox="0 0 260 30" width="260" height="30" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="swooshGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#e83a75" />
-                  <stop offset="50%" stop-color="#9333ea" />
-                  <stop offset="100%" stop-color="#3b82f6" />
-                </linearGradient>
-              </defs>
-              <!-- Main swoosh line -->
-              <path d="M5,18 C30,4 70,2 120,12 S200,26 255,8" />
-              <!-- Small decorative curl at end -->
-              <path d="M248,10 C258,5 262,12 255,15" stroke-width="1.5" />
-              <!-- Small decorative curl at start -->
-              <path d="M5,18 C0,22 -2,16 5,14" stroke-width="1.5" />
+        <div class="info-motto">
+          <div class="info-motto-label">คติประจำใจ</div>
+          <div class="info-motto-text">
+            " ซื่อสัตย์อย่างจริงใจ "
+            <svg class="sig-line" viewBox="0 0 220 24" width="220" height="24">
+              <defs><linearGradient id="sg1" x1="0%" x2="100%"><stop offset="0%" stop-color="#e83a75"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs>
+              <path d="M2,16 Q30,4 60,14 T120,10 T180,16 Q200,20 218,10" stroke="url(#sg1)"/>
+              <path d="M210,12 Q218,8 216,14" stroke="url(#sg1)" stroke-width="1.5"/>
             </svg>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="council-divider"><hr></div>
+    <div class="profile-divider"><hr></div>
 
     <!-- ═══ รองประธานนักเรียน (ชาย) ═══ -->
-    <div class="member-profile">
-      <div class="member-photo-side">
-        <div class="member-photo-frame">
+    <div class="profile-block">
+      <div class="profile-photo-col">
+        <div class="profile-photo">
           <img src="assets/vice-president-male.png" alt="อาเดล มาตัดสา">
-          <div class="position-tag">รองประธานนักเรียน</div>
+          <div class="photo-name-overlay">
+            <div class="pno-role">Vice President</div>
+            <div class="pno-name">อาเดล มาตัดสา</div>
+          </div>
         </div>
       </div>
-
-      <div class="member-info-side">
-        <div class="member-role-label">รองประธานนักเรียน (ชาย) — Vice President</div>
-        <h2 class="member-name-th">อาเดล มาตัดสา</h2>
-        <div class="member-name-en">Adel Matadsa</div>
-
-        <div class="member-details">
-          <div class="detail-item">
-            <span class="detail-dot"></span>
-            <span class="detail-label">ระดับชั้น</span>
-            <span class="detail-value">ม.6 / Intan</span>
+      <div class="profile-info-col">
+        <div class="info-role">รองประธานนักเรียน (ชาย) — Vice President</div>
+        <h2 class="info-name-th">อาเดล มาตัดสา</h2>
+        <div class="info-name-en">Adel Matadsa</div>
+        <div class="info-details">
+          <div class="info-detail">
+            <div class="info-detail-label">ตำแหน่ง</div>
+            <div class="info-detail-value">รองประธานนักเรียน</div>
           </div>
-          <div class="detail-item">
-            <span class="detail-dot"></span>
-            <span class="detail-label">ปีการศึกษา</span>
-            <span class="detail-value">2568</span>
+          <div class="info-detail">
+            <div class="info-detail-label">ระดับชั้น</div>
+            <div class="info-detail-value">ม.6 / Intan</div>
+          </div>
+          <div class="info-detail">
+            <div class="info-detail-label">ปีการศึกษา</div>
+            <div class="info-detail-value">2568</div>
+          </div>
+          <div class="info-detail">
+            <div class="info-detail-label">สังกัด</div>
+            <div class="info-detail-value">สภานักเรียน</div>
           </div>
         </div>
-
-        <div class="motto-section">
-          <div class="motto-label">คติประจำใจ</div>
-          <div class="motto-signature">
-            <span class="motto-text">ทำงานอย่างจริงจัง</span>
-            <svg class="motto-swoosh" viewBox="0 0 240 30" width="240" height="30" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="swooshGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#e83a75" />
-                  <stop offset="50%" stop-color="#9333ea" />
-                  <stop offset="100%" stop-color="#3b82f6" />
-                </linearGradient>
-              </defs>
-              <path d="M5,18 C30,4 70,2 110,14 S190,26 235,8" fill="none" stroke="url(#swooshGrad2)" stroke-width="2" stroke-linecap="round" />
-              <path d="M228,10 C238,5 242,12 235,15" fill="none" stroke="url(#swooshGrad2)" stroke-width="1.5" stroke-linecap="round" />
-              <path d="M5,18 C0,22 -2,16 5,14" fill="none" stroke="url(#swooshGrad2)" stroke-width="1.5" stroke-linecap="round" />
+        <div class="info-motto">
+          <div class="info-motto-label">คติประจำใจ</div>
+          <div class="info-motto-text">
+            " ทำงานอย่างจริงจัง "
+            <svg class="sig-line" viewBox="0 0 210 24" width="210" height="24">
+              <defs><linearGradient id="sg2" x1="0%" x2="100%"><stop offset="0%" stop-color="#e83a75"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+              <path d="M2,16 Q25,3 55,13 T115,9 T175,17 Q195,20 208,10" stroke="url(#sg2)"/>
+              <path d="M200,12 Q208,7 206,13" stroke="url(#sg2)" stroke-width="1.5"/>
             </svg>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="council-divider"><hr></div>
+    <div class="profile-divider"><hr></div>
 
     <!-- ═══ เพิ่มสมาชิกคนอื่นต่อได้ตรงนี้ ═══ -->
 
