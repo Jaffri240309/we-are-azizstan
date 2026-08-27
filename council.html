@@ -73,26 +73,28 @@
        ══════════════════════════════════════ */
     .premium-dock {
       position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 100px;
+      right: 24px;
+      left: auto;
+      transform: none;
       z-index: 1000;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 16px;
-      padding: 10px 16px;
+      gap: 12px;
+      padding: 10px;
       background: rgba(255, 255, 255, 0.45);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 40px;
-      box-shadow: 0 16px 40px rgba(147, 51, 234, 0.15), inset 0 1px 1px rgba(255,255,255,1);
-      animation: slideUpDock 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      border-radius: 30px;
+      box-shadow: 0 12px 30px rgba(147, 51, 234, 0.1), inset 0 1px 1px rgba(255,255,255,1);
+      animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    @keyframes slideUpDock {
-      from { opacity: 0; transform: translate(-50%, 100px); }
-      to { opacity: 1; transform: translate(-50%, 0); }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .dock-section {
@@ -110,20 +112,20 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 10px 0;
+      gap: 6px;
+      padding: 8px 0;
       border-radius: 30px;
       cursor: pointer;
       color: #64748b;
       font-family: 'Kanit', sans-serif;
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.8rem;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .dock-btn.gender-btn { width: 96px; }
-    .dock-btn.view-btn { width: 110px; }
+    .dock-btn.gender-btn { width: 72px; }
+    .dock-btn.view-btn { width: 84px; }
 
-    .dock-btn i { font-size: 1.25rem; transition: transform 0.3s ease; }
+    .dock-btn i { font-size: 1rem; transition: transform 0.3s ease; }
     .dock-btn:hover { color: #1e293b; }
     .dock-btn.active { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.25); }
     .dock-btn.active i { transform: scale(1.1); }
@@ -137,22 +139,22 @@
     }
 
     .gt-ind {
-      width: 96px;
+      width: 72px;
       background: linear-gradient(135deg, #e83a75, #9333ea);
       box-shadow: 0 4px 12px rgba(232,58,117,0.3);
     }
 
     .vt-ind {
-      width: 110px;
+      width: 84px;
       background: linear-gradient(135deg, #9333ea, #3b82f6);
       box-shadow: 0 4px 12px rgba(147,51,234,0.3);
     }
 
     .dock-divider {
-      width: 2px;
-      height: 28px;
+      width: 100%;
+      height: 1px;
       background: rgba(147, 51, 234, 0.15);
-      border-radius: 2px;
+      border-radius: 1px;
     }
 
     #list-view-container {
@@ -857,7 +859,7 @@
         female.classList.remove('hidden');
         if(btnF) btnF.classList.add('active');
         if(btnM) btnM.classList.remove('active');
-        if(ind) ind.style.transform = 'translateX(100px)'; // 96px + 4px gap
+        if(ind) ind.style.transform = 'translateX(76px)'; // 72px + 4px gap
       }
 
       // Update tab active state
@@ -967,7 +969,7 @@
       if (mode === 'list') {
         gv.style.display = 'none';
         lv.style.display = 'flex';
-        ind.style.transform = 'translateX(114px)'; // 110px + 4px gap
+        ind.style.transform = 'translateX(88px)'; // 84px + 4px gap
         btnC.classList.remove('active');
         btnL.classList.add('active');
         renderListView();
