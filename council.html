@@ -210,18 +210,16 @@
     }
     .vt-btn.active { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
-    /* Flat List View Overrides */
-    #grid-view.view-mode-list .org-chart {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      max-width: 1000px;
+    #list-view-container {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+      flex-direction: column;
+      gap: 40px;
     }
-    #grid-view.view-mode-list .org-row { display: contents; }
-    #grid-view.view-mode-list .org-connector { display: none; }
-    #grid-view.view-mode-list .org-section-label { display: none; }
-
 
     /* ══════════════════════════════════════
        ORG CHART GRID VIEW
@@ -912,8 +910,12 @@
         if(ind) ind.style.transform = 'translateY(72px)';
       }
 
-      // Go back to grid if in detail view
-      backToGrid();
+      const btnL = document.getElementById('btn-list');
+      if (btnL && btnL.classList.contains('active')) {
+        renderListView();
+      } else {
+        backToGrid();
+      }
     }
 
     function showDetail(id) {
@@ -968,6 +970,10 @@
       gridView.style.display = 'none';
       tabs.style.display = 'none';
       if(vtabs) vtabs.style.display = 'none';
+      
+      const lv = document.getElementById('list-view-container');
+      if(lv) lv.style.display = 'none';
+
       detailView.classList.add('active');
 
       // Scroll to top smoothly
@@ -995,21 +1001,68 @@
 
     function switchViewMode(mode) {
       const gv = document.getElementById('grid-view');
+      const lv = document.getElementById('list-view-container');
+      const dv = document.getElementById('detail-view');
       const ind = document.getElementById('vt-indicator');
       const btnC = document.getElementById('btn-chart');
       const btnL = document.getElementById('btn-list');
       
+      dv.classList.remove('active');
+      
       if (mode === 'list') {
-        gv.classList.add('view-mode-list');
+        gv.style.display = 'none';
+        lv.style.display = 'flex';
         ind.style.transform = 'translateX(74px)';
         btnC.classList.remove('active');
         btnL.classList.add('active');
+        renderListView();
       } else {
-        gv.classList.remove('view-mode-list');
+        gv.style.display = '';
+        lv.style.display = 'none';
         ind.style.transform = 'translateX(0)';
         btnL.classList.remove('active');
         btnC.classList.add('active');
       }
+    }
+
+    function renderListView() {
+      const lv = document.getElementById('list-view-container');
+      if(!lv) return;
+      lv.innerHTML = '';
+      
+      const prefix = currentGender === 'male' ? 'm-' : 'f-';
+      const keys = Object.keys(members).filter(k => k.startsWith(prefix));
+      
+      let html = '';
+      keys.forEach(id => {
+         const m = members[id];
+         html += `
+         <div class="detail-card" style="opacity:1; transform:translateY(0); animation:none; margin-bottom: 20px;">
+          <div class="detail-photo">
+            <img src="${m.photo}" alt="${m.nameTh}">
+            <div class="photo-label">${m.roleLabel}</div>
+          </div>
+          <div class="detail-info">
+            <div class="detail-role">${m.role}</div>
+            <h2 class="detail-name-th">${m.nameTh}</h2>
+            <div class="detail-name-en">${m.nameEn}</div>
+
+            <div class="detail-grid">
+              <div class="dg-item"><div class="dg-label">ตำแหน่ง</div><div class="dg-value">${m.position}</div></div>
+              <div class="dg-item"><div class="dg-label">ระดับชั้น</div><div class="dg-value">${m.level}</div></div>
+              <div class="dg-item"><div class="dg-label">ปีการศึกษา</div><div class="dg-value">${m.year}</div></div>
+              <div class="dg-item"><div class="dg-label">สังกัด</div><div class="dg-value">${m.org}</div></div>
+            </div>
+
+            <div class="detail-motto">
+              <div class="dm-label">คติประจำใจ</div>
+              <div class="dm-text">${m.motto}</div>
+            </div>
+          </div>
+        </div>
+         `;
+      });
+      lv.innerHTML = html;
     }
   </script>
 </body>
