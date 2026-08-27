@@ -69,146 +69,91 @@
     }
 
     /* ══════════════════════════════════════
-       GENDER TOGGLE (Top Right)
+       PREMIUM FLOATING DOCK (Gender & View)
        ══════════════════════════════════════ */
-    .gender-toggle-wrapper {
+    .premium-dock {
       position: fixed;
-      top: 100px;
-      right: 24px;
-      z-index: 990;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-    .gt-label {
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #e83a75;
-      background: rgba(255,255,255,0.85);
-      padding: 6px 16px;
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-    .gender-toggle {
-      display: flex;
-      flex-direction: column;
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.8);
+      align-items: center;
+      gap: 16px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       border-radius: 40px;
-      padding: 8px;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(232,58,117,0.12), 0 4px 12px rgba(0,0,0,0.04);
+      box-shadow: 0 16px 40px rgba(147, 51, 234, 0.15), inset 0 1px 1px rgba(255,255,255,1);
+      animation: slideUpDock 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
-    .gt-indicator {
-      position: absolute;
-      top: 8px; left: 8px; right: 8px;
-      height: 64px;
-      background: linear-gradient(135deg, #e83a75, #9333ea);
-      border-radius: 34px;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 6px 16px rgba(232,58,117,0.3);
-    }
-    .gt-btn {
-      position: relative;
-      z-index: 1;
-      width: 64px;
-      height: 64px;
-      border: none;
-      background: none;
-      border-radius: 34px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-      color: #64748b;
-      transition: all 0.3s ease;
-    }
-    .gt-btn i { font-size: 1.5rem; transition: all 0.3s ease; }
-    .gt-btn span {
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-    }
-    .gt-btn.active { color: white; text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
-    .gt-btn.active i { transform: scale(1.15); }
 
-    /* ══════════════════════════════════════
-       VIEW TOGGLE (List vs Chart)
-       ══════════════════════════════════════ */
-    .view-toggle-wrapper {
-      position: fixed;
-      top: 250px;
-      right: 24px;
-      z-index: 990;
+    @keyframes slideUpDock {
+      from { opacity: 0; transform: translate(-50%, 100px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .dock-section {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-    }
-    .vt-label {
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #9333ea;
-      background: rgba(255,255,255,0.85);
-      padding: 4px 12px;
-      border-radius: 16px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .view-toggle {
-      display: flex;
-      flex-direction: row;
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 30px;
-      padding: 4px;
       position: relative;
-      box-shadow: 0 6px 20px rgba(147,51,234,0.08);
+      gap: 4px;
     }
-    .vt-indicator {
-      position: absolute;
-      top: 4px; bottom: 4px; left: 4px;
-      width: 74px;
-      background: linear-gradient(135deg, #9333ea, #e83a75);
-      border-radius: 20px;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 10px rgba(147,51,234,0.2);
-    }
-    .vt-btn {
+
+    .dock-btn {
       position: relative;
-      z-index: 1;
-      width: 74px;
-      height: 32px;
+      z-index: 2;
+      background: transparent;
       border: none;
-      background: none;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      padding: 10px 0;
+      border-radius: 30px;
       cursor: pointer;
       color: #64748b;
-      transition: all 0.3s ease;
-    }
-    .vt-btn i { font-size: 1rem; }
-    .vt-btn span {
       font-family: 'Kanit', sans-serif;
-      font-size: 0.65rem;
       font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .vt-btn.active { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .dock-btn.gender-btn { width: 96px; }
+    .dock-btn.view-btn { width: 110px; }
+
+    .dock-btn i { font-size: 1.25rem; transition: transform 0.3s ease; }
+    .dock-btn:hover { color: #1e293b; }
+    .dock-btn.active { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.25); }
+    .dock-btn.active i { transform: scale(1.1); }
+
+    .dock-indicator {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      border-radius: 30px;
+      z-index: 1;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .gt-ind {
+      width: 96px;
+      background: linear-gradient(135deg, #e83a75, #9333ea);
+      box-shadow: 0 4px 12px rgba(232,58,117,0.3);
+    }
+
+    .vt-ind {
+      width: 110px;
+      background: linear-gradient(135deg, #9333ea, #3b82f6);
+      box-shadow: 0 4px 12px rgba(147,51,234,0.3);
+    }
+
+    .dock-divider {
+      width: 2px;
+      height: 28px;
+      background: rgba(147, 51, 234, 0.15);
+      border-radius: 2px;
+    }
 
     #list-view-container {
       display: none;
@@ -649,36 +594,35 @@
       <div class="ch-sub">โรงเรียนมูลนิธิอาซิซสถาน · ปีการศึกษา 2568</div>
     </div>
 
-    <!-- Toggle Switch -->
-    <div class="gender-toggle-wrapper" id="gender-tabs">
-      <div class="gt-label">ฝ่าย / Gender</div>
-      <div class="gender-toggle">
-        <div class="gt-indicator" id="gt-indicator"></div>
-        <button class="gt-btn active" id="btn-male" data-gender="male" onclick="switchGender('male')">
-          <i class="ph ph-gender-male"></i>
-          <span>ชาย</span>
+    <!-- ══════════════════════════════════════
+         PREMIUM FLOATING DOCK (Gender & View)
+         ══════════════════════════════════════ -->
+    <div class="premium-dock" id="gender-tabs">
+      
+      <!-- Gender Toggle -->
+      <div class="dock-section">
+        <div class="dock-indicator gt-ind" id="gt-indicator"></div>
+        <button id="btn-male" class="dock-btn gender-btn active" onclick="switchGender('male')">
+          <i class="ph ph-gender-male"></i> ชาย
         </button>
-        <button class="gt-btn" id="btn-female" data-gender="female" onclick="switchGender('female')">
-          <i class="ph ph-gender-female"></i>
-          <span>หญิง</span>
+        <button id="btn-female" class="dock-btn gender-btn" onclick="switchGender('female')">
+          <i class="ph ph-gender-female"></i> หญิง
         </button>
       </div>
-    </div>
 
-    <!-- View Toggle -->
-    <div class="view-toggle-wrapper" id="view-tabs">
-      <div class="vt-label">มุมมอง / View</div>
-      <div class="view-toggle">
-        <div class="vt-indicator" id="vt-indicator"></div>
-        <button class="vt-btn active" id="btn-chart" onclick="switchViewMode('chart')">
-          <i class="ph ph-tree-structure"></i>
-          <span>ทำเนียบ</span>
+      <div class="dock-divider"></div>
+
+      <!-- View Toggle -->
+      <div class="dock-section" id="view-tabs">
+        <div class="dock-indicator vt-ind" id="vt-indicator"></div>
+        <button id="btn-chart" class="dock-btn view-btn active" onclick="switchViewMode('chart')">
+          <i class="ph ph-tree-structure"></i> ทำเนียบ
         </button>
-        <button class="vt-btn" id="btn-list" onclick="switchViewMode('list')">
-          <i class="ph ph-squares-four"></i>
-          <span>เรียงคน</span>
+        <button id="btn-list" class="dock-btn view-btn" onclick="switchViewMode('list')">
+          <i class="ph ph-squares-four"></i> เรียงคน
         </button>
       </div>
+
     </div>
 
     <!-- ══════════════════════════════════════
@@ -907,13 +851,13 @@
         male.classList.remove('hidden');
         if(btnM) btnM.classList.add('active');
         if(btnF) btnF.classList.remove('active');
-        if(ind) ind.style.transform = 'translateY(0)';
+        if(ind) ind.style.transform = 'translateX(0)';
       } else {
         male.classList.add('hidden');
         female.classList.remove('hidden');
         if(btnF) btnF.classList.add('active');
         if(btnM) btnM.classList.remove('active');
-        if(ind) ind.style.transform = 'translateY(72px)';
+        if(ind) ind.style.transform = 'translateX(100px)'; // 96px + 4px gap
       }
 
       // Update tab active state
@@ -1023,7 +967,7 @@
       if (mode === 'list') {
         gv.style.display = 'none';
         lv.style.display = 'flex';
-        ind.style.transform = 'translateX(74px)';
+        ind.style.transform = 'translateX(114px)'; // 110px + 4px gap
         btnC.classList.remove('active');
         btnL.classList.add('active');
         renderListView();
