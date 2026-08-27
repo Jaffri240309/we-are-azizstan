@@ -462,34 +462,45 @@
 </head>
 <body>
 
-  <!-- ── Navigation (same as other pages) ── -->
-  <nav class="navbar">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
-        <img src="assets/depazLogo.jpg" alt="Logo 1" class="nav-logo-img" />
-        <img src="assets/azizLogo.png" alt="Logo 2" class="nav-logo-img" />
-        <div class="nav-logo-text">
-          <span class="brand-name">We Are Azizstan</span>
-          <span class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</span>
+  <!-- Navbar (Light/White Theme) -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-logos">
+          <!-- Main School Logo -->
+          <img src="assets/azizLogo.png" alt="Azizstan Logo" class="logo">
+          <!-- DEPAZ Logo -->
+          <img src="assets/depazLogo.jpg" alt="DEPAZ Logo" class="logo">
+        </div>
+        <div class="brand-txt">
+          <div class="brand-title">We Are Azizstan</div>
+          <div class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</div>
         </div>
       </a>
-      <div class="nav-links">
+
+      <nav class="nav">
         <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
         <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
         <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
         <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
-        <a href="council.html" class="active-link"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
-      </div>
-      <button class="hamburger" aria-label="เมนู"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
+        <a class="active" href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
+      </nav>
 
-  <div class="mobile-nav-panel">
-    <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
-    <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
-    <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
-    <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
-    <a href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
+      <button class="hamburger" id="menuBtn" aria-label="เปิดเมนู">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel">
+      <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
+      <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
+      <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
+      <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
+      <a class="active" href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
+    </div>
   </div>
 
   <!-- Page transition overlay -->
