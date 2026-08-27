@@ -463,7 +463,10 @@
 
     /* ── Sections ── */
     .gender-section {
-      display: none; /* JS controls this via inline style */
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .gender-section.hidden {
+      display: none !important;
     }
 
     /* ── Responsive ── */
@@ -558,7 +561,7 @@
     </div>
 
     <!-- ═══ ฝ่ายชาย ═══ -->
-    <div id="male-section" class="gender-section active">
+    <div id="male-section" class="gender-section">
 
     <!-- ═══ ประธานนักเรียน ═══ -->
     <div class="pcard">
@@ -723,7 +726,7 @@
     </div> <!-- End Male Section -->
 
     <!-- ═══ ฝ่ายหญิง ═══ -->
-    <div id="female-section" class="gender-section">
+    <div id="female-section" class="gender-section hidden">
       <!-- ═══ เพิ่มสมาชิกหญิงตรงนี้ ═══ -->
     </div> <!-- End Female Section -->
 
@@ -731,69 +734,27 @@
 
   <script src="assets/js/app.js?v=1787701351"></script>
   <script>
-    let busy = false;
-
-    function showSection(id, cb) {
-      const sec = document.getElementById(id);
-      sec.style.display = 'block';
-      sec.style.opacity = '0';
-      sec.style.transform = 'translateY(16px)';
-      // Force reflow
-      sec.getBoundingClientRect();
-      sec.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-      requestAnimationFrame(() => {
-        sec.style.opacity = '1';
-        sec.style.transform = 'translateY(0)';
-        setTimeout(() => { if (cb) cb(); }, 450);
-      });
-    }
-
-    function hideSection(id, cb) {
-      const sec = document.getElementById(id);
-      sec.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      sec.style.opacity = '0';
-      sec.style.transform = 'translateY(-10px)';
-      setTimeout(() => {
-        sec.style.display = 'none';
-        if (cb) cb();
-      }, 310);
-    }
-
     function switchGender(gender) {
-      if (busy) return;
-      const btnMale   = document.getElementById('btn-male');
-      const btnFemale = document.getElementById('btn-female');
-      const indicator = document.getElementById('gt-indicator');
-      const cur       = gender === 'male' ? 'female-section' : 'male-section';
-      const nxt       = gender === 'male' ? 'male-section'   : 'female-section';
+      const male   = document.getElementById('male-section');
+      const female = document.getElementById('female-section');
+      const btnM   = document.getElementById('btn-male');
+      const btnF   = document.getElementById('btn-female');
+      const ind    = document.getElementById('gt-indicator');
 
-      // Already on same side
-      if ((gender === 'male'   && btnMale.classList.contains('active')) ||
-          (gender === 'female' && btnFemale.classList.contains('active'))) return;
-
-      busy = true;
-      btnMale.classList.toggle('active',   gender === 'male');
-      btnFemale.classList.toggle('active', gender === 'female');
-      indicator.style.transform = gender === 'male' ? 'translateY(0)' : 'translateY(calc(100% + 4px))';
-
-      hideSection(cur, () => {
-        showSection(nxt, () => { busy = false; });
-      });
+      if (gender === 'male') {
+        female.classList.add('hidden');
+        male.classList.remove('hidden');
+        btnM.classList.add('active');
+        btnF.classList.remove('active');
+        ind.style.transform = 'translateY(0)';
+      } else {
+        male.classList.add('hidden');
+        female.classList.remove('hidden');
+        btnF.classList.add('active');
+        btnM.classList.remove('active');
+        ind.style.transform = 'translateY(calc(100% + 4px))';
+      }
     }
-
-    // Init on load
-    document.addEventListener('DOMContentLoaded', () => {
-      const male = document.getElementById('male-section');
-      male.style.display = 'block';
-      male.style.opacity = '0';
-      male.style.transform = 'translateY(16px)';
-      male.getBoundingClientRect();
-      male.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      requestAnimationFrame(() => {
-        male.style.opacity = '1';
-        male.style.transform = 'translateY(0)';
-      });
-    });
   </script>
 </body>
 </html>
