@@ -123,11 +123,11 @@
     .org-row {
       display: flex;
       justify-content: center;
-      gap: 24px;
-      margin-bottom: 20px;
+      gap: 36px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
     }
-    .org-row.president { margin-bottom: 28px; }
+    .org-row.president { margin-bottom: 40px; }
 
     /* Connector line between rows */
     .org-connector {
@@ -150,40 +150,40 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       cursor: pointer;
-      padding: 12px;
-      border-radius: 16px;
+      padding: 16px;
+      border-radius: 20px;
       transition: all 0.3s ease;
-      width: 130px;
+      width: 170px;
       position: relative;
     }
     .org-person:hover {
       background: rgba(232,58,117,0.06);
-      transform: translateY(-4px);
+      transform: translateY(-6px);
     }
     .org-person:active { transform: scale(0.97); }
 
     .org-person .person-photo {
-      width: 90px;
-      height: 90px;
+      width: 125px;
+      height: 125px;
       border-radius: 50%;
       overflow: hidden;
       border: 3px solid rgba(232,58,117,0.2);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       transition: all 0.35s ease;
       position: relative;
     }
     .org-person.president-card .person-photo {
-      width: 110px;
-      height: 110px;
+      width: 155px;
+      height: 155px;
       border-width: 4px;
       border-color: rgba(232,58,117,0.4);
-      box-shadow: 0 6px 24px rgba(232,58,117,0.15);
+      box-shadow: 0 8px 30px rgba(232,58,117,0.15);
     }
     .org-person:hover .person-photo {
-      border-color: rgba(232,58,117,0.5);
-      box-shadow: 0 6px 24px rgba(232,58,117,0.2);
+      border-color: rgba(232,58,117,0.6);
+      box-shadow: 0 8px 28px rgba(232,58,117,0.25);
     }
     .org-person .person-photo img {
       width: 100%;
@@ -194,7 +194,7 @@
 
     .org-person .person-name {
       font-family: 'Kanit', sans-serif;
-      font-size: 0.78rem;
+      font-size: 1rem;
       font-weight: 500;
       color: var(--c-text);
       text-align: center;
@@ -202,7 +202,7 @@
     }
     .org-person .person-role {
       font-family: 'Sarabun', sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.82rem;
       color: var(--c-text-muted);
       text-align: center;
       font-weight: 400;
@@ -212,24 +212,24 @@
     .org-person.president-card::after {
       content: '★';
       position: absolute;
-      top: 6px;
-      right: 12px;
-      font-size: 0.7rem;
+      top: 10px;
+      right: 18px;
+      font-size: 1.1rem;
       color: #fbbf24;
-      filter: drop-shadow(0 1px 2px rgba(251,191,36,0.4));
+      filter: drop-shadow(0 1px 4px rgba(251,191,36,0.5));
     }
 
     /* Section label */
     .org-section-label {
       font-family: 'Kanit', sans-serif;
-      font-size: 0.62rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--c-primary);
       text-align: center;
-      margin-bottom: 10px;
-      opacity: 0.7;
+      margin-bottom: 16px;
+      opacity: 0.85;
     }
 
     /* Gender section visibility */
@@ -432,12 +432,12 @@
         border-top: none;
         padding: 28px 24px;
       }
-      .org-person { width: 100px; padding: 8px; }
-      .org-person .person-photo { width: 70px; height: 70px; }
-      .org-person.president-card .person-photo { width: 86px; height: 86px; }
-      .org-person .person-name { font-size: 0.7rem; }
-      .org-person .person-role { font-size: 0.6rem; }
-      .org-row { gap: 12px; }
+      .org-person { width: 140px; padding: 12px; }
+      .org-person .person-photo { width: 95px; height: 95px; }
+      .org-person.president-card .person-photo { width: 115px; height: 115px; }
+      .org-person .person-name { font-size: 0.9rem; }
+      .org-person .person-role { font-size: 0.75rem; }
+      .org-row { gap: 16px; }
       .detail-name-th { font-size: 1.3rem; }
       .detail-grid { grid-template-columns: 1fr; }
     }
@@ -610,7 +610,7 @@
   </div>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="container">
       <div class="footer-contact-section">
         <h3>ติดต่อ</h3>
