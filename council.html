@@ -5,81 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ทำเนียบสภานักเรียน | We Are Azizstan</title>
   <link rel="stylesheet" href="/style.css?v=1787703023" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ── Full-page background ── */
     .council-page {
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse at 10% 20%, rgba(99,102,241,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 10%, rgba(232,58,117,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 60% 80%, rgba(147,51,234,0.12) 0%, transparent 50%),
-        linear-gradient(160deg, #f5f0fa 0%, #fdf0f5 40%, #f0f4ff 100%);
-      padding-top: 80px;
-      overflow-x: hidden;
+      padding-top: 100px;
+      padding-bottom: 80px;
     }
 
-    /* ── Floating ambient blobs ── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(90px);
-      pointer-events: none;
-      z-index: 0;
-      animation: blobDrift ease-in-out infinite;
-    }
-    .blob-1 { width:500px;height:500px;background:rgba(232,58,117,0.12);top:-80px;right:-60px;animation-duration:12s;animation-delay:0s; }
-    .blob-2 { width:400px;height:400px;background:rgba(99,102,241,0.13);bottom:0;left:-80px;animation-duration:15s;animation-delay:3s; }
-    .blob-3 { width:300px;height:300px;background:rgba(147,51,234,0.1);top:40%;right:10%;animation-duration:10s;animation-delay:6s; }
-
-    @keyframes blobDrift {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33%      { transform: translate(30px,-25px) scale(1.06); }
-      66%      { transform: translate(-20px,15px) scale(0.96); }
+    /* ── Page Title ── */
+    .page-title {
+      text-align: center;
+      margin-bottom: 60px;
     }
 
-    /* ── Hero section ── */
-    .council-hero {
-      position: relative;
-      z-index: 1;
-      min-height: calc(100vh - 80px);
+    .page-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin: 0 0 8px;
+    }
+
+    .page-title p {
+      font-family: 'Outfit', sans-serif;
+      color: var(--c-text-muted);
+      font-size: 1rem;
+    }
+
+    .page-title .accent-line {
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--c-primary), #9333ea);
+      border-radius: 10px;
+      margin: 16px auto 0;
+    }
+
+    /* ── Member Profile ── */
+    .member-profile {
       display: flex;
-      align-items: stretch;
+      align-items: flex-start;
+      gap: 50px;
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
     }
 
-    /* ── Left Photo Panel ── */
-    .photo-panel {
+    /* Photo */
+    .member-photo-side {
+      flex-shrink: 0;
+      width: 280px;
+    }
+
+    .member-photo-frame {
       position: relative;
-      flex: 0 0 45%;
+      width: 280px;
+      height: 370px;
+      border-radius: 20px;
       overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     }
 
-    /* Curved right edge clip */
-    .photo-panel::after {
-      content: '';
-      position: absolute;
-      top: 0; right: -1px; bottom: 0;
-      width: 80px;
-      background: inherit;
-      clip-path: ellipse(80px 55% at 100% 50%);
-      background: radial-gradient(ellipse at 10% 20%, rgba(99,102,241,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 10%, rgba(232,58,117,0.15) 0%, transparent 50%),
-        linear-gradient(160deg, #f5f0fa 0%, #fdf0f5 40%, #f0f4ff 100%);
-      z-index: 2;
-    }
-
-    .photo-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: calc(100vh - 80px);
-    }
-
-    .president-img {
+    .member-photo-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -87,263 +76,210 @@
       display: block;
     }
 
-    /* Overlay gradient on photo bottom */
-    .photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(0,0,0,0.08) 0%,
-        rgba(0,0,0,0) 60%
-      );
-      z-index: 1;
-    }
-
-    /* Subtle diagonal light sweep */
-    .photo-inner::before {
+    /* Subtle gradient overlay at bottom of photo */
+    .member-photo-frame::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.15) 0%,
-        rgba(255,255,255,0) 50%
-      );
-      z-index: 1;
+      bottom: 0; left: 0; right: 0;
+      height: 100px;
+      background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
       pointer-events: none;
     }
 
-    /* ── Right Info Panel ── */
-    .info-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 60px 60px 60px 80px;
-      position: relative;
-      z-index: 1;
+    /* Position tag on photo */
+    .position-tag {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      text-align: center;
+      z-index: 2;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
     }
 
-    /* Section label */
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--c-primary);
+    /* Info side */
+    .member-info-side {
+      flex: 1;
+      padding-top: 10px;
+    }
+
+    .member-role-label {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+      color: var(--c-primary);
+      margin-bottom: 12px;
     }
 
-    .label-line {
-      display: inline-block;
-      width: 36px;
-      height: 2px;
-      background: var(--c-primary);
-      border-radius: 2px;
-    }
-
-    /* Main name */
-    .name-th {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 4.5vw, 4.5rem);
-      font-weight: 700;
-      color: #1a1025;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-      opacity: 0;
-      transform: translateY(25px);
-      animation: fadeUp 0.9s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-
-    .name-en {
+    .member-name-th {
       font-family: 'Outfit', sans-serif;
-      font-size: 1rem;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--c-text);
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+
+    .member-name-en {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
       font-weight: 400;
-      color: #7c6f8e;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 36px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+      color: var(--c-text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 28px;
     }
 
-    /* Divider */
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, #e83a75, #9333ea);
-      border-radius: 2px;
-      margin-bottom: 36px;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-
-    /* Info rows */
-    .info-rows {
+    /* Detail items */
+    .member-details {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s 0.65s cubic-bezier(0.16,1,0.3,1) forwards;
+      gap: 18px;
+      margin-bottom: 36px;
     }
 
-    .info-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .info-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(232,58,117,0.08);
-      border: 1px solid rgba(232,58,117,0.18);
-      border-radius: 12px;
+    .detail-item {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 14px;
+    }
+
+    .detail-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-primary);
       flex-shrink: 0;
-      color: var(--c-primary);
-      font-size: 1.1rem;
     }
 
-    .info-text-label {
+    .detail-label {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.75rem;
-      color: #a090b8;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--c-text-muted);
+      letter-spacing: 0.06em;
+      min-width: 65px;
+    }
+
+    .detail-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      color: var(--c-text);
       font-weight: 500;
     }
 
-    .info-text-value {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
-      color: #2d1f42;
-      font-weight: 500;
-      margin-top: 2px;
-    }
-
-    /* Quote — handwriting style */
-    .quote-block {
-      position: relative;
-      margin-bottom: 0;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-
-    .quote-mark {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      line-height: 0.5;
-      color: rgba(232,58,117,0.2);
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .quote-text {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #2d1f42;
-      line-height: 1.3;
-      letter-spacing: 0.02em;
-    }
-
-    .quote-source {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.8rem;
-      color: #a090b8;
+    /* ── Signature / Motto ── */
+    .motto-section {
       margin-top: 10px;
-      letter-spacing: 0.08em;
+      position: relative;
+      padding-left: 0;
     }
 
-    /* Role badge floating on photo */
-    .role-badge {
-      position: absolute;
-      bottom: 40px;
-      left: 30px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 18px;
-      padding: 14px 22px;
-      color: white;
-      z-index: 3;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    }
-
-    .role-badge .role-title {
+    .motto-label {
       font-family: 'Outfit', sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      opacity: 0.75;
+      color: var(--c-text-muted);
+      margin-bottom: 12px;
     }
 
-    .role-badge .role-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-top: 2px;
+    .motto-signature {
+      position: relative;
+      display: inline-block;
     }
 
-    /* Year tag on photo top */
-    .year-tag {
+    /* SVG signature flourish */
+    .motto-signature svg.flourish {
       position: absolute;
-      top: 30px;
-      left: 30px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.85);
-      background: rgba(232,58,117,0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 50px;
-      padding: 6px 16px;
-      z-index: 3;
-      text-transform: uppercase;
-      font-weight: 600;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      overflow: visible;
     }
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+    .motto-signature svg.flourish path {
+      fill: none;
+      stroke: var(--c-primary);
+      stroke-width: 1.2;
+      opacity: 0.35;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: drawLine 2s 0.5s ease forwards;
+    }
+
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .motto-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--c-text);
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Underline swoosh */
+    .motto-swoosh {
+      display: block;
+      margin-top: 4px;
+      overflow: visible;
+    }
+
+    .motto-swoosh path {
+      fill: none;
+      stroke: url(#swooshGrad);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: drawLine 1.5s 1s ease forwards;
+    }
+
+    /* ── Section Divider ── */
+    .council-divider {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .council-divider hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,58,117,0.2), transparent);
     }
 
     /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .council-hero { flex-direction: column; }
-      .photo-panel {
-        flex: none;
-        width: 100%;
-        height: 65vw;
-        max-height: 480px;
+    @media (max-width: 768px) {
+      .member-profile {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
       }
-      .photo-panel::after { display: none; }
-      .info-panel { padding: 40px 24px 60px; }
-      .name-th { font-size: 2.8rem; }
+
+      .member-photo-side { width: 240px; }
+      .member-photo-frame { width: 240px; height: 320px; }
+      .member-info-side { text-align: center; padding-top: 0; }
+
+      .member-name-th { font-size: 2rem; }
+
+      .detail-item { justify-content: center; }
+
+      .motto-section { text-align: center; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Ambient blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
 
   <header class="topbar">
     <div class="container topbar-inner">
@@ -370,7 +306,6 @@
     </div>
   </header>
 
-  <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-panel">
       <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
@@ -382,71 +317,98 @@
   </div>
 
   <div class="council-page">
-    <section class="council-hero">
 
-      <!-- Left: Full Photo -->
-      <div class="photo-panel">
-        <div class="photo-inner">
-          <img src="assets/president.png" alt="ประธานนักเรียน ฮูซัยฟี เจ๊ะเลาะ" class="president-img">
-          <div class="photo-overlay"></div>
+    <div class="page-title">
+      <h1>ทำเนียบสภานักเรียน</h1>
+      <p>โรงเรียนมูลนิธิอาซิซสถาน · ปีการศึกษา 2568</p>
+      <span class="accent-line"></span>
+    </div>
 
-          <div class="year-tag">สภานักเรียน · 2568</div>
-
-          <div class="role-badge">
-            <div class="role-title">ตำแหน่ง</div>
-            <div class="role-name">ประธานนักเรียน</div>
-          </div>
+    <!-- ═══ ประธานนักเรียน ═══ -->
+    <div class="member-profile">
+      <div class="member-photo-side">
+        <div class="member-photo-frame">
+          <img src="assets/president.png" alt="ฮูซัยฟี เจ๊ะเลาะ">
+          <div class="position-tag">ประธานนักเรียน</div>
         </div>
       </div>
 
-      <!-- Right: Info -->
-      <div class="info-panel">
+      <div class="member-info-side">
+        <div class="member-role-label">ประธานนักเรียน — President</div>
+        <h2 class="member-name-th">ฮูซัยฟี เจ๊ะเลาะ</h2>
+        <div class="member-name-en">Husaifee Jehloh</div>
 
-        <span class="section-label">
-          <span class="label-line"></span>
-          We Are Azizstan
-        </span>
-
-        <h1 class="name-th">ฮูซัยฟี<br>เจ๊ะเลาะ</h1>
-        <div class="name-en">Husaifee &nbsp;·&nbsp; Jehloh</div>
-
-        <div class="divider"></div>
-
-        <div class="info-rows">
-          <div class="info-row">
-            <div class="info-icon"><i class="ph-fill ph-crown"></i></div>
-            <div>
-              <div class="info-text-label">ตำแหน่ง</div>
-              <div class="info-text-value">ประธานนักเรียน</div>
-            </div>
+        <div class="member-details">
+          <div class="detail-item">
+            <span class="detail-dot"></span>
+            <span class="detail-label">ระดับชั้น</span>
+            <span class="detail-value">ม.6 / Al-Khawarizmi</span>
           </div>
-
-          <div class="info-row">
-            <div class="info-icon"><i class="ph-fill ph-graduation-cap"></i></div>
-            <div>
-              <div class="info-text-label">ระดับชั้น</div>
-              <div class="info-text-value">ม.6 / Al-Khawarizmi</div>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <div class="info-icon"><i class="ph-fill ph-buildings"></i></div>
-            <div>
-              <div class="info-text-label">โรงเรียน</div>
-              <div class="info-text-value">มูลนิธิอาซิซสถาน (Azizstan.net)</div>
-            </div>
+          <div class="detail-item">
+            <span class="detail-dot"></span>
+            <span class="detail-label">ปีการศึกษา</span>
+            <span class="detail-value">2568</span>
           </div>
         </div>
 
-        <!-- Handwriting quote -->
-        <div class="quote-block">
-          <span class="quote-mark">"</span>
-          <div class="quote-text">ซื่อสัตย์อย่างจริงใจ</div>
-          <div class="quote-source">— คติประจำใจ</div>
+        <div class="motto-section">
+          <div class="motto-label">คติประจำใจ</div>
+          <div class="motto-signature">
+            <span class="motto-text">ซื่อสัตย์อย่างจริงใจ</span>
+            <!-- SVG underline swoosh — like a real signature stroke -->
+            <svg class="motto-swoosh" viewBox="0 0 260 30" width="260" height="30" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="swooshGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#e83a75" />
+                  <stop offset="50%" stop-color="#9333ea" />
+                  <stop offset="100%" stop-color="#3b82f6" />
+                </linearGradient>
+              </defs>
+              <!-- Main swoosh line -->
+              <path d="M5,18 C30,4 70,2 120,12 S200,26 255,8" />
+              <!-- Small decorative curl at end -->
+              <path d="M248,10 C258,5 262,12 255,15" stroke-width="1.5" />
+              <!-- Small decorative curl at start -->
+              <path d="M5,18 C0,22 -2,16 5,14" stroke-width="1.5" />
+            </svg>
+          </div>
         </div>
-
       </div>
-    </section>
+    </div>
+
+    <div class="council-divider"><hr></div>
+
+    <!-- ═══ เพิ่มสมาชิกคนอื่นต่อได้ตรงนี้ ═══ -->
+    <!--
+    <div class="member-profile">
+      <div class="member-photo-side">
+        <div class="member-photo-frame">
+          <img src="assets/xxx.png" alt="ชื่อ">
+          <div class="position-tag">ตำแหน่ง</div>
+        </div>
+      </div>
+      <div class="member-info-side">
+        <div class="member-role-label">ตำแหน่ง — Title</div>
+        <h2 class="member-name-th">ชื่อ นามสกุล</h2>
+        <div class="member-name-en">Name Surname</div>
+        <div class="member-details">
+          <div class="detail-item">
+            <span class="detail-dot"></span>
+            <span class="detail-label">ระดับชั้น</span>
+            <span class="detail-value">ม.x / xxx</span>
+          </div>
+        </div>
+        <div class="motto-section">
+          <div class="motto-label">คติประจำใจ</div>
+          <div class="motto-signature">
+            <span class="motto-text">xxx</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="council-divider"><hr></div>
+    -->
+
   </div>
 
   <script src="assets/js/app.js?v=1787701351"></script>
