@@ -380,15 +380,15 @@
     .gender-section {
       display: none;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInSection 0.6s ease forwards;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .gender-section.active {
       display: block;
     }
-
-    @keyframes fadeInSection {
-      to { opacity: 1; transform: translateY(0); }
+    .gender-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── Responsive ── */
@@ -654,27 +654,46 @@
 
   <script src="assets/js/app.js?v=1787701351"></script>
   <script>
+    function showSection(id) {
+      const sec = document.getElementById(id);
+      sec.classList.add('active');
+      // Force reflow then animate in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          sec.classList.add('visible');
+        });
+      });
+    }
+
+    function hideSection(id) {
+      const sec = document.getElementById(id);
+      sec.classList.remove('visible');
+      // Wait for transition to finish before hiding
+      setTimeout(() => sec.classList.remove('active'), 500);
+    }
+
     function switchGender(gender) {
-      const maleSec = document.getElementById('male-section');
-      const femaleSec = document.getElementById('female-section');
       const btnMale = document.getElementById('btn-male');
       const btnFemale = document.getElementById('btn-female');
       const indicator = document.getElementById('gt-indicator');
 
       if (gender === 'male') {
-        maleSec.classList.add('active');
-        femaleSec.classList.remove('active');
+        hideSection('female-section');
+        showSection('male-section');
         btnMale.classList.add('active');
         btnFemale.classList.remove('active');
         indicator.style.transform = 'translateY(0)';
       } else {
-        femaleSec.classList.add('active');
-        maleSec.classList.remove('active');
+        hideSection('male-section');
+        showSection('female-section');
         btnFemale.classList.add('active');
         btnMale.classList.remove('active');
         indicator.style.transform = 'translateY(calc(100% + 2px))';
       }
     }
+
+    // Init: show male section on load
+    document.addEventListener('DOMContentLoaded', () => showSection('male-section'));
   </script>
 </body>
 </html>
