@@ -141,6 +141,89 @@
     .gt-btn.active i { transform: scale(1.15); }
 
     /* ══════════════════════════════════════
+       VIEW TOGGLE (List vs Chart)
+       ══════════════════════════════════════ */
+    .view-toggle-wrapper {
+      position: fixed;
+      top: 250px;
+      right: 24px;
+      z-index: 990;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .vt-label {
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9333ea;
+      background: rgba(255,255,255,0.85);
+      padding: 4px 12px;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .view-toggle {
+      display: flex;
+      flex-direction: row;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 30px;
+      padding: 4px;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(147,51,234,0.08);
+    }
+    .vt-indicator {
+      position: absolute;
+      top: 4px; bottom: 4px; left: 4px;
+      width: 74px;
+      background: linear-gradient(135deg, #9333ea, #e83a75);
+      border-radius: 20px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 10px rgba(147,51,234,0.2);
+    }
+    .vt-btn {
+      position: relative;
+      z-index: 1;
+      width: 74px;
+      height: 32px;
+      border: none;
+      background: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      color: #64748b;
+      transition: all 0.3s ease;
+    }
+    .vt-btn i { font-size: 1rem; }
+    .vt-btn span {
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+    }
+    .vt-btn.active { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+
+    /* Flat List View Overrides */
+    #grid-view.view-mode-list .org-chart {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      max-width: 1000px;
+    }
+    #grid-view.view-mode-list .org-row { display: contents; }
+    #grid-view.view-mode-list .org-connector { display: none; }
+    #grid-view.view-mode-list .org-section-label { display: none; }
+
+
+    /* ══════════════════════════════════════
        ORG CHART GRID VIEW
        ══════════════════════════════════════ */
     .org-chart {
@@ -463,6 +546,8 @@
        RESPONSIVE
        ══════════════════════════════════════ */
     @media (max-width: 768px) {
+      .gender-toggle-wrapper { top: 80px; right: 16px; transform: scale(0.85); transform-origin: top right; }
+      .view-toggle-wrapper { top: 215px; right: 16px; transform: scale(0.85); transform-origin: top right; }
       .detail-card {
         grid-template-columns: 1fr;
       }
@@ -577,6 +662,22 @@
         <button class="gt-btn" id="btn-female" data-gender="female" onclick="switchGender('female')">
           <i class="ph ph-gender-female"></i>
           <span>หญิง</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="view-toggle-wrapper" id="view-tabs">
+      <div class="vt-label">มุมมอง / View</div>
+      <div class="view-toggle">
+        <div class="vt-indicator" id="vt-indicator"></div>
+        <button class="vt-btn active" id="btn-chart" onclick="switchViewMode('chart')">
+          <i class="ph ph-tree-structure"></i>
+          <span>ทำเนียบ</span>
+        </button>
+        <button class="vt-btn" id="btn-list" onclick="switchViewMode('list')">
+          <i class="ph ph-squares-four"></i>
+          <span>เรียงคน</span>
         </button>
       </div>
     </div>
@@ -823,6 +924,7 @@
       const detailView = document.getElementById('detail-view');
       const content    = document.getElementById('detail-content');
       const tabs       = document.getElementById('gender-tabs');
+      const vtabs      = document.getElementById('view-tabs');
 
       content.innerHTML = `
         <div class="detail-card">
@@ -865,6 +967,7 @@
 
       gridView.style.display = 'none';
       tabs.style.display = 'none';
+      if(vtabs) vtabs.style.display = 'none';
       detailView.classList.add('active');
 
       // Scroll to top smoothly
@@ -875,10 +978,12 @@
       const gridView   = document.getElementById('grid-view');
       const detailView = document.getElementById('detail-view');
       const tabs       = document.getElementById('gender-tabs');
+      const vtabs      = document.getElementById('view-tabs');
 
       detailView.classList.remove('active');
       gridView.style.display = '';
       tabs.style.display = '';
+      if(vtabs) vtabs.style.display = 'flex';
 
       // Re-trigger animations by re-adding elements
       document.querySelectorAll('.org-person').forEach(el => {
@@ -886,6 +991,25 @@
         el.offsetHeight; // force reflow
         el.style.animation = '';
       });
+    }
+
+    function switchViewMode(mode) {
+      const gv = document.getElementById('grid-view');
+      const ind = document.getElementById('vt-indicator');
+      const btnC = document.getElementById('btn-chart');
+      const btnL = document.getElementById('btn-list');
+      
+      if (mode === 'list') {
+        gv.classList.add('view-mode-list');
+        ind.style.transform = 'translateX(74px)';
+        btnC.classList.remove('active');
+        btnL.classList.add('active');
+      } else {
+        gv.classList.remove('view-mode-list');
+        ind.style.transform = 'translateX(0)';
+        btnL.classList.remove('active');
+        btnC.classList.add('active');
+      }
     }
   </script>
 </body>
