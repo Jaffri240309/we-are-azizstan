@@ -3,18 +3,397 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>โครงสร้างสภา | We Are Azizstan</title>
+  <title>ทำเนียบสภานักเรียน | We Are Azizstan</title>
   <link rel="stylesheet" href="/style.css?v=1787703023" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    /* ====== Council Hero ====== */
+    .council-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 80px;
+      overflow: hidden;
+    }
+
+    /* Animated background blobs */
+    .council-hero::before,
+    .council-hero::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      animation: blobFloat 8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .council-hero::before {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(232,58,117,0.5), rgba(196,98,255,0.4));
+      top: -100px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .council-hero::after {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99,102,241,0.45), rgba(14,165,233,0.35));
+      bottom: -80px;
+      left: -80px;
+      animation-delay: 4s;
+    }
+
+    /* Extra floating blob */
+    .blob-mid {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251,191,36,0.3), rgba(232,58,117,0.2));
+      top: 40%;
+      left: 30%;
+      filter: blur(70px);
+      opacity: 0.45;
+      animation: blobFloat 11s ease-in-out infinite;
+      animation-delay: 2s;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(40px, -30px) scale(1.08); }
+      66%       { transform: translate(-30px, 20px) scale(0.95); }
+    }
+
+    /* Floating particle dots */
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      animation: particleDrift linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleDrift {
+      0%   { transform: translateY(110vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* Section title */
+    .council-section-title {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .council-section-title .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,58,117,0.12);
+      border: 1px solid rgba(232,58,117,0.25);
+      color: var(--c-primary);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .council-section-title h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      background: linear-gradient(135deg, #e83a75, #9333ea, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    .council-section-title p {
+      margin-top: 12px;
+      color: var(--c-text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* ====== President Card ====== */
+    .president-card-outer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    @keyframes cardEntrance {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .president-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 36px;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.12),
+        0 10px 30px rgba(232,58,117,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -1px 0 rgba(0,0,0,0.03);
+      overflow: hidden;
+      max-width: 420px;
+      width: 100%;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+      cursor: default;
+    }
+
+    .president-card:hover {
+      transform: translateY(-10px) scale(1.012);
+      box-shadow:
+        0 50px 100px rgba(0,0,0,0.15),
+        0 20px 50px rgba(232,58,117,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    /* Top shimmer line */
+    .president-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #e83a75, #9333ea, #3b82f6, #e83a75);
+      background-size: 200%;
+      animation: shimmerLine 3s linear infinite;
+      z-index: 3;
+    }
+
+    @keyframes shimmerLine {
+      from { background-position: 0% 0%; }
+      to   { background-position: 200% 0%; }
+    }
+
+    /* Inner glow */
+    .president-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.25) 0%,
+        rgba(255,255,255,0) 60%
+      );
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Photo section */
+    .president-photo-wrap {
+      position: relative;
+      padding: 40px 40px 0;
+      display: flex;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .president-photo-ring {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    /* Spinning gradient ring */
+    .president-photo-ring::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #e83a75,
+        #9333ea,
+        #3b82f6,
+        #06b6d4,
+        #e83a75
+      );
+      animation: spinRing 4s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Inner white gap */
+    .president-photo-ring::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      z-index: 1;
+    }
+
+    .president-photo {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 2;
+      border: 4px solid rgba(255,255,255,0.7);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    /* Badge */
+    .president-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 4px;
+      background: linear-gradient(135deg, #e83a75, #9333ea);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 50px;
+      z-index: 4;
+      box-shadow: 0 4px 12px rgba(232,58,117,0.5);
+      letter-spacing: 0.05em;
+      border: 2px solid rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+
+    /* Info section */
+    .president-info {
+      padding: 28px 36px 36px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .president-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--c-primary);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      background: rgba(232,58,117,0.08);
+      border: 1px solid rgba(232,58,117,0.2);
+      padding: 4px 14px;
+      border-radius: 50px;
+    }
+
+    .president-name-th {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--c-text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0 0 4px;
+    }
+
+    .president-name-en {
+      font-size: 1rem;
+      color: var(--c-text-muted);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .president-divider {
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #e83a75, #9333ea);
+      border-radius: 10px;
+      margin: 0 auto 20px;
+    }
+
+    .president-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .president-detail-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--c-text);
+      font-size: 0.95rem;
+    }
+
+    .president-detail-row i {
+      font-size: 1.1rem;
+      color: var(--c-primary);
+      flex-shrink: 0;
+    }
+
+    .president-quote {
+      background: rgba(232,58,117,0.07);
+      border-left: 3px solid var(--c-primary);
+      border-radius: 0 14px 14px 0;
+      padding: 14px 18px;
+      text-align: left;
+      margin-top: 8px;
+    }
+
+    .president-quote p {
+      font-size: 0.95rem;
+      color: var(--c-text);
+      font-style: italic;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .president-quote span {
+      font-size: 0.78rem;
+      color: var(--c-text-muted);
+      margin-top: 4px;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <header class="topbar">
+
+  <!-- Floating background particles -->
+  <div class="blob-mid"></div>
+  <div class="particle" style="width:8px;height:8px;background:rgba(232,58,117,0.6);left:15%;animation-duration:12s;animation-delay:0s;"></div>
+  <div class="particle" style="width:5px;height:5px;background:rgba(147,51,234,0.5);left:40%;animation-duration:16s;animation-delay:2s;"></div>
+  <div class="particle" style="width:10px;height:10px;background:rgba(59,130,246,0.4);left:70%;animation-duration:10s;animation-delay:4s;"></div>
+  <div class="particle" style="width:6px;height:6px;background:rgba(232,58,117,0.5);left:88%;animation-duration:14s;animation-delay:1s;"></div>
+  <div class="particle" style="width:9px;height:9px;background:rgba(6,182,212,0.4);left:55%;animation-duration:18s;animation-delay:6s;"></div>
+  <div class="particle" style="width:4px;height:4px;background:rgba(251,191,36,0.6);left:25%;animation-duration:13s;animation-delay:3s;"></div>
+  <div class="particle" style="width:7px;height:7px;background:rgba(147,51,234,0.5);left:80%;animation-duration:15s;animation-delay:5s;"></div>
+
+  <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand" href="index.html">
         <div class="brand-logos">
-          <!-- Main School Logo -->
           <img src="assets/azizLogo.png" alt="Azizstan Logo" class="logo">
-          <!-- DEPAZ Logo -->
           <img src="assets/depazLogo.jpg" alt="DEPAZ Logo" class="logo">
         </div>
         <div class="brand-txt">
@@ -48,15 +427,53 @@
     </div>
   </div>
 
+  <section class="council-hero">
 
-  <main class="container page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center;">
-    <i class="ph ph-file-dashed" style="font-size: 6rem; color: var(--c-primary); margin-bottom: 1rem; opacity: 0.8;"></i>
-    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--c-text);">404</h1>
-    <p style="font-size: 1.2rem; color: var(--c-text); opacity: 0.7; margin-bottom: 2rem;">ยังไม่มีอัพเดทจากแอดมิน</p>
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--c-primary); color: white; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 500; box-shadow: 0 4px 15px rgba(232,58,117,0.3);">
-      <i class="ph ph-house"></i> กลับสู่หน้าหลัก
-    </a>
-  </main>
+    <div class="council-section-title">
+      <div class="tag">
+        <i class="ph-fill ph-users"></i> สภานักเรียน
+      </div>
+      <h1>ทำเนียบสภานักเรียน</h1>
+      <p>โรงเรียนมูลนิธิอาซิซสถาน • ปีการศึกษา 2568</p>
+    </div>
+
+    <!-- President Card -->
+    <div class="president-card-outer">
+      <div class="president-card">
+        <div class="president-photo-wrap">
+          <div class="president-photo-ring">
+            <img src="assets/president.png" alt="ประธานนักเรียน ฮูซัยฟี เจ๊ะเลาะ" class="president-photo">
+            <div class="president-badge">⭐ ประธาน</div>
+          </div>
+        </div>
+
+        <div class="president-info">
+          <div class="president-role">
+            <i class="ph-fill ph-crown"></i>
+            ประธานนักเรียน
+          </div>
+
+          <h2 class="president-name-th">ฮูซัยฟี เจ๊ะเลาะ</h2>
+          <div class="president-name-en">Husaifee Jehloh</div>
+
+          <div class="president-divider"></div>
+
+          <div class="president-details">
+            <div class="president-detail-row">
+              <i class="ph-fill ph-graduation-cap"></i>
+              <span>ม.6 / Al-Khawarizmi</span>
+            </div>
+          </div>
+
+          <div class="president-quote">
+            <p>❝ ซื่อสัตย์อย่างจริงใจ ❞</p>
+            <span>— คติประจำใจ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <script src="assets/js/app.js?v=1787701351"></script>
 </body>
