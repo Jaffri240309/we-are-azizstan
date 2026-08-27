@@ -8,7 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Charm:wght@400;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <style>
-    /* ── Base ── */
+    /* ══════════════════════════════════════
+       COUNCIL DIRECTORY — Grid + Detail View
+       ══════════════════════════════════════ */
+
     .council-page {
       padding-top: 16px;
       padding-bottom: 80px;
@@ -16,850 +19,808 @@
       overflow: hidden;
     }
 
-    /* ── Ambient animated background ── */
+    /* ── Ambient background ── */
     .bg-grain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.03;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; opacity: 0.03;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
-
     .bg-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      pointer-events: none;
-      z-index: 0;
+      position: fixed; border-radius: 50%; filter: blur(100px);
+      pointer-events: none; z-index: 0;
       animation: orbFloat ease-in-out infinite;
     }
     .bg-orb-1 { width:420px;height:420px;background:rgba(232,58,117,0.08);top:-60px;right:5%;animation-duration:18s; }
     .bg-orb-2 { width:380px;height:380px;background:rgba(99,102,241,0.07);bottom:10%;left:-5%;animation-duration:22s;animation-delay:4s; }
     .bg-orb-3 { width:260px;height:260px;background:rgba(251,191,36,0.06);top:45%;right:15%;animation-duration:15s;animation-delay:8s; }
-
     @keyframes orbFloat {
       0%,100% { transform: translate(0,0) scale(1); }
-      25%      { transform: translate(20px,-15px) scale(1.04); }
-      50%      { transform: translate(-10px,20px) scale(0.97); }
-      75%      { transform: translate(15px,10px) scale(1.02); }
+      25%     { transform: translate(20px,-15px) scale(1.04); }
+      50%     { transform: translate(-10px,20px) scale(0.97); }
+      75%     { transform: translate(15px,10px) scale(1.02); }
     }
 
     /* ── Page Header ── */
     .council-header {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 32px;
       position: relative;
       z-index: 1;
     }
-
     .council-header .ch-label {
       font-family: 'Kanit', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--c-primary);
-      margin-bottom: 8px;
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--c-primary); margin-bottom: 8px;
     }
-
     .council-header h1 {
       font-family: 'Kanit', sans-serif;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--c-text);
-      margin: 0;
+      font-size: 2rem; font-weight: 600;
+      color: var(--c-text); margin: 0;
       letter-spacing: -0.01em;
     }
-
     .council-header .ch-sub {
       font-family: 'Sarabun', sans-serif;
-      font-size: 0.88rem;
-      color: var(--c-text-muted);
-      margin-top: 6px;
-      font-weight: 400;
+      font-size: 0.88rem; color: var(--c-text-muted);
+      margin-top: 6px; font-weight: 400;
     }
 
-    /* ── Profile Card ── */
-    .pcard {
-      max-width: 1100px;
-      margin: 0 auto 30px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: 360px 1fr;
+    /* ══════════════════════════════════════
+       GENDER TAB BAR — centered, horizontal
+       ══════════════════════════════════════ */
+    .gender-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 10;
+    }
+    .gender-tab {
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 10px 28px;
+      border: 1px solid rgba(232,58,117,0.15);
+      border-radius: 40px;
+      background: rgba(255,255,255,0.08);
+      color: var(--c-text-muted);
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gender-tab i { font-size: 1.1rem; }
+    .gender-tab.active {
+      background: linear-gradient(160deg, #e83a75, #9333ea);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(232,58,117,0.35), 0 2px 8px rgba(147,51,234,0.25);
+      transform: scale(1.04);
+    }
+    .gender-tab:not(.active):hover {
+      background: rgba(232,58,117,0.08);
+      border-color: rgba(232,58,117,0.3);
+      color: var(--c-primary);
+    }
+
+    /* ══════════════════════════════════════
+       ORG CHART GRID VIEW
+       ══════════════════════════════════════ */
+    .org-chart {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px;
       position: relative;
       z-index: 1;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: revealCard 0.8s ease forwards;
-    }
-    .pcard:nth-child(2) { animation-delay: 0.15s; }
-    .pcard:nth-child(4) { animation-delay: 0.3s; }
-
-    @keyframes revealCard {
-      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Photo */
-    .pcard-photo {
+    /* Section title row ("ประธาน", "รองประธาน", etc.) */
+    .org-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .org-row.president { margin-bottom: 28px; }
+
+    /* Connector line between rows */
+    .org-connector {
+      width: 2px;
+      height: 24px;
+      margin: 0 auto 16px;
+      background: linear-gradient(to bottom, rgba(232,58,117,0.25), rgba(147,51,234,0.15));
+      border-radius: 2px;
+    }
+    .org-connector.horizontal {
+      height: 2px;
+      width: 60%;
+      max-width: 400px;
+      margin: 0 auto 16px;
+      background: linear-gradient(to right, transparent, rgba(232,58,117,0.2), rgba(147,51,234,0.2), transparent);
+    }
+
+    /* ── Single person card in grid ── */
+    .org-person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      width: 130px;
       position: relative;
-      z-index: 2;
-      border-radius: 14px;
+    }
+    .org-person:hover {
+      background: rgba(232,58,117,0.06);
+      transform: translateY(-4px);
+    }
+    .org-person:active { transform: scale(0.97); }
+
+    .org-person .person-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
       overflow: hidden;
-      height: 460px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.14);
-      transition: box-shadow 0.5s ease;
+      border: 3px solid rgba(232,58,117,0.2);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transition: all 0.35s ease;
+      position: relative;
     }
-
-    .pcard:hover .pcard-photo {
-      box-shadow: 0 28px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(232,58,117,0.08);
+    .org-person.president-card .person-photo {
+      width: 110px;
+      height: 110px;
+      border-width: 4px;
+      border-color: rgba(232,58,117,0.4);
+      box-shadow: 0 6px 24px rgba(232,58,117,0.15);
     }
-
-    .pcard-photo img {
+    .org-person:hover .person-photo {
+      border-color: rgba(232,58,117,0.5);
+      box-shadow: 0 6px 24px rgba(232,58,117,0.2);
+    }
+    .org-person .person-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
-      display: block;
-      transition: transform 5s cubic-bezier(0.25,0.46,0.45,0.94);
+      object-position: top;
     }
 
-    .pcard:hover .pcard-photo img { transform: scale(1.06); }
+    .org-person .person-name {
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--c-text);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .org-person .person-role {
+      font-family: 'Sarabun', sans-serif;
+      font-size: 0.68rem;
+      color: var(--c-text-muted);
+      text-align: center;
+      font-weight: 400;
+    }
 
-    .pcard-photo::after {
-      content: '';
+    /* President highlight badge */
+    .org-person.president-card::after {
+      content: '★';
+      position: absolute;
+      top: 6px;
+      right: 12px;
+      font-size: 0.7rem;
+      color: #fbbf24;
+      filter: drop-shadow(0 1px 2px rgba(251,191,36,0.4));
+    }
+
+    /* Section label */
+    .org-section-label {
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-primary);
+      text-align: center;
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+
+    /* Gender section visibility */
+    .gender-section { transition: opacity 0.4s ease; }
+    .gender-section.hidden { display: none !important; }
+
+    /* ══════════════════════════════════════
+       DETAIL VIEW (when clicking a person)
+       ══════════════════════════════════════ */
+    #detail-view {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    #detail-view.active { display: block; }
+
+    /* Back button */
+    .detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--c-primary);
+      cursor: pointer;
+      padding: 8px 16px;
+      border: 1px solid rgba(232,58,117,0.2);
+      border-radius: 30px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+      margin-bottom: 30px;
+    }
+    .detail-back:hover {
+      background: rgba(232,58,117,0.08);
+      border-color: rgba(232,58,117,0.35);
+      transform: translateX(-2px);
+    }
+    .detail-back i { font-size: 1rem; }
+
+    /* Detail card layout */
+    .detail-card {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 0;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: revealDetail 0.6s ease forwards;
+    }
+    @keyframes revealDetail {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-photo {
+      position: relative;
+      border-radius: 24px 0 0 24px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      box-shadow: -4px 0 32px rgba(0,0,0,0.06);
+    }
+    .detail-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+    .detail-photo .photo-label {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 100px;
-      background: linear-gradient(to top, rgba(15,5,25,0.55), transparent);
-    }
-
-    .pcard-photo .photo-label {
-      position: absolute;
-      bottom: 14px;
-      left: 16px;
-      z-index: 3;
+      padding: 24px 20px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
       font-family: 'Kanit', sans-serif;
       font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.25);
     }
 
-    /* Info Panel */
-    .pcard-info {
-      background: rgba(255,255,255,0.38);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.5);
-      border-left: none;
-      border-radius: 0 18px 18px 0;
-      margin-left: -16px;
-      padding: 36px 40px 36px 48px;
-      min-height: 460px;
+    .detail-info {
+      padding: 40px 36px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      position: relative;
-      z-index: 1;
+      background: rgba(255,255,255,0.04);
+      border-radius: 0 24px 24px 0;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: none;
     }
 
-    /* Vertical accent line inside info */
-    .pcard-info::before {
-      content: '';
-      position: absolute;
-      top: 32px; bottom: 32px; left: 20px;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, var(--c-primary), #9333ea, transparent);
-      opacity: 0.25;
-      border-radius: 2px;
-    }
-
-    .pcard-role {
+    .detail-role {
       font-family: 'Kanit', sans-serif;
       font-size: 0.68rem;
       font-weight: 500;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--c-primary);
       margin-bottom: 6px;
     }
-
-    .pcard-name-th {
+    .detail-name-th {
       font-family: 'Kanit', sans-serif;
-      font-size: 2.3rem;
+      font-size: 1.6rem;
       font-weight: 600;
       color: var(--c-text);
-      line-height: 1.15;
+      margin: 0 0 4px;
       letter-spacing: -0.01em;
-      margin-bottom: 2px;
     }
-
-    .pcard-name-en {
+    .detail-name-en {
       font-family: 'Sarabun', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 400;
+      font-size: 0.92rem;
       color: var(--c-text-muted);
-      letter-spacing: 0.06em;
+      font-weight: 300;
+      font-style: italic;
       margin-bottom: 24px;
     }
 
-    /* Details 2-col */
-    .pcard-details {
+    .detail-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px 28px;
-      margin-bottom: 24px;
+      gap: 12px;
+      margin-bottom: 28px;
     }
-
-    .pd-item { padding-left: 12px; position: relative; }
-    .pd-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 5px;
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--c-primary);
+    .detail-grid .dg-item {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
     }
-
-    .pd-label {
+    .detail-grid .dg-label {
       font-family: 'Sarabun', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--c-text-muted);
-      font-weight: 500;
+      margin-bottom: 2px;
     }
-    .pd-value {
+    .detail-grid .dg-value {
       font-family: 'Kanit', sans-serif;
-      font-size: 0.92rem;
-      color: var(--c-text);
+      font-size: 0.88rem;
       font-weight: 500;
-      margin-top: 1px;
+      color: var(--c-text);
     }
 
-    /* ── Motto / Signature ── */
-    .pcard-motto {
-      border-top: 1px solid rgba(0,0,0,0.05);
-      padding-top: 18px;
+    /* Motto section in detail */
+    .detail-motto {
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
-
-    .pm-label {
+    .detail-motto .dm-label {
       font-family: 'Sarabun', sans-serif;
       font-size: 0.62rem;
-      letter-spacing: 0.18em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--c-text-muted);
-      font-weight: 500;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
-
-    /* Handwriting motto */
-    .pm-sig {
+    .detail-motto .dm-text {
       font-family: 'Charm', cursive;
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 1.3rem;
       color: var(--c-text);
-      position: relative;
-      display: inline-block;
-      line-height: 1.3;
+      font-weight: 700;
+      line-height: 1.5;
     }
 
-    /* SVG flourish — drawn on load */
-    .pm-flourish {
+    /* Flourish SVG in detail */
+    .dm-flourish {
       display: block;
-      margin-top: -2px;
-      overflow: visible;
-    }
-    .pm-flourish path {
+      margin-top: 6px;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: var(--len, 500);
-      stroke-dashoffset: var(--len, 500);
-      animation: drawSig 2.5s 0.6s cubic-bezier(0.4,0,0.2,1) forwards;
+      stroke-dasharray: var(--len);
+      stroke-dashoffset: var(--len);
+      animation: drawLine 1.6s ease forwards 0.4s;
     }
-    @keyframes drawSig {
+    @keyframes drawLine {
       to { stroke-dashoffset: 0; }
     }
 
-    /* ── Divider ── */
-    .pcard-divider {
-      max-width: 1100px;
-      margin: 0 auto 30px;
-      padding: 0 20px;
-    }
-    .pcard-divider hr {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 5%, rgba(232,58,117,0.12) 30%, rgba(147,51,234,0.12) 70%, transparent 95%);
-    }
-
-    /* ── Gender Toggle Switch ── */
-    .gender-toggle-wrapper {
-      position: fixed;
-      top: 80px;
-      right: 24px;
-      z-index: 1000;
-    }
-
-    .gender-toggle {
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(20px) saturate(200%);
-      -webkit-backdrop-filter: blur(20px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 50px;
-      padding: 5px;
-      display: inline-flex;
-      flex-direction: column;
-      position: relative;
-      box-shadow:
-        0 8px 32px rgba(0,0,0,0.12),
-        0 2px 8px rgba(232,58,117,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.6);
-      gap: 2px;
-    }
-
-    .gt-indicator {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      width: calc(100% - 10px);
-      height: 44px;
-      background: linear-gradient(135deg, #e83a75, #9333ea);
-      border-radius: 40px;
-      box-shadow: 0 4px 15px rgba(232,58,117,0.4), 0 2px 6px rgba(147,51,234,0.3);
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 1;
-    }
-
-    .gt-btn {
-      position: relative;
-      z-index: 2;
-      border: none;
-      background: none;
-      width: 108px;
-      height: 44px;
-      border-radius: 40px;
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--c-text-muted);
-      cursor: pointer;
-      transition: color 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .gt-btn i { font-size: 1.15rem; transition: transform 0.3s ease; }
-    .gt-btn:hover i { transform: scale(1.2); }
-
-    .gt-btn.active {
-      color: white;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.25);
-    }
-
-    /* ── Gender Toggle Switch ── */
-    .gender-toggle-wrapper {
-      position: fixed;
-      top: 88px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    .gt-label {
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.55rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-text-muted);
-      text-align: center;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .gender-toggle {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
-      border: 1px solid rgba(255,255,255,0.45);
-      border-radius: 60px;
-      padding: 5px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      position: relative;
-      box-shadow:
-        0 12px 40px rgba(0,0,0,0.10),
-        0 2px 0 rgba(255,255,255,0.6) inset,
-        0 0 0 1px rgba(232,58,117,0.05);
-    }
-
-    .gt-indicator {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      right: 5px;
-      height: 60px;
-      background: linear-gradient(160deg, #e83a75 0%, #9333ea 60%, #6366f1 100%);
-      border-radius: 50px;
-      box-shadow:
-        0 6px 20px rgba(232,58,117,0.45),
-        0 2px 8px rgba(147,51,234,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.25);
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 1;
-    }
-
-    .gt-btn {
-      position: relative;
-      z-index: 2;
-      border: none;
-      background: none;
-      width: 74px;
-      height: 60px;
-      border-radius: 50px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      transition: all 0.3s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .gt-btn i {
-      font-size: 1.4rem;
-      color: var(--c-text-muted);
-      transition: all 0.35s ease;
-      display: block;
-    }
-    .gt-btn span {
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      color: var(--c-text-muted);
-      transition: all 0.35s ease;
-      display: block;
-    }
-    .gt-btn.active i,
-    .gt-btn.active span {
-      color: white;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    }
-    .gt-btn.active i { transform: scale(1.18); }
-    .gt-btn:not(.active):hover i { transform: scale(1.1); color: var(--c-primary); }
-
-    /* ── Sections ── */
-    .gender-section {
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .gender-section.hidden {
-      display: none !important;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 800px) {
-      .pcard {
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .detail-card {
         grid-template-columns: 1fr;
       }
-      .pcard-photo {
-        height: 350px;
-        border-radius: 14px 14px 0 0;
+      .detail-photo {
+        border-radius: 20px 20px 0 0;
+        aspect-ratio: 4 / 3;
       }
-      .pcard-info {
-        margin-left: 0;
-        border-radius: 0 0 14px 14px;
-        border-left: 1px solid rgba(255,255,255,0.5);
+      .detail-info {
+        border-radius: 0 0 20px 20px;
+        border-left: 1px solid rgba(255,255,255,0.08);
         border-top: none;
         padding: 28px 24px;
-        min-height: auto;
       }
-      .pcard-info::before { display: none; }
-      .pcard-name-th { font-size: 1.7rem; }
-      .pcard-details { grid-template-columns: 1fr; }
-      .pm-sig { font-size: 1.5rem; }
+      .org-person { width: 100px; padding: 8px; }
+      .org-person .person-photo { width: 70px; height: 70px; }
+      .org-person.president-card .person-photo { width: 86px; height: 86px; }
+      .org-person .person-name { font-size: 0.7rem; }
+      .org-person .person-role { font-size: 0.6rem; }
+      .org-row { gap: 12px; }
+      .detail-name-th { font-size: 1.3rem; }
+      .detail-grid { grid-template-columns: 1fr; }
     }
+
+    /* Animation stagger for grid items */
+    .org-person {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .org-row:nth-child(1) .org-person { animation-delay: 0.05s; }
+    .org-row:nth-child(2) .org-person:nth-child(1) { animation-delay: 0.12s; }
+    .org-row:nth-child(2) .org-person:nth-child(2) { animation-delay: 0.18s; }
+    .org-row:nth-child(3) .org-person { animation-delay: 0.25s; }
+    .org-row:nth-child(4) .org-person:nth-child(1) { animation-delay: 0.32s; }
+    .org-row:nth-child(4) .org-person:nth-child(2) { animation-delay: 0.38s; }
+    .org-row:nth-child(4) .org-person:nth-child(3) { animation-delay: 0.44s; }
   </style>
 </head>
 <body>
 
-  <!-- Ambient background -->
-  <div class="bg-grain"></div>
-  <div class="bg-orb bg-orb-1"></div>
-  <div class="bg-orb bg-orb-2"></div>
-  <div class="bg-orb bg-orb-3"></div>
-
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand" href="index.html">
-        <div class="brand-logos">
-          <img src="assets/azizLogo.png" alt="Azizstan Logo" class="logo">
-          <img src="assets/depazLogo.jpg" alt="DEPAZ Logo" class="logo">
-        </div>
-        <div class="brand-txt">
-          <div class="brand-title">We Are Azizstan</div>
-          <div class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</div>
+  <!-- ── Navigation (same as other pages) ── -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="assets/depazLogo.jpg" alt="Logo 1" class="nav-logo-img" />
+        <img src="assets/azizLogo.png" alt="Logo 2" class="nav-logo-img" />
+        <div class="nav-logo-text">
+          <span class="brand-name">We Are Azizstan</span>
+          <span class="brand-sub">สภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</span>
         </div>
       </a>
-      <nav class="nav">
+      <div class="nav-links">
         <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
         <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
         <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
         <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
-        <a class="active" href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
-      </nav>
-      <button class="hamburger" id="menuBtn" aria-label="เปิดเมนู">
-        <span></span><span></span><span></span>
-      </button>
+        <a href="council.html" class="active-link"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
+      </div>
+      <button class="hamburger" aria-label="เมนู"><span></span><span></span><span></span></button>
     </div>
-  </header>
+  </nav>
 
-  <div class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-panel">
-      <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
-      <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
-      <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
-      <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
-      <a href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
-    </div>
+  <div class="mobile-nav-panel">
+    <a href="index.html"><i class="ph ph-house"></i> หน้าแรก</a>
+    <a href="news.html"><i class="ph ph-newspaper"></i> ข่าวสาร</a>
+    <a href="projects.html"><i class="ph ph-calendar-star"></i> กิจกรรม</a>
+    <a href="forms.html"><i class="ph ph-clipboard-text"></i> แบบฟอร์ม</a>
+    <a href="council.html"><i class="ph ph-users"></i> เกี่ยวกับสภา</a>
   </div>
+
+  <!-- Page transition overlay -->
+  <div class="page-transition"></div>
 
   <div class="council-page">
 
+    <!-- Ambient background -->
+    <div class="bg-grain"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <!-- Page header -->
     <div class="council-header">
       <div class="ch-label">Student Council 2568</div>
       <h1>ทำเนียบสภานักเรียน</h1>
       <div class="ch-sub">โรงเรียนมูลนิธิอาซิซสถาน · ปีการศึกษา 2568</div>
     </div>
 
-    <!-- Toggle Switch -->
-    <div class="gender-toggle-wrapper">
-      <div class="gt-label">ฝ่าย</div>
-      <div class="gender-toggle">
-        <div class="gt-indicator" id="gt-indicator"></div>
-        <button class="gt-btn active" id="btn-male" onclick="switchGender('male')">
-          <i class="ph ph-gender-male"></i>
-          <span>ชาย</span>
-        </button>
-        <button class="gt-btn" id="btn-female" onclick="switchGender('female')">
-          <i class="ph ph-gender-female"></i>
-          <span>หญิง</span>
-        </button>
-      </div>
+    <!-- Gender Tabs -->
+    <div class="gender-tabs" id="gender-tabs">
+      <button class="gender-tab active" data-gender="male" onclick="switchGender('male')">
+        <i class="ph ph-gender-male"></i> ฝ่ายชาย
+      </button>
+      <button class="gender-tab" data-gender="female" onclick="switchGender('female')">
+        <i class="ph ph-gender-female"></i> ฝ่ายหญิง
+      </button>
     </div>
 
-    <!-- ═══ ฝ่ายชาย ═══ -->
-    <div id="male-section" class="gender-section">
+    <!-- ══════════════════════════════════════
+         GRID VIEW — Org Chart
+         ══════════════════════════════════════ -->
+    <div id="grid-view">
 
-    <!-- ═══ ประธานนักเรียน ═══ -->
-    <div class="pcard">
-      <div class="pcard-photo">
-        <img src="assets/president.png" alt="ฮูซัยฟี เจาะเลาะ">
-        <div class="photo-label">President · 2568</div>
-      </div>
-      <div class="pcard-info">
-        <div class="pcard-role">ประธานนักเรียน — President</div>
-        <h2 class="pcard-name-th">ฮูซัยฟี เจาะเลาะ</h2>
-        <div class="pcard-name-en">Husaifee Jehlok</div>
+      <!-- ═══ ฝ่ายชาย ═══ -->
+      <div id="male-section" class="gender-section">
+        <div class="org-chart">
 
-        <div class="pcard-details">
-          <div class="pd-item">
-            <div class="pd-label">ตำแหน่ง</div>
-            <div class="pd-value">ประธานนักเรียน</div>
+          <div class="org-section-label">ประธานนักเรียน</div>
+          <div class="org-row president">
+            <div class="org-person president-card" onclick="showDetail('m-president')">
+              <div class="person-photo"><img src="assets/president.png" alt="ฮูซัยฟี เจาะเลาะ"></div>
+              <div class="person-name">ฮูซัยฟี เจาะเลาะ</div>
+              <div class="person-role">ประธานนักเรียน</div>
+            </div>
           </div>
-          <div class="pd-item">
-            <div class="pd-label">ระดับชั้น</div>
-            <div class="pd-value">ม.6 / Al-Khawarizmi</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ปีการศึกษา</div>
-            <div class="pd-value">2568</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">สังกัด</div>
-            <div class="pd-value">สภานักเรียน</div>
-          </div>
-        </div>
 
-        <div class="pcard-motto">
-          <div class="pm-label">คติประจำใจ</div>
-          <div class="pm-sig">
-            ซื่อสัตย์อย่างจริงใจ
-            <!-- Unique flourish #1: sweeping curve with loop & tail curl -->
-            <svg class="pm-flourish" viewBox="0 0 280 40" width="280" height="40" xmlns="http://www.w3.org/2000/svg">
-              <defs><linearGradient id="fl1" x1="0%" x2="100%"><stop offset="0%" stop-color="#e83a75"/><stop offset="60%" stop-color="#9333ea"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
-              <!-- Main sweeping stroke -->
-              <path d="M4,22 C16,8 32,6 52,16 C72,26 88,28 108,18 C128,8 148,6 168,14 C188,22 210,26 238,14 C248,10 258,6 268,12" stroke="url(#fl1)" stroke-width="2" style="--len:420"/>
-              <!-- Loop at middle -->
-              <path d="M130,14 C126,4 118,2 114,10 C112,14 116,18 122,16" stroke="url(#fl1)" stroke-width="1.5" style="--len:80"/>
-              <!-- Tail curl at end -->
-              <path d="M268,12 C274,16 276,24 270,28 C266,30 262,28 264,24" stroke="url(#fl1)" stroke-width="1.5" style="--len:60"/>
-              <!-- Start flourish -->
-              <path d="M4,22 C-2,28 -4,20 2,18" stroke="url(#fl1)" stroke-width="1.5" style="--len:30"/>
-            </svg>
+          <div class="org-connector"></div>
+
+          <div class="org-section-label">รองประธาน · เลขานุการ</div>
+          <div class="org-row">
+            <div class="org-person" onclick="showDetail('m-vice')">
+              <div class="person-photo"><img src="assets/vice-president-male.png" alt="อาเดล มาตัดสา"></div>
+              <div class="person-name">อาเดล มาตัดสา</div>
+              <div class="person-role">รองประธาน</div>
+            </div>
+            <div class="org-person" onclick="showDetail('m-secretary')">
+              <div class="person-photo"><img src="assets/secretary.png" alt="ซีรอจณ์ หัจญีซิดดิก"></div>
+              <div class="person-name">ซีรอจณ์ หัจญีซิดดิก</div>
+              <div class="person-role">เลขานุการ</div>
+            </div>
           </div>
+
         </div>
       </div>
+
+      <!-- ═══ ฝ่ายหญิง ═══ -->
+      <div id="female-section" class="gender-section hidden">
+        <div class="org-chart">
+
+          <div class="org-section-label">ประธานนักเรียน</div>
+          <div class="org-row president">
+            <div class="org-person president-card" onclick="showDetail('f-president')">
+              <div class="person-photo"><img src="assets/president-female.png" alt="เบนาซี ดาราโจ๊ะ"></div>
+              <div class="person-name">เบนาซี ดาราโจ๊ะ</div>
+              <div class="person-role">ประธานนักเรียน</div>
+            </div>
+          </div>
+
+          <div class="org-connector"></div>
+
+          <div class="org-section-label">เลขานุการ</div>
+          <div class="org-row">
+            <div class="org-person" onclick="showDetail('f-secretary')">
+              <div class="person-photo"><img src="assets/secretary-female.png" alt="นูรฟิสรี เหตุหาก"></div>
+              <div class="person-name">นูรฟิสรี เหตุหาก</div>
+              <div class="person-role">เลขานุการ</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
-    <div class="pcard-divider"><hr></div>
-
-    <!-- ═══ รองประธาน (ชาย) ═══ -->
-    <div class="pcard">
-      <div class="pcard-photo">
-        <img src="assets/vice-president-male.png" alt="อาเดล มาตัดสา">
-        <div class="photo-label">Vice President · 2568</div>
+    <!-- ══════════════════════════════════════
+         DETAIL VIEW — Individual Profile
+         ══════════════════════════════════════ -->
+    <div id="detail-view">
+      <div class="detail-back" onclick="backToGrid()">
+        <i class="ph ph-arrow-left"></i> กลับไปดูผังทำเนียบ
       </div>
-      <div class="pcard-info">
-        <div class="pcard-role">รองประธานนักเรียน (ชาย) — Vice President</div>
-        <h2 class="pcard-name-th">อาเดล มาตัดสา</h2>
-        <div class="pcard-name-en">Adel Matadsa</div>
-
-        <div class="pcard-details">
-          <div class="pd-item">
-            <div class="pd-label">ตำแหน่ง</div>
-            <div class="pd-value">รองประธานนักเรียน</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ระดับชั้น</div>
-            <div class="pd-value">ม.6 / Intan</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ปีการศึกษา</div>
-            <div class="pd-value">2568</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">สังกัด</div>
-            <div class="pd-value">สภานักเรียน</div>
-          </div>
-        </div>
-
-        <div class="pcard-motto">
-          <div class="pm-label">คติประจำใจ</div>
-          <div class="pm-sig">
-            ทำงานอย่างจริงจัง
-            <!-- Unique flourish #2: wave with double curl -->
-            <svg class="pm-flourish" viewBox="0 0 260 40" width="260" height="40" xmlns="http://www.w3.org/2000/svg">
-              <defs><linearGradient id="fl2" x1="0%" x2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#e83a75"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs>
-              <!-- Main wave stroke -->
-              <path d="M6,20 Q30,4 58,18 Q86,32 114,16 Q142,0 170,18 Q198,34 226,14 L250,10" stroke="url(#fl2)" stroke-width="2" style="--len:400"/>
-              <!-- Start spiral -->
-              <path d="M6,20 C0,26 -6,24 -2,18 C0,14 6,14 8,18" stroke="url(#fl2)" stroke-width="1.5" style="--len:50"/>
-              <!-- End spiral (opposite direction) -->
-              <path d="M250,10 C256,6 260,10 256,16 C254,18 250,16 250,12" stroke="url(#fl2)" stroke-width="1.5" style="--len:50"/>
-              <!-- Decorative dot-dash at center top -->
-              <path d="M135,4 C140,2 145,4 142,8" stroke="url(#fl2)" stroke-width="1.2" style="--len:20"/>
-            </svg>
-          </div>
-        </div>
-      </div>
+      <div id="detail-content"></div>
     </div>
-
-    <div class="pcard-divider"><hr></div>
-
-    <!-- ═══ เลขานุการ ═══ -->
-    <div class="pcard">
-      <div class="pcard-photo">
-        <img src="assets/secretary.png" alt="ซีรอจณ์ หัจญีซิดดิก">
-        <div class="photo-label">Secretary · 2568</div>
-      </div>
-      <div class="pcard-info">
-        <div class="pcard-role">เลขานุการ — Secretary</div>
-        <h2 class="pcard-name-th">ซีรอจณ์ หัจญีซิดดิก</h2>
-        <div class="pcard-name-en">Zerodge Hajjisidik</div>
-
-        <div class="pcard-details">
-          <div class="pd-item">
-            <div class="pd-label">ตำแหน่ง</div>
-            <div class="pd-value">เลขานุการ</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ระดับชั้น</div>
-            <div class="pd-value">ม.6 / Amber</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ปีการศึกษา</div>
-            <div class="pd-value">2568</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">สังกัด</div>
-            <div class="pd-value">สภานักเรียน</div>
-          </div>
-        </div>
-
-        <div class="pcard-motto">
-          <div class="pm-label">คติประจำใจ</div>
-          <div class="pm-sig">
-            เรียนให้สนุก ทำสิ่งที่ชอบ
-            <!-- Unique flourish #3: smooth underlining curve -->
-            <svg class="pm-flourish" viewBox="0 0 280 40" width="280" height="40" xmlns="http://www.w3.org/2000/svg">
-              <defs><linearGradient id="fl3" x1="0%" x2="100%"><stop offset="0%" stop-color="#10b981"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
-              <!-- Main swift stroke -->
-              <path d="M10,22 Q50,40 100,20 T190,20 T270,16" stroke="url(#fl3)" stroke-width="2" style="--len:300"/>
-              <!-- Initial drop -->
-              <path d="M10,22 C5,26 5,16 10,12" stroke="url(#fl3)" stroke-width="1.5" style="--len:20"/>
-              <!-- Cross at end -->
-              <path d="M260,8 L275,22" stroke="url(#fl3)" stroke-width="1.5" style="--len:30"/>
-              <path d="M260,22 L275,8" stroke="url(#fl3)" stroke-width="1.5" style="--len:30"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard-divider"><hr></div>
-
-    <!-- ═══ เพิ่มสมาชิกชายต่อได้ตรงนี้ ═══ -->
-
-    </div> <!-- End Male Section -->
-
-    <!-- ═══ ฝ่ายหญิง ═══ -->
-    <div id="female-section" class="gender-section hidden">
-    <!-- ═══ ประธานนักเรียน (หญิง) ═══ -->
-    <div class="pcard">
-      <div class="pcard-photo">
-        <img src="assets/president-female.png" alt="เบนาซี ดาราโจ๊ะ">
-        <div class="photo-label">President · 2568</div>
-      </div>
-      <div class="pcard-info">
-        <div class="pcard-role">ประธานนักเรียน (หญิง) — President</div>
-        <h2 class="pcard-name-th">เบนาซี ดาราโจ๊ะ</h2>
-        <div class="pcard-name-en">Baenasee Darajoh</div>
-
-        <div class="pcard-details">
-          <div class="pd-item">
-            <div class="pd-label">ตำแหน่ง</div>
-            <div class="pd-value">ประธานนักเรียน</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ระดับชั้น</div>
-            <div class="pd-value">ม.6 / Intan</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ปีการศึกษา</div>
-            <div class="pd-value">2568</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">สังกัด</div>
-            <div class="pd-value">สภานักเรียน</div>
-          </div>
-        </div>
-
-        <div class="pcard-motto">
-          <div class="pm-label">คติประจำใจ</div>
-          <div class="pm-sig">
-            อย่าหยุดฝัน
-            <!-- Unique flourish #4: elegant feminine swirl -->
-            <svg class="pm-flourish" viewBox="0 0 200 40" width="200" height="40" xmlns="http://www.w3.org/2000/svg">
-              <defs><linearGradient id="fl4" x1="0%" x2="100%"><stop offset="0%" stop-color="#f472b6"/><stop offset="50%" stop-color="#e83a75"/><stop offset="100%" stop-color="#a855f7"/></linearGradient></defs>
-              <!-- Main flowing curve -->
-              <path d="M8,22 C30,6 55,4 80,16 S130,26 160,14 Q180,8 194,18" stroke="url(#fl4)" stroke-width="2" style="--len:350"/>
-              <!-- Petal loop at start -->
-              <path d="M8,22 C2,14 0,6 8,8 C16,10 14,20 8,22" stroke="url(#fl4)" stroke-width="1.4" style="--len:60"/>
-              <!-- Small curl at end -->
-              <path d="M194,18 C200,14 202,20 196,24 C192,26 190,22 194,18" stroke="url(#fl4)" stroke-width="1.4" style="--len:40"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard-divider"><hr></div>
-
-    <!-- ═══ เพิ่มสมาชิกหญิงตรงนี้ ═══ -->
-
-    <!-- ═══ เลขานุการ (หญิง) ═══ -->
-    <div class="pcard">
-      <div class="pcard-photo">
-        <img src="assets/secretary-female.png" alt="นูรฟิสรี เหตุหาก">
-        <div class="photo-label">Secretary · 2568</div>
-      </div>
-      <div class="pcard-info">
-        <div class="pcard-role">เลขานุการ — Secretary</div>
-        <h2 class="pcard-name-th">นูรฟิสรี เหตุหาก</h2>
-        <div class="pcard-name-en">Nurfisri Headhak</div>
-
-        <div class="pcard-details">
-          <div class="pd-item">
-            <div class="pd-label">ตำแหน่ง</div>
-            <div class="pd-value">เลขานุการ</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ระดับชั้น</div>
-            <div class="pd-value">ม.6 / Amber</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">ปีการศึกษา</div>
-            <div class="pd-value">2568</div>
-          </div>
-          <div class="pd-item">
-            <div class="pd-label">สังกัด</div>
-            <div class="pd-value">สภานักเรียน</div>
-          </div>
-        </div>
-
-        <div class="pcard-motto">
-          <div class="pm-label">คติประจำใจ</div>
-          <div class="pm-sig">
-            ความพยายามไม่เคยทำร้ายใคร
-            <!-- Unique flourish #5: ascending wave with rising stars -->
-            <svg class="pm-flourish" viewBox="0 0 300 40" width="300" height="40" xmlns="http://www.w3.org/2000/svg">
-              <defs><linearGradient id="fl5" x1="0%" x2="100%"><stop offset="0%" stop-color="#f472b6"/><stop offset="40%" stop-color="#c084fc"/><stop offset="100%" stop-color="#818cf8"/></linearGradient></defs>
-              <!-- Rising main stroke -->
-              <path d="M8,28 C40,28 60,14 90,18 S150,28 190,16 Q240,6 288,10" stroke="url(#fl5)" stroke-width="2" style="--len:400"/>
-              <!-- Opening hook -->
-              <path d="M8,28 C4,34 2,26 6,22 C9,18 12,22 10,26" stroke="url(#fl5)" stroke-width="1.4" style="--len:50"/>
-              <!-- Ascending flourish at end -->
-              <path d="M288,10 C292,6 296,4 292,8 C288,12 290,16 294,12" stroke="url(#fl5)" stroke-width="1.4" style="--len:40"/>
-              <!-- Small accent dot -->
-              <circle cx="155" cy="10" r="2" fill="url(#fl5)" opacity="0.6"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard-divider"><hr></div>
-
-    <!-- ═══ เพิ่มสมาชิกหญิงเพิ่มเติมได้ตรงนี้ ═══ -->
-    </div> <!-- End Female Section -->
 
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-contact-section">
+        <h3>ติดต่อ</h3>
+        <p><i class="ph-fill ph-map-pin" style="color: #f59e0b;"></i> 119 ม.7 ต.นาประดู่ อ.โคกโพธิ์ จ.ปัตตานี 94180</p>
+        <p><i class="ph-fill ph-phone" style="color: #f59e0b;"></i> 08-1599-2978</p>
+        <p><i class="ph-fill ph-envelope" style="color: #f59e0b;"></i> e-office@azizstan.ac.th</p>
+      </div>
+      <div class="footer-bottom">
+        <div>© <span id="year"></span> We Are Azizstan • โรงเรียนมูลนิธิอาซิซสถาน</div>
+        <div class="footer-links">
+          <a id="socialFb" href="https://www.facebook.com/profile.php?id=100022088562742" target="_blank" rel="noopener"><i class="ph ph-facebook-logo"></i> Facebook</a>
+          <a id="socialIg" href="https://www.instagram.com/mppa_aziz?igsi=MXNidWpneTV5MHN0cw==" target="_blank" rel="noopener"><i class="ph ph-instagram-logo"></i> Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="assets/js/app.js?v=1787701351"></script>
   <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ═══════════════════════════════════
+    // DATA — All council members
+    // ═══════════════════════════════════
+    const members = {
+      // ── Male ──
+      'm-president': {
+        photo: 'assets/president.png',
+        role: 'ประธานนักเรียน — President',
+        roleLabel: 'President · 2568',
+        nameTh: 'ฮูซัยฟี เจาะเลาะ',
+        nameEn: 'Husaifee Jehlok',
+        position: 'ประธานนักเรียน',
+        level: 'ม.6 / Al-Khawarizmi',
+        year: '2568',
+        org: 'สภานักเรียน',
+        motto: 'ซื่อสัตย์อย่างจริงใจ',
+        flourish: `<svg class="dm-flourish" viewBox="0 0 280 40" width="280" height="40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="fl1" x1="0%" x2="100%"><stop offset="0%" stop-color="#e83a75"/><stop offset="60%" stop-color="#9333ea"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
+          <path d="M4,22 C16,8 32,6 52,16 C72,26 88,28 108,18 C128,8 148,6 168,14 C188,22 210,26 238,14 C248,10 258,6 268,12" stroke="url(#fl1)" stroke-width="2" style="--len:420"/>
+          <path d="M130,14 C126,4 118,2 114,10 C112,14 116,18 122,16" stroke="url(#fl1)" stroke-width="1.5" style="--len:80"/>
+          <path d="M268,12 C274,16 276,24 270,28 C266,30 262,28 264,24" stroke="url(#fl1)" stroke-width="1.5" style="--len:60"/>
+          <path d="M4,22 C-2,28 -4,20 2,18" stroke="url(#fl1)" stroke-width="1.5" style="--len:30"/>
+        </svg>`
+      },
+      'm-vice': {
+        photo: 'assets/vice-president-male.png',
+        role: 'รองประธานนักเรียน (ชาย) — Vice President',
+        roleLabel: 'Vice President · 2568',
+        nameTh: 'อาเดล มาตัดสา',
+        nameEn: 'Adel Matadsa',
+        position: 'รองประธานนักเรียน',
+        level: 'ม.6 / Intan',
+        year: '2568',
+        org: 'สภานักเรียน',
+        motto: 'ทำงานอย่างจริงจัง',
+        flourish: `<svg class="dm-flourish" viewBox="0 0 260 40" width="260" height="40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="fl2" x1="0%" x2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="50%" stop-color="#e83a75"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs>
+          <path d="M6,20 Q30,4 58,18 Q86,32 114,16 Q142,0 170,18 Q198,34 226,14 L250,10" stroke="url(#fl2)" stroke-width="2" style="--len:400"/>
+          <path d="M6,20 C0,26 -6,24 -2,18 C0,14 6,14 8,18" stroke="url(#fl2)" stroke-width="1.5" style="--len:50"/>
+          <path d="M250,10 C256,6 260,10 256,16 C254,18 250,16 250,12" stroke="url(#fl2)" stroke-width="1.5" style="--len:50"/>
+        </svg>`
+      },
+      'm-secretary': {
+        photo: 'assets/secretary.png',
+        role: 'เลขานุการ — Secretary',
+        roleLabel: 'Secretary · 2568',
+        nameTh: 'ซีรอจณ์ หัจญีซิดดิก',
+        nameEn: 'Zerodge Hajjisidik',
+        position: 'เลขานุการ',
+        level: 'ม.6 / Amber',
+        year: '2568',
+        org: 'สภานักเรียน',
+        motto: 'เรียนให้สนุก ทำสิ่งที่ชอบ',
+        flourish: `<svg class="dm-flourish" viewBox="0 0 280 40" width="280" height="40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="fl3" x1="0%" x2="100%"><stop offset="0%" stop-color="#10b981"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+          <path d="M10,22 Q50,40 100,20 T190,20 T270,16" stroke="url(#fl3)" stroke-width="2" style="--len:300"/>
+          <path d="M10,22 C5,26 5,16 10,12" stroke="url(#fl3)" stroke-width="1.5" style="--len:20"/>
+          <path d="M260,8 L275,22" stroke="url(#fl3)" stroke-width="1.5" style="--len:30"/>
+          <path d="M260,22 L275,8" stroke="url(#fl3)" stroke-width="1.5" style="--len:30"/>
+        </svg>`
+      },
+
+      // ── Female ──
+      'f-president': {
+        photo: 'assets/president-female.png',
+        role: 'ประธานนักเรียน (หญิง) — President',
+        roleLabel: 'President · 2568',
+        nameTh: 'เบนาซี ดาราโจ๊ะ',
+        nameEn: 'Baenasee Darajoh',
+        position: 'ประธานนักเรียน',
+        level: 'ม.6 / Intan',
+        year: '2568',
+        org: 'สภานักเรียน',
+        motto: 'อย่าหยุดฝัน',
+        flourish: `<svg class="dm-flourish" viewBox="0 0 200 40" width="200" height="40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="fl4" x1="0%" x2="100%"><stop offset="0%" stop-color="#f472b6"/><stop offset="50%" stop-color="#e83a75"/><stop offset="100%" stop-color="#a855f7"/></linearGradient></defs>
+          <path d="M8,22 C30,6 55,4 80,16 S130,26 160,14 Q180,8 194,18" stroke="url(#fl4)" stroke-width="2" style="--len:350"/>
+          <path d="M8,22 C2,14 0,6 8,8 C16,10 14,20 8,22" stroke="url(#fl4)" stroke-width="1.4" style="--len:60"/>
+          <path d="M194,18 C200,14 202,20 196,24 C192,26 190,22 194,18" stroke="url(#fl4)" stroke-width="1.4" style="--len:40"/>
+        </svg>`
+      },
+      'f-secretary': {
+        photo: 'assets/secretary-female.png',
+        role: 'เลขานุการ — Secretary',
+        roleLabel: 'Secretary · 2568',
+        nameTh: 'นูรฟิสรี เหตุหาก',
+        nameEn: 'Nurfisri Headhak',
+        position: 'เลขานุการ',
+        level: 'ม.6 / Amber',
+        year: '2568',
+        org: 'สภานักเรียน',
+        motto: 'ความพยายามไม่เคยทำร้ายใคร',
+        flourish: `<svg class="dm-flourish" viewBox="0 0 300 40" width="300" height="40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="fl5" x1="0%" x2="100%"><stop offset="0%" stop-color="#f472b6"/><stop offset="40%" stop-color="#c084fc"/><stop offset="100%" stop-color="#818cf8"/></linearGradient></defs>
+          <path d="M8,28 C40,28 60,14 90,18 S150,28 190,16 Q240,6 288,10" stroke="url(#fl5)" stroke-width="2" style="--len:400"/>
+          <path d="M8,28 C4,34 2,26 6,22 C9,18 12,22 10,26" stroke="url(#fl5)" stroke-width="1.4" style="--len:50"/>
+          <path d="M288,10 C292,6 296,4 292,8 C288,12 290,16 294,12" stroke="url(#fl5)" stroke-width="1.4" style="--len:40"/>
+          <circle cx="155" cy="10" r="2" fill="url(#fl5)" opacity="0.6"/>
+        </svg>`
+      }
+    };
+
+    // ═══════════════════════════════════
+    // VIEW SWITCHING LOGIC
+    // ═══════════════════════════════════
+    let currentGender = 'male';
+
     function switchGender(gender) {
+      currentGender = gender;
       const male   = document.getElementById('male-section');
       const female = document.getElementById('female-section');
-      const btnM   = document.getElementById('btn-male');
-      const btnF   = document.getElementById('btn-female');
-      const ind    = document.getElementById('gt-indicator');
 
       if (gender === 'male') {
         female.classList.add('hidden');
         male.classList.remove('hidden');
-        btnM.classList.add('active');
-        btnF.classList.remove('active');
-        ind.style.transform = 'translateY(0)';
       } else {
         male.classList.add('hidden');
         female.classList.remove('hidden');
-        btnF.classList.add('active');
-        btnM.classList.remove('active');
-        ind.style.transform = 'translateY(calc(100% + 4px))';
       }
+
+      // Update tab active state
+      document.querySelectorAll('.gender-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.gender === gender);
+      });
+
+      // Go back to grid if in detail view
+      backToGrid();
+    }
+
+    function showDetail(id) {
+      const m = members[id];
+      if (!m) return;
+
+      const gridView   = document.getElementById('grid-view');
+      const detailView = document.getElementById('detail-view');
+      const content    = document.getElementById('detail-content');
+      const tabs       = document.getElementById('gender-tabs');
+
+      content.innerHTML = `
+        <div class="detail-card">
+          <div class="detail-photo">
+            <img src="${m.photo}" alt="${m.nameTh}">
+            <div class="photo-label">${m.roleLabel}</div>
+          </div>
+          <div class="detail-info">
+            <div class="detail-role">${m.role}</div>
+            <h2 class="detail-name-th">${m.nameTh}</h2>
+            <div class="detail-name-en">${m.nameEn}</div>
+
+            <div class="detail-grid">
+              <div class="dg-item">
+                <div class="dg-label">ตำแหน่ง</div>
+                <div class="dg-value">${m.position}</div>
+              </div>
+              <div class="dg-item">
+                <div class="dg-label">ระดับชั้น</div>
+                <div class="dg-value">${m.level}</div>
+              </div>
+              <div class="dg-item">
+                <div class="dg-label">ปีการศึกษา</div>
+                <div class="dg-value">${m.year}</div>
+              </div>
+              <div class="dg-item">
+                <div class="dg-label">สังกัด</div>
+                <div class="dg-value">${m.org}</div>
+              </div>
+            </div>
+
+            <div class="detail-motto">
+              <div class="dm-label">คติประจำใจ</div>
+              <div class="dm-text">${m.motto}</div>
+              ${m.flourish}
+            </div>
+          </div>
+        </div>
+      `;
+
+      gridView.style.display = 'none';
+      tabs.style.display = 'none';
+      detailView.classList.add('active');
+
+      // Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToGrid() {
+      const gridView   = document.getElementById('grid-view');
+      const detailView = document.getElementById('detail-view');
+      const tabs       = document.getElementById('gender-tabs');
+
+      detailView.classList.remove('active');
+      gridView.style.display = '';
+      tabs.style.display = '';
+
+      // Re-trigger animations by re-adding elements
+      document.querySelectorAll('.org-person').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; // force reflow
+        el.style.animation = '';
+      });
     }
   </script>
 </body>
