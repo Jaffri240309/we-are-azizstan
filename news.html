@@ -503,5 +503,13 @@
   </footer>
 
   <script src="assets/js/app.js?v=1787701351"></script>
+  <script>
+    SC.renderNewsDetail("#newsDetail");
+    SC.renderNewsList("#newsList");
+
+    document.getElementById("q").addEventListener("input", (e) => {
+      SC.renderNewsList("#newsList", e.target.value);
+    });
+  </script>
 </body>
 </html>

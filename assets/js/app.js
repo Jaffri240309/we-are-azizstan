@@ -5,6 +5,12 @@ const SC = (() => {
     return res.json();
   }
 
+  function getNewsArray(data) {
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.news)) return data.news;
+    return [];
+  }
+
   function escapeHtml(s) {
     return String(s ?? "")
       .replaceAll("&", "&amp;")
@@ -91,7 +97,8 @@ const SC = (() => {
     const el = qs(selector);
     if (!el) return;
     try {
-      const items = await getJSON("data/news.json");
+      const raw = await getJSON("data/news.json");
+      const items = getNewsArray(raw);
       items.sort((a,b) => (b.date||"").localeCompare(a.date||""));
       el.innerHTML = items.slice(0, limit).map(newsCard).join("");
     } catch (e) {
@@ -104,7 +111,8 @@ const SC = (() => {
     if (!el) return;
     const q = query.trim().toLowerCase();
     try {
-      const items = await getJSON("data/news.json");
+      const raw = await getJSON("data/news.json");
+      const items = getNewsArray(raw);
       items.sort((a,b) => (b.date||"").localeCompare(a.date||""));
       const filtered = !q ? items : items.filter(it => {
         const hay = [
@@ -124,7 +132,8 @@ const SC = (() => {
     if (!el) return;
     const id = getParam("id");
     try {
-      const items = await getJSON("data/news.json");
+      const raw = await getJSON("data/news.json");
+      const items = getNewsArray(raw);
       const item = items.find(x => x.id === id) || items.sort((a,b)=> (b.date||"").localeCompare(a.date||""))[0];
       el.innerHTML = newsDetail(item);
     } catch (e) {
