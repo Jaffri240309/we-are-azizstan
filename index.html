@@ -172,14 +172,6 @@
       </div>
 
       <div id="bannerGrid" class="banner-grid">
-        <a class="banner" href="news.html" title="งานเมาลิดนบีมูฮัมมัด ﷺ" style="background-image: url('assets/mawlid-nabi-2026.jpg');">
-          <div class="banner-overlay"></div>
-          <div class="banner-meta">
-            <span class="pill pill-primary"><i class="ph-fill ph-star"></i> กิจกรรมศาสนา</span>
-            <div class="banner-title">งานเมาลิดนบีมูฮัมมัด ﷺ ประจำปี 2569</div>
-            <div class="banner-date">30 สิงหาคม 2569</div>
-          </div>
-        </a>
       </div>
     </section>
 
@@ -191,16 +183,6 @@
       </div>
 
       <div id="latestNews" class="grid">
-        <!-- ข่าวเมาลิด -->
-        <a class="card card-news" href="news.html">
-          <div class="card-img" style="background-image: url('assets/mawlid-nabi-2026.jpg'); background-size: cover; background-position: center;"></div>
-          <div class="meta">
-            <span class="pill" style="background: rgba(13,115,119,0.1); color: #0d7377;">กิจกรรมศาสนา</span>
-            <span>30 ส.ค. 2569</span>
-          </div>
-          <h3>งานเมาลิดนบีมูฮัมมัด ﷺ ประจำปี 2569</h3>
-          <p>รำลึกการประสูติของท่านนบีมูฮัมมัด ﷺ ณ โรงยิมอาซิซสถาน พร้อมกิจกรรมเศาะละวาต และบรรยายศาสนา</p>
-        </a>
       </div>
     </section>
   </main>
@@ -213,11 +195,13 @@
     // ====== ตั้งค่าทั่วไป ======
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ====== โหลด Announce Bar จาก data/news.json ======
-    async function loadAnnounce(){
+    // ====== โหลดข้อมูลหน้าแรกจาก data/news.json ======
+    async function loadHomeData(){
       try{
         const res = await fetch("data/news.json", { cache: "no-store" });
         const data = await res.json();
+        
+        // 1. Announce Bar
         const announce = Array.isArray(data) ? null : (data.announce || null);
         if(announce && announce.text){
           const box = document.getElementById("announce");
@@ -227,16 +211,22 @@
           if(announce.link) link.href = announce.link;
           box.style.display = "block";
         }
+
+        // 2. Banners
+        const banners = Array.isArray(data) ? null : (data.banners || null);
+        if(banners && banners.length > 0){
+          renderBanners(banners);
+        } else {
+          document.getElementById("bannerGrid").style.display = "none";
+        }
+
+        // 3. Latest News (ดึงข่าว 3 ชิ้นล่าสุด)
+        const newsItems = Array.isArray(data) ? data : (data.news || []);
+        renderLatestNews(newsItems, 3);
+        
       }catch(e){
         console.warn("โหลด data/news.json ไม่สำเร็จ", e);
       }
-    }
-    loadAnnounce();
-  </script>("announceText");
-      const link = document.getElementById("announceLink");
-      txt.textContent = announce.text;
-      if(announce.link) link.href = announce.link;
-      box.style.display = "block";
     }
 
     function el(tag, cls){
@@ -259,11 +249,11 @@
         const a = el("a", "banner");
         a.href = it.link || "projects.html";
         a.title = it.title || "กิจกรรม";
-        a.style.backgroundImage = it.image ? \`url('\${it.image}')\` : "none";
+        a.style.backgroundImage = it.image ? `url('${it.image}')` : "none";
 
         const overlay = el("div","banner-overlay");
         const meta = el("div","banner-meta");
-
+        
         const pill = el("span","pill pill-primary");
         pill.innerHTML = "<i class='ph-fill ph-star'></i> กิจกรรม";
         const h = el("div","banner-title");
@@ -291,7 +281,7 @@
         a.href = it.link || "news.html";
 
         const img = el("div","card-img");
-        if(it.image) img.style.backgroundImage = \`url('\${it.image}')\`;
+        if(it.image) img.style.backgroundImage = `url('${it.image}')`;
 
         const meta = el("div","meta");
         const pill = el("span","pill");
