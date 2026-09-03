@@ -3,9 +3,369 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>โครงการ | We Are Azizstan</title>
-  <link rel="stylesheet" href="/style.css?v=1787703023" />
+  <title>บันทึกกิจกรรม | We Are Azizstan</title>
+  <meta name="description" content="บันทึกกิจกรรมทั้งหมดที่จัดขึ้นโดยสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน" />
+  <link rel="stylesheet" href="style.css?v=1787703023" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    /* ====== Page Header ====== */
+    .page-header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+    }
+
+    .page-header-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0d7377, #14b8a6);
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 25px -5px rgba(13, 115, 119, 0.35);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--c-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      color: var(--c-text-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ====== Filter Buttons ====== */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1px solid var(--c-border);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      color: var(--c-text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--c-primary);
+      color: var(--c-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--c-primary);
+      color: white;
+      border-color: var(--c-primary);
+      box-shadow: 0 4px 12px -2px rgba(232, 58, 117, 0.3);
+    }
+
+    .filter-btn.active-green {
+      background: linear-gradient(135deg, #0d7377, #14b8a6);
+      color: white;
+      border-color: #0d7377;
+      box-shadow: 0 4px 12px -2px rgba(13, 115, 119, 0.3);
+    }
+
+    /* ====== Timeline ====== */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #14b8a6, var(--c-primary), #818cf8);
+      border-radius: 3px;
+    }
+
+    /* ====== Timeline Item ====== */
+    .timeline-item {
+      position: relative;
+      padding-left: 70px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+
+    /* Timeline Dot */
+    .timeline-dot {
+      position: absolute;
+      left: 18px;
+      top: 2rem;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 0 0 3px #14b8a6, 0 4px 12px rgba(13, 115, 119, 0.3);
+      z-index: 2;
+    }
+
+    .timeline-dot.green { background: #14b8a6; box-shadow: 0 0 0 3px #14b8a6, 0 4px 12px rgba(13, 115, 119, 0.3); }
+    .timeline-dot.pink { background: var(--c-primary); box-shadow: 0 0 0 3px var(--c-primary), 0 4px 12px rgba(232, 58, 117, 0.3); }
+    .timeline-dot.blue { background: #6366f1; box-shadow: 0 0 0 3px #6366f1, 0 4px 12px rgba(99, 102, 241, 0.3); }
+
+    .timeline-dot.featured {
+      width: 32px;
+      height: 32px;
+      left: 15px;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 3px #14b8a6, 0 4px 12px rgba(13, 115, 119, 0.3); }
+      50% { box-shadow: 0 0 0 3px #14b8a6, 0 0 20px rgba(13, 115, 119, 0.5); }
+    }
+
+    /* ====== Timeline Card ====== */
+    .timeline-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--c-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-card.featured {
+      border-color: rgba(13, 115, 119, 0.2);
+      box-shadow: 0 8px 30px -5px rgba(13, 115, 119, 0.15);
+    }
+
+    /* Card Image */
+    .timeline-card-img {
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .timeline-card-img.small {
+      height: 160px;
+    }
+
+    .timeline-card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 60%);
+    }
+
+    .timeline-card-img-placeholder {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    .timeline-card-img-placeholder.pink-bg {
+      background: linear-gradient(135deg, #fce8f0, #fbd5e4);
+      color: var(--c-primary);
+    }
+
+    .timeline-card-img-placeholder.blue-bg {
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      color: #6366f1;
+    }
+
+    /* Card Body */
+    .timeline-card-body {
+      padding: 1.5rem;
+    }
+
+    .timeline-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .category-pill.green {
+      background: rgba(13, 115, 119, 0.1);
+      color: #0d7377;
+    }
+
+    .category-pill.pink {
+      background: var(--c-primary-light);
+      color: var(--c-primary);
+    }
+
+    .category-pill.blue {
+      background: rgba(99, 102, 241, 0.1);
+      color: #6366f1;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+
+    .timeline-date {
+      font-size: 0.82rem;
+      color: var(--c-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timeline-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--c-text);
+    }
+
+    .timeline-card.featured h3 {
+      font-size: 1.5rem;
+      color: #0d7377;
+    }
+
+    .timeline-card p {
+      font-size: 0.92rem;
+      color: var(--c-text-muted);
+      line-height: 1.7;
+    }
+
+    .timeline-card-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--c-text-muted);
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--c-border);
+    }
+
+    .timeline-card-location i {
+      color: var(--c-primary);
+    }
+
+    .read-more-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #0d7377;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      transition: gap 0.3s ease;
+    }
+
+    .read-more-link:hover {
+      gap: 10px;
+    }
+
+    /* ====== Stats Footer ====== */
+    .stats-section {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid var(--c-border);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--c-primary);
+    }
+
+    .stat-number.green { color: #0d7377; }
+    .stat-number.blue { color: #6366f1; }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--c-text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ====== Animations ====== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 768px) {
+      .timeline::before { left: 20px; }
+      .timeline-item { padding-left: 55px; }
+      .timeline-dot { left: 8px; width: 22px; height: 22px; }
+      .timeline-dot.featured { width: 26px; height: 26px; left: 6px; }
+      .timeline-card-img { height: 180px; }
+      .timeline-card h3 { font-size: 1.1rem; }
+      .timeline-card.featured h3 { font-size: 1.25rem; }
+      .stats-section { gap: 1.5rem; flex-wrap: wrap; }
+      .filter-bar { gap: 0.3rem; }
+      .filter-btn { padding: 6px 14px; font-size: 0.8rem; }
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -48,14 +408,133 @@
     </div>
   </div>
 
+  <main class="container page" style="padding-bottom: 3rem;">
 
-  <main class="container page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center;">
-    <i class="ph ph-file-dashed" style="font-size: 6rem; color: var(--c-primary); margin-bottom: 1rem; opacity: 0.8;"></i>
-    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--c-text);">404</h1>
-    <p style="font-size: 1.2rem; color: var(--c-text); opacity: 0.7; margin-bottom: 2rem;">ยังไม่มีอัพเดทจากแอดมิน</p>
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--c-primary); color: white; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 500; box-shadow: 0 4px 15px rgba(232,58,117,0.3);">
-      <i class="ph ph-house"></i> กลับสู่หน้าหลัก
-    </a>
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header-icon">
+        <i class="ph-fill ph-calendar-star"></i>
+      </div>
+      <h1>บันทึกกิจกรรม</h1>
+      <p>รวมกิจกรรมทั้งหมดที่จัดขึ้นโดยสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterTimeline('all', this)">ทั้งหมด</button>
+      <button class="filter-btn" onclick="filterTimeline('ศาสนา', this)">🕌 กิจกรรมศาสนา</button>
+      <button class="filter-btn" onclick="filterTimeline('ทั่วไป', this)">📋 กิจกรรมทั่วไป</button>
+      <button class="filter-btn" onclick="filterTimeline('กีฬา', this)">⚽ กีฬา</button>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline" id="timeline">
+
+      <!-- 1. งานเมาลิดนบี (Featured) -->
+      <div class="timeline-item" data-category="ศาสนา">
+        <div class="timeline-dot green featured"></div>
+        <div class="timeline-card featured">
+          <div class="timeline-card-img" style="background-image: url('assets/mawlid-nabi-2026.jpg');">
+            <div class="timeline-card-img-overlay"></div>
+          </div>
+          <div class="timeline-card-body">
+            <div class="timeline-card-meta">
+              <span class="category-pill green"><i class="ph-fill ph-mosque"></i> กิจกรรมศาสนา</span>
+              <span class="status-badge">✅ จัดงานเรียบร้อยแล้ว</span>
+            </div>
+            <div class="timeline-date">
+              <i class="ph ph-calendar"></i> 30 สิงหาคม 2569
+            </div>
+            <h3>งานเมาลิดนบีมูฮัมมัด ﷺ</h3>
+            <p>
+              งานรำลึกการประสูติของท่านนบีมูฮัมมัด ﷺ จัดขึ้นเพื่อเสริมสร้างความรักต่อท่านศาสดาและส่งเสริมค่านิยมอิสลามอันดีงาม
+              มีกิจกรรมอ่านเศาะละวาต บรรยายศาสนา (คุฏบะฮ์) เกี่ยวกับซีเราะฮ์ (ประวัติชีวิต) ของท่านนบี ﷺ และแจกอาหารขนม
+            </p>
+            <div class="timeline-card-location">
+              <i class="ph-fill ph-map-pin"></i>
+              <span>โรงยิมโรงเรียนมูลนิธิอาซิซสถาน</span>
+            </div>
+            <a href="news.html" class="read-more-link">
+              อ่านรายละเอียด <i class="ph ph-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ปฐมนิเทศนักเรียนใหม่ -->
+      <div class="timeline-item" data-category="ทั่วไป">
+        <div class="timeline-dot pink"></div>
+        <div class="timeline-card">
+          <div class="timeline-card-img-placeholder pink-bg">
+            <i class="ph ph-graduation-cap"></i>
+          </div>
+          <div class="timeline-card-body">
+            <div class="timeline-card-meta">
+              <span class="category-pill pink"><i class="ph-fill ph-star"></i> กิจกรรมทั่วไป</span>
+              <span class="status-badge">✅ จัดงานเรียบร้อยแล้ว</span>
+            </div>
+            <div class="timeline-date">
+              <i class="ph ph-calendar"></i> 15 มิถุนายน 2569
+            </div>
+            <h3>กิจกรรมปฐมนิเทศนักเรียนใหม่</h3>
+            <p>
+              ต้อนรับนักเรียนใหม่ประจำปีการศึกษา 2569 พร้อมแนะนำระเบียบโรงเรียน แนะนำสภานักเรียน
+              และกิจกรรมสันทนาการเพื่อสร้างความสัมพันธ์ระหว่างรุ่นพี่รุ่นน้อง
+            </p>
+            <div class="timeline-card-location">
+              <i class="ph-fill ph-map-pin"></i>
+              <span>หอประชุมโรงเรียนมูลนิธิอาซิซสถาน</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. กิจกรรมกีฬาสีภายใน -->
+      <div class="timeline-item" data-category="กีฬา">
+        <div class="timeline-dot blue"></div>
+        <div class="timeline-card">
+          <div class="timeline-card-img-placeholder blue-bg">
+            <i class="ph ph-trophy"></i>
+          </div>
+          <div class="timeline-card-body">
+            <div class="timeline-card-meta">
+              <span class="category-pill blue"><i class="ph-fill ph-trophy"></i> กีฬา</span>
+              <span class="status-badge">✅ จัดงานเรียบร้อยแล้ว</span>
+            </div>
+            <div class="timeline-date">
+              <i class="ph ph-calendar"></i> 20 พฤษภาคม 2569
+            </div>
+            <h3>กิจกรรมกีฬาสีภายใน</h3>
+            <p>
+              การแข่งขันกีฬาสีประจำปี เสริมสร้างความสามัคคีในหมู่นักเรียน
+              มีการแข่งขันฟุตบอล วอลเลย์บอล วิ่ง และกรีฑา พร้อมกิจกรรมเชียร์ลีดเดอร์
+            </p>
+            <div class="timeline-card-location">
+              <i class="ph-fill ph-map-pin"></i>
+              <span>สนามกีฬาโรงเรียนมูลนิธิอาซิซสถาน</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-section" style="animation: fadeInUp 0.6s ease 0.7s both;">
+      <div class="stat-item">
+        <div class="stat-number green">3</div>
+        <div class="stat-label">กิจกรรมทั้งหมด</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">กิจกรรมศาสนา</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number blue">1</div>
+        <div class="stat-label">กีฬา</div>
+      </div>
+    </div>
+
   </main>
 
   <footer class="footer">
@@ -63,5 +542,32 @@
   </footer>
 
   <script src="assets/js/app.js?v=1787701351"></script>
+  <script>
+    // Year
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Filter Timeline
+    function filterTimeline(category, btn) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'active-green'));
+      if (category === 'ศาสนา') {
+        btn.classList.add('active-green');
+      } else {
+        btn.classList.add('active');
+      }
+
+      // Filter items
+      const items = document.querySelectorAll('.timeline-item');
+      items.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = '';
+          item.style.animation = 'fadeInUp 0.5s ease forwards';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>

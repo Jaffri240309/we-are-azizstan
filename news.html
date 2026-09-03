@@ -4,8 +4,446 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ข่าวสาร | We Are Azizstan</title>
-  <link rel="stylesheet" href="/style.css?v=1787703023" />
+  <meta name="description" content="ข่าวสารและกิจกรรมล่าสุดจากสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน - งานเมาลิดนบีมูฮัมมัด ﷺ" />
+  <link rel="stylesheet" href="style.css?v=1787703023" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    /* ====== Islamic Geometric Pattern ====== */
+    .islamic-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(13,115,119,0.3) 40px, rgba(13,115,119,0.3) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(13,115,119,0.3) 40px, rgba(13,115,119,0.3) 41px),
+        repeating-linear-gradient(45deg, transparent, transparent 28px, rgba(20,184,166,0.2) 28px, rgba(20,184,166,0.2) 29px),
+        repeating-linear-gradient(-45deg, transparent, transparent 28px, rgba(20,184,166,0.2) 28px, rgba(20,184,166,0.2) 29px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ====== Featured Article Hero ====== */
+    .featured-hero {
+      position: relative;
+      min-height: 520px;
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 60px -15px rgba(13, 115, 119, 0.3);
+    }
+
+    .featured-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    .featured-hero:hover .featured-hero-bg {
+      transform: scale(1.03);
+    }
+
+    .featured-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13, 115, 119, 0.92) 0%,
+        rgba(6, 78, 82, 0.88) 40%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 1;
+    }
+
+    .featured-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 520px;
+      color: white;
+    }
+
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(20, 184, 166, 0.3);
+      border: 1px solid rgba(20, 184, 166, 0.5);
+      color: #5eead4;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      width: fit-content;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .featured-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .featured-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .featured-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .featured-meta-item i {
+      font-size: 1.1rem;
+      color: #5eead4;
+    }
+
+    /* ====== Crescent Moon Decoration ====== */
+    .crescent-decoration {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 80px;
+      height: 80px;
+      z-index: 2;
+      opacity: 0.15;
+    }
+
+    .crescent-decoration::before {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #fbbf24;
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+    }
+
+    .crescent-decoration::after {
+      content: '';
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: rgba(13, 115, 119, 0.95);
+      top: -5px;
+      left: 15px;
+    }
+
+    .star-deco {
+      position: absolute;
+      top: 1.5rem;
+      right: 5.5rem;
+      color: #fbbf24;
+      font-size: 1.2rem;
+      z-index: 2;
+      opacity: 0.2;
+    }
+
+    /* ====== Article Body ====== */
+    .article-body {
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    .article-section {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(13, 115, 119, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .article-section:nth-child(2) { animation-delay: 0.1s; }
+    .article-section:nth-child(3) { animation-delay: 0.2s; }
+    .article-section:nth-child(4) { animation-delay: 0.3s; }
+    .article-section:nth-child(5) { animation-delay: 0.4s; }
+
+    .article-section h2 {
+      font-size: 1.3rem;
+      color: #0d7377;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .article-section h2 i {
+      color: #14b8a6;
+    }
+
+    .article-section p {
+      color: var(--c-text);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    /* ====== Quran Verse ====== */
+    .quran-verse {
+      background: linear-gradient(135deg, #f0fdfa 0%, #e6fffa 100%);
+      border: 1px solid rgba(13, 115, 119, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .arabic-text {
+      font-family: 'Traditional Arabic', 'Amiri', 'Noto Naskh Arabic', serif;
+      font-size: 1.6rem;
+      direction: rtl;
+      color: #0d7377;
+      line-height: 2.2;
+      margin-bottom: 1rem;
+    }
+
+    .verse-ref {
+      font-size: 0.85rem;
+      color: var(--c-text-muted);
+      font-style: italic;
+    }
+
+    .verse-meaning {
+      font-size: 0.95rem;
+      color: #115e59;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(13,115,119,0.1);
+    }
+
+    /* ====== Hadith Block ====== */
+    .hadith-block {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border-left: 4px solid #f59e0b;
+      border-radius: 0 16px 16px 0;
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .hadith-block .hadith-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #b45309;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hadith-block .hadith-text {
+      font-size: 1rem;
+      color: #78350f;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .hadith-block .hadith-source {
+      font-size: 0.8rem;
+      color: #92400e;
+      margin-top: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ====== Activities List ====== */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem;
+      background: rgba(13, 115, 119, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(13, 115, 119, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .activity-item:hover {
+      background: rgba(13, 115, 119, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .activity-item i {
+      font-size: 1.5rem;
+      color: #0d7377;
+    }
+
+    .activity-item span {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* ====== Other News Section ====== */
+    .other-news-section {
+      margin: 3rem 0;
+    }
+
+    .other-news-section .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .other-news-section .section-head h2 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .other-news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .news-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--c-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -8px rgba(0,0,0,0.12);
+      border-color: var(--c-primary);
+    }
+
+    .news-card-img {
+      height: 180px;
+      background: linear-gradient(135deg, var(--c-primary-light), #e0e7ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .news-card-img i {
+      font-size: 3rem;
+      color: var(--c-primary);
+      opacity: 0.5;
+    }
+
+    .news-card-body {
+      padding: 1.5rem;
+    }
+
+    .news-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.8rem;
+    }
+
+    .news-card-meta .pill {
+      background: var(--c-primary-light);
+      color: var(--c-primary);
+      font-size: 0.7rem;
+    }
+
+    .news-card-meta .date {
+      font-size: 0.8rem;
+      color: var(--c-text-muted);
+    }
+
+    .news-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .news-card p {
+      font-size: 0.9rem;
+      color: var(--c-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ====== Poster Image Section ====== */
+    .poster-section {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .poster-section img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px -10px rgba(13, 115, 119, 0.25);
+      margin: 0 auto;
+    }
+
+    .poster-caption {
+      font-size: 0.85rem;
+      color: var(--c-text-muted);
+      margin-top: 1rem;
+    }
+
+    /* ====== Animations ====== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { opacity: 0.1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 0.1; }
+    }
+
+    .crescent-decoration { animation: shimmer 4s ease-in-out infinite; }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 768px) {
+      .featured-hero { min-height: 400px; border-radius: 16px; }
+      .featured-hero-content { padding: 1.5rem; min-height: 400px; }
+      .featured-title { font-size: 1.5rem; }
+      .featured-meta { gap: 0.8rem; font-size: 0.85rem; }
+      .article-section { padding: 1.5rem; }
+      .arabic-text { font-size: 1.3rem; }
+      .crescent-decoration { width: 50px; height: 50px; }
+      .crescent-decoration::before { width: 50px; height: 50px; }
+      .crescent-decoration::after { width: 40px; height: 40px; left: 10px; }
+      .star-deco { right: 4rem; }
+      .other-news-grid { grid-template-columns: 1fr; }
+      .activities-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -48,14 +486,167 @@
     </div>
   </div>
 
+  <main class="container page" style="padding-top: 2rem; padding-bottom: 3rem;">
 
-  <main class="container page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center;">
-    <i class="ph ph-file-dashed" style="font-size: 6rem; color: var(--c-primary); margin-bottom: 1rem; opacity: 0.8;"></i>
-    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--c-text);">404</h1>
-    <p style="font-size: 1.2rem; color: var(--c-text); opacity: 0.7; margin-bottom: 2rem;">ยังไม่มีอัพเดทจากแอดมิน</p>
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--c-primary); color: white; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 500; box-shadow: 0 4px 15px rgba(232,58,117,0.3);">
-      <i class="ph ph-house"></i> กลับสู่หน้าหลัก
-    </a>
+    <!-- ====== Featured Article: Mawlid Nabi ====== -->
+    <article class="featured-hero" style="animation: fadeInUp 0.8s ease both;">
+      <div class="featured-hero-bg" style="background-image: url('assets/mawlid-nabi-2026.jpg');"></div>
+      <div class="featured-hero-overlay"></div>
+      <div class="islamic-pattern"></div>
+
+      <!-- Crescent Moon Decoration -->
+      <div class="crescent-decoration"></div>
+      <div class="star-deco">✦</div>
+
+      <div class="featured-hero-content">
+        <div class="featured-badge">
+          <i class="ph-fill ph-mosque"></i> กิจกรรมศาสนา
+        </div>
+        <h1 class="featured-title">งานเมาลิดนบีมูฮัมมัด ﷺ<br>ประจำปี 2569</h1>
+        <div class="featured-meta">
+          <div class="featured-meta-item">
+            <i class="ph-fill ph-calendar"></i>
+            <span>30 สิงหาคม 2569</span>
+          </div>
+          <div class="featured-meta-item">
+            <i class="ph-fill ph-map-pin"></i>
+            <span>ณ โรงยิมโรงเรียนมูลนิธิอาซิซสถาน</span>
+          </div>
+          <div class="featured-meta-item">
+            <i class="ph-fill ph-users-three"></i>
+            <span>นักเรียน บุคลากร และผู้ปกครอง</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ====== Article Body ====== -->
+    <div class="article-body">
+
+      <!-- วัตถุประสงค์ -->
+      <section class="article-section">
+        <h2><i class="ph-fill ph-target"></i> วัตถุประสงค์</h2>
+        <p>
+          งานเมาลิดนบีจัดขึ้นเพื่อรำลึกถึงการประสูติของท่านนบีมูฮัมมัด ﷺ ศาสดาแห่งอิสลาม
+          เป็นการแสดงความรักและเคารพต่อท่าน ตามที่อัลลอฮ์ ﷻ ตรัสไว้ในอัลกุรอาน
+          งานนี้จัดขึ้นเพื่อเสริมสร้างความรักและความผูกพันต่อท่านนบีมูฮัมมัด ﷺ
+          ในหมู่นักเรียนและบุคลากร ตลอดจนส่งเสริมค่านิยมอิสลามอันดีงามในสถานศึกษา
+        </p>
+
+        <!-- อ้างอิงอายะฮ์ -->
+        <div class="quran-verse">
+          <div class="arabic-text">
+            ﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾
+          </div>
+          <div class="verse-ref">(อัล-อะห์ซาบ: 21)</div>
+          <div class="verse-meaning">
+            "แท้จริงในตัวของท่านเราะสูลุลลอฮ์นั้น มีแบบอย่างอันดีงามสำหรับพวกเจ้า"
+          </div>
+        </div>
+      </section>
+
+      <!-- หะดีษ -->
+      <section class="article-section">
+        <h2><i class="ph-fill ph-book-open-text"></i> หะดีษเกี่ยวกับความรักต่อท่านนบี ﷺ</h2>
+        <div class="hadith-block">
+          <div class="hadith-label">📖 หะดีษ</div>
+          <div class="hadith-text">
+            "ไม่มีผู้ใดในหมู่พวกเจ้าศรัทธาอย่างสมบูรณ์ จนกว่าฉันจะเป็นที่รักของเขายิ่งกว่าบิดามารดา
+            บุตร และมวลมนุษย์ทั้งปวง"
+          </div>
+          <div class="hadith-source">— บันทึกโดย อัล-บุคอรีย์ และมุสลิม</div>
+        </div>
+        <p style="margin-top: 1rem;">
+          หะดีษนี้แสดงให้เห็นถึงความสำคัญของความรักต่อท่านนบี ﷺ ซึ่งเป็นส่วนหนึ่งของอีหม่านที่สมบูรณ์
+          การจัดงานเมาลิดเป็นหนึ่งในวิธีที่เราแสดงออกถึงความรักนี้ผ่านการรำลึกถึงคุณงามความดีของท่าน
+        </p>
+      </section>
+
+      <!-- โปสเตอร์งาน -->
+      <section class="article-section">
+        <h2><i class="ph-fill ph-image"></i> โปสเตอร์งาน</h2>
+        <div class="poster-section">
+          <img src="assets/mawlid-nabi-2026.jpg" alt="โปสเตอร์งานเมาลิดนบี ﷺ ประจำปี 2569" loading="lazy">
+          <p class="poster-caption">โปสเตอร์ประชาสัมพันธ์งานเมาลิดนบี ﷺ ประจำปี 2569 โดย DEPAZ Media</p>
+        </div>
+      </section>
+
+      <!-- กิจกรรมภายในงาน -->
+      <section class="article-section">
+        <h2><i class="ph-fill ph-list-checks"></i> กิจกรรมภายในงาน</h2>
+        <div class="activities-grid">
+          <div class="activity-item">
+            <i class="ph-fill ph-hands-praying"></i>
+            <span>อ่านบทเศาะละวาต</span>
+          </div>
+          <div class="activity-item">
+            <i class="ph-fill ph-microphone-stage"></i>
+            <span>บรรยายศาสนา (คุฏบะฮ์)</span>
+          </div>
+          <div class="activity-item">
+            <i class="ph-fill ph-book-open"></i>
+            <span>ซีเราะฮ์ (ประวัติชีวิต) ของท่านนบี</span>
+          </div>
+          <div class="activity-item">
+            <i class="ph-fill ph-bowl-food"></i>
+            <span>แจกอาหารและขนม</span>
+          </div>
+          <div class="activity-item">
+            <i class="ph-fill ph-heart"></i>
+            <span>ดุอาอ์ (ขอพรจากอัลลอฮ์)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ข้อความปิด -->
+      <section class="article-section" style="background: linear-gradient(135deg, rgba(13,115,119,0.05), rgba(20,184,166,0.05)); border-color: rgba(13,115,119,0.15);">
+        <h2><i class="ph-fill ph-sparkle"></i> สรุป</h2>
+        <p>
+          งานเมาลิดนบีมูฮัมมัด ﷺ ณ โรงยิมโรงเรียนมูลนิธิอาซิซสถาน จัดขึ้นเพื่อเสริมสร้างความรักและความผูกพันต่อท่านนบีมูฮัมมัด ﷺ
+          ในหมู่นักเรียนและบุคลากร ตลอดจนส่งเสริมค่านิยมอิสลามอันดีงามในสถานศึกษา
+          ขอให้อัลลอฮ์ ﷻ ทรงเพิ่มพูนความรักต่อท่านนบี ﷺ ในหัวใจของเราทุกคน อามีน 🤲
+        </p>
+      </section>
+
+    </div>
+
+    <!-- ====== Other News ====== -->
+    <section class="other-news-section">
+      <div class="section-head">
+        <h2><i class="ph-fill ph-article"></i> ข่าวอื่นๆ</h2>
+      </div>
+
+      <div class="other-news-grid">
+        <a class="news-card" href="news.html" style="animation: fadeInUp 0.6s ease 0.5s both;">
+          <div class="news-card-img">
+            <i class="ph ph-globe"></i>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="pill">ประกาศ</span>
+              <span class="date">27 มกราคม 2569</span>
+            </div>
+            <h3>เปิดใช้งานเว็บไซต์สภานักเรียน</h3>
+            <p>เว็บไซต์สภานักเรียนพร้อมใช้งานแล้ว กดปุ่มไปยังแบบฟอร์ม/ข่าวสารได้ทันที</p>
+          </div>
+        </a>
+
+        <a class="news-card" href="projects.html" style="animation: fadeInUp 0.6s ease 0.6s both;">
+          <div class="news-card-img" style="background: linear-gradient(135deg, #f0fdfa, #ccfbf1);">
+            <i class="ph ph-calendar-star" style="color: #0d7377;"></i>
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="pill" style="background: #f0fdfa; color: #0d7377;">กิจกรรม</span>
+              <span class="date">ดูทั้งหมด</span>
+            </div>
+            <h3>บันทึกกิจกรรมทั้งหมด</h3>
+            <p>ดูรายละเอียดกิจกรรมทั้งหมดที่สภานักเรียนจัดขึ้น พร้อมรูปภาพและบันทึก</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -63,14 +654,5 @@
   </footer>
 
   <script src="assets/js/app.js?v=1787701351"></script>
-  <script>
-    // ถ้ามี ?id= จะโชว์รายละเอียดข่าวด้านบน
-    SC.renderNewsDetail("#newsDetail");
-    SC.renderNewsList("#newsList");
-
-    document.getElementById("q").addEventListener("input", (e) => {
-      SC.renderNewsList("#newsList", e.target.value);
-    });
-  </script>
 </body>
 </html>
