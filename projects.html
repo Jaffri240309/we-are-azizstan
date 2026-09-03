@@ -408,133 +408,23 @@
     </div>
   </div>
 
-  <main class="container page" style="padding-bottom: 3rem;">
-
-    <!-- Page Header -->
-    <div class="page-header">
-      <div class="page-header-icon">
-        <i class="ph-fill ph-calendar-star"></i>
-      </div>
-      <h1>บันทึกกิจกรรม</h1>
-      <p>รวมกิจกรรมทั้งหมดที่จัดขึ้นโดยสภานักเรียน โรงเรียนมูลนิธิอาซิซสถาน</p>
+  <main class="container page" style="min-height: 60vh;">
+    <div class="section-head">
+      <h2><i class="ph-fill ph-calendar-star"></i> กิจกรรมและโครงการ</h2>
     </div>
-
-    <!-- Filter Buttons -->
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterTimeline('all', this)">ทั้งหมด</button>
-      <button class="filter-btn" onclick="filterTimeline('ศาสนา', this)">🕌 กิจกรรมศาสนา</button>
-      <button class="filter-btn" onclick="filterTimeline('ทั่วไป', this)">📋 กิจกรรมทั่วไป</button>
-      <button class="filter-btn" onclick="filterTimeline('กีฬา', this)">⚽ กีฬา</button>
-    </div>
-
-    <!-- Timeline -->
-    <div class="timeline" id="timeline">
-
-      <!-- 1. งานเมาลิดนบี (Featured) -->
-      <div class="timeline-item" data-category="ศาสนา">
-        <div class="timeline-dot green featured"></div>
-        <div class="timeline-card featured">
-          <div class="timeline-card-img" style="background-image: url('assets/mawlid-nabi-2026.jpg');">
-            <div class="timeline-card-img-overlay"></div>
-          </div>
-          <div class="timeline-card-body">
-            <div class="timeline-card-meta">
-              <span class="category-pill green"><i class="ph-fill ph-mosque"></i> กิจกรรมศาสนา</span>
-              <span class="status-badge">✅ จัดงานเรียบร้อยแล้ว</span>
-            </div>
-            <div class="timeline-date">
-              <i class="ph ph-calendar"></i> 30 สิงหาคม 2569
-            </div>
-            <h3>งานเมาลิดนบีมูฮัมมัด ﷺ</h3>
-            <p>
-              งานรำลึกการประสูติของท่านนบีมูฮัมมัด ﷺ จัดขึ้นเพื่อเสริมสร้างความรักต่อท่านศาสดาและส่งเสริมค่านิยมอิสลามอันดีงาม
-              มีกิจกรรมอ่านเศาะละวาต บรรยายศาสนา (คุฏบะฮ์) เกี่ยวกับซีเราะฮ์ (ประวัติชีวิต) ของท่านนบี ﷺ และแจกอาหารขนม
-            </p>
-            <div class="timeline-card-location">
-              <i class="ph-fill ph-map-pin"></i>
-              <span>โรงยิมโรงเรียนมูลนิธิอาซิซสถาน</span>
-            </div>
-            <a href="news.html" class="read-more-link">
-              อ่านรายละเอียด <i class="ph ph-arrow-right"></i>
-            </a>
-          </div>
+    
+    <div class="grid">
+      <!-- ข่าวเมาลิด -->
+      <a class="card card-news" href="news.html?id=งานเมาลิดนบีมูฮัมมัด">
+        <div class="card-img" style="background-image: url("assets/mawlid-nabi-2026.jpg"); background-size: cover; background-position: center;"></div>
+        <div class="meta">
+          <span class="pill" style="background: rgba(13,115,119,0.1); color: #0d7377;">กิจกรรมศาสนา</span>
+          <span>30 ส.ค. 2569</span>
         </div>
-      </div>
-
-      <!-- 2. ปฐมนิเทศนักเรียนใหม่ -->
-      <div class="timeline-item" data-category="ทั่วไป">
-        <div class="timeline-dot pink"></div>
-        <div class="timeline-card">
-          <div class="timeline-card-img-placeholder pink-bg">
-            <i class="ph ph-graduation-cap"></i>
-          </div>
-          <div class="timeline-card-body">
-            <div class="timeline-card-meta">
-              <span class="category-pill pink"><i class="ph-fill ph-star"></i> กิจกรรมทั่วไป</span>
-              <span class="status-badge">✅ จัดงานเรียบร้อยแล้ว</span>
-            </div>
-            <div class="timeline-date">
-              <i class="ph ph-calendar"></i> 15 มิถุนายน 2569
-            </div>
-            <h3>กิจกรรมปฐมนิเทศนักเรียนใหม่</h3>
-            <p>
-              ต้อนรับนักเรียนใหม่ประจำปีการศึกษา 2569 พร้อมแนะนำระเบียบโรงเรียน แนะนำสภานักเรียน
-              และกิจกรรมสันทนาการเพื่อสร้างความสัมพันธ์ระหว่างรุ่นพี่รุ่นน้อง
-            </p>
-            <div class="timeline-card-location">
-              <i class="ph-fill ph-map-pin"></i>
-              <span>หอประชุมโรงเรียนมูลนิธิอาซิซสถาน</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. กิจกรรมกีฬาสีภายใน -->
-      <div class="timeline-item" data-category="กีฬา">
-        <div class="timeline-dot blue"></div>
-        <div class="timeline-card">
-          <div class="timeline-card-img-placeholder blue-bg">
-            <i class="ph ph-trophy"></i>
-          </div>
-          <div class="timeline-card-body">
-            <div class="timeline-card-meta">
-              <span class="category-pill blue"><i class="ph-fill ph-trophy"></i> กีฬา</span>
-              <span class="status-badge">✅ จัดงานเรียบร้อยแล้ว</span>
-            </div>
-            <div class="timeline-date">
-              <i class="ph ph-calendar"></i> 20 พฤษภาคม 2569
-            </div>
-            <h3>กิจกรรมกีฬาสีภายใน</h3>
-            <p>
-              การแข่งขันกีฬาสีประจำปี เสริมสร้างความสามัคคีในหมู่นักเรียน
-              มีการแข่งขันฟุตบอล วอลเลย์บอล วิ่ง และกรีฑา พร้อมกิจกรรมเชียร์ลีดเดอร์
-            </p>
-            <div class="timeline-card-location">
-              <i class="ph-fill ph-map-pin"></i>
-              <span>สนามกีฬาโรงเรียนมูลนิธิอาซิซสถาน</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+        <h3>งานเมาลิดนบีมูฮัมมัด ﷺ ประจำปี 2569</h3>
+        <p>รำลึกการประสูติของท่านนบีมูฮัมมัด ﷺ ณ โรงยิมอาซิซสถาน พร้อมกิจกรรมเศาะละวาต และบรรยายศาสนา</p>
+      </a>
     </div>
-
-    <!-- Stats -->
-    <div class="stats-section" style="animation: fadeInUp 0.6s ease 0.7s both;">
-      <div class="stat-item">
-        <div class="stat-number green">3</div>
-        <div class="stat-label">กิจกรรมทั้งหมด</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">1</div>
-        <div class="stat-label">กิจกรรมศาสนา</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number blue">1</div>
-        <div class="stat-label">กีฬา</div>
-      </div>
-    </div>
-
   </main>
 
   <footer class="footer">
