@@ -899,8 +899,8 @@ h3 { font-size: 1.25rem; }
 
 /* ====== School Map Section ====== */
 .school-map-section {
-  padding: 80px 0 60px;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  padding: 50px 0;
+  background: linear-gradient(160deg, #0f172a 0%, #1a2744 100%);
   position: relative;
   overflow: hidden;
 }
@@ -908,239 +908,132 @@ h3 { font-size: 1.25rem; }
 .school-map-section::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 40%, rgba(232, 58, 117, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 58, 117, 0.08), transparent 70%);
+  top: -100px;
+  right: -100px;
   pointer-events: none;
 }
 
-.map-header {
-  text-align: center;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 1;
+.map-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  max-width: 820px;
+  margin: 0 auto;
+  transition: border-color 0.3s ease;
+}
+
+.map-card:hover {
+  border-color: rgba(232, 58, 117, 0.2);
+}
+
+.map-card-left {
+  flex: 1;
+  min-width: 0;
 }
 
 .map-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: linear-gradient(135deg, rgba(232, 58, 117, 0.15), rgba(232, 58, 117, 0.05));
-  border: 1px solid rgba(232, 58, 117, 0.25);
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(232, 58, 117, 0.12);
+  border: 1px solid rgba(232, 58, 117, 0.2);
   border-radius: 100px;
   color: #f472b6;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  margin-bottom: 20px;
-  backdrop-filter: blur(10px);
+  margin-bottom: 16px;
 }
 
-.map-badge i {
-  font-size: 1.1rem;
-}
-
-.map-header h2 {
-  font-size: 2rem;
+.map-card-left h2 {
+  font-size: 1.5rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 12px;
-  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  line-height: 1.3;
 }
 
-.map-header p {
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 1.05rem;
-  max-width: 550px;
-  margin: 0 auto;
-  line-height: 1.7;
+.map-card-left p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 0 0 22px;
 }
 
-.map-frame {
-  position: relative;
-  border-radius: 20px;
+.btn-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--c-primary), #d12c62);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(232, 58, 117, 0.3);
+}
+
+.btn-map:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(232, 58, 117, 0.4);
+}
+
+.map-card-right {
+  flex-shrink: 0;
+  width: 280px;
+  height: 200px;
+  border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.5),
-              0 0 0 1px rgba(255, 255, 255, 0.06);
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.4s ease;
-  z-index: 1;
-  max-width: 900px;
-  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.map-frame:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.6),
-              0 0 0 1px rgba(255, 255, 255, 0.1),
-              0 0 60px -20px rgba(232, 58, 117, 0.15);
-}
-
-.map-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.map-frame:hover .map-image {
+.map-card-right:hover {
   transform: scale(1.03);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
-.map-hover-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(15, 23, 42, 0) 40%,
-    rgba(15, 23, 42, 0.85) 100%
-  );
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 30px;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.map-frame:hover .map-hover-overlay {
-  opacity: 1;
-}
-
-.map-hover-overlay i {
-  font-size: 2.5rem;
-  color: white;
-  background: rgba(232, 58, 117, 0.7);
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.map-hover-overlay span {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-/* Lightbox */
-.map-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
-}
-
-.map-lightbox.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.lightbox-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(20px);
-  z-index: 0;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 3;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.lightbox-close:hover {
-  background: rgba(232, 58, 117, 0.5);
-  transform: scale(1.1);
-}
-
-.lightbox-body {
-  position: relative;
-  z-index: 2;
-  max-width: 92vw;
-  max-height: 82vh;
-  overflow: auto;
-  border-radius: 12px;
-  background: #1e293b;
-  -webkit-overflow-scrolling: touch;
-}
-
-.lightbox-img {
-  display: block;
+.map-card-right img {
   width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
-.lightbox-hint {
-  position: relative;
-  z-index: 2;
-  margin-top: 16px;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.85rem;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 @media (max-width: 768px) {
   .school-map-section {
-    padding: 50px 0 40px;
+    padding: 40px 0;
   }
 
-  .map-header h2 {
-    font-size: 1.5rem;
+  .map-card {
+    flex-direction: column;
+    padding: 28px 22px;
+    gap: 24px;
+    text-align: center;
   }
 
-  .map-header p {
-    font-size: 0.95rem;
+  .map-card-left h2 {
+    font-size: 1.3rem;
   }
 
-  .map-frame {
-    border-radius: 14px;
-  }
-
-  .map-hover-overlay {
-    opacity: 1;
-  }
-
-  .lightbox-body {
-    max-width: 96vw;
-    max-height: 85vh;
-  }
-
-  .lightbox-close {
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
+  .map-card-right {
+    width: 100%;
+    height: 180px;
   }
 }
 
