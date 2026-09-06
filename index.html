@@ -197,6 +197,35 @@
     </section>
   </main>
 
+  <!-- แผนผังโรงเรียน -->
+  <section class="school-map-section">
+    <div class="container">
+      <div class="map-header">
+        <span class="map-badge"><i class="ph-fill ph-map-trifold"></i> แผนผังโรงเรียน</span>
+        <h2>แผนผังภายในโรงเรียนมูลนิธิอาซิซสถาน</h2>
+        <p>ดูตำแหน่งอาคารเรียน สนามกีฬา ห้องสมุด และสิ่งอำนวยความสะดวกต่างๆ ภายในโรงเรียน</p>
+      </div>
+      <div class="map-frame" id="mapFrame" onclick="openMapLightbox()">
+        <img src="assets/school-map.png" alt="แผนผังโรงเรียนมูลนิธิอาซิซสถาน" class="map-image" loading="lazy">
+        <div class="map-hover-overlay">
+          <i class="ph ph-magnifying-glass-plus"></i>
+          <span>คลิกเพื่อดูแบบเต็มจอ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox สำหรับดูแผนที่เต็มจอ -->
+  <div class="map-lightbox" id="mapLightbox" onclick="closeMapLightbox(event)">
+    <button class="lightbox-close" onclick="closeMapLightbox(event)" aria-label="ปิด"><i class="ph ph-x"></i></button>
+    <div class="lightbox-body">
+      <img src="assets/school-map.png" alt="แผนผังโรงเรียนมูลนิธิอาซิซสถาน" class="lightbox-img" id="lightboxImg">
+    </div>
+    <div class="lightbox-hint">
+      <i class="ph ph-arrows-out"></i> ใช้นิ้วซูมหรือเลื่อนดูรายละเอียด • กดที่ใดก็ได้เพื่อปิด
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-contact-section">
@@ -330,6 +359,24 @@
     }
 
     loadHomeData();
+
+    // ====== Lightbox แผนผังโรงเรียน ======
+    function openMapLightbox() {
+      const lb = document.getElementById('mapLightbox');
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMapLightbox(e) {
+      if (e && e.target.closest('.lightbox-img')) return;
+      const lb = document.getElementById('mapLightbox');
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMapLightbox(e);
+    });
   </script>
 </body>
 </html>
