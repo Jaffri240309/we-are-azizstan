@@ -216,14 +216,13 @@
   </section>
 
   <!-- Lightbox สำหรับดูแผนที่เต็มจอ -->
-  <div class="map-lightbox" id="mapLightbox" onclick="closeMapLightbox(event)">
-    <button class="lightbox-close" onclick="closeMapLightbox(event)" aria-label="ปิด"><i class="ph ph-x"></i></button>
-    <div class="lightbox-body">
-      <img src="assets/school-map.png" alt="แผนผังโรงเรียนมูลนิธิอาซิซสถาน" class="lightbox-img" id="lightboxImg">
+  <div class="map-lightbox" id="mapLightbox">
+    <div class="lightbox-backdrop" onclick="closeMapLightbox()"></div>
+    <button class="lightbox-close" onclick="closeMapLightbox()" aria-label="ปิด"><i class="ph ph-x"></i></button>
+    <div class="lightbox-body" onclick="event.stopPropagation()">
+      <img src="assets/school-map.png" alt="แผนผังโรงเรียนมูลนิธิอาซิซสถาน" class="lightbox-img">
     </div>
-    <div class="lightbox-hint">
-      <i class="ph ph-arrows-out"></i> ใช้นิ้วซูมหรือเลื่อนดูรายละเอียด • กดที่ใดก็ได้เพื่อปิด
-    </div>
+    <div class="lightbox-hint">กดปุ่ม ✕ หรือพื้นหลังเพื่อปิด</div>
   </div>
 
   <footer class="footer">
@@ -362,20 +361,17 @@
 
     // ====== Lightbox แผนผังโรงเรียน ======
     function openMapLightbox() {
-      const lb = document.getElementById('mapLightbox');
-      lb.classList.add('active');
+      document.getElementById('mapLightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeMapLightbox(e) {
-      if (e && e.target.closest('.lightbox-img')) return;
-      const lb = document.getElementById('mapLightbox');
-      lb.classList.remove('active');
+    function closeMapLightbox() {
+      document.getElementById('mapLightbox').classList.remove('active');
       document.body.style.overflow = '';
     }
 
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeMapLightbox(e);
+      if (e.key === 'Escape') closeMapLightbox();
     });
   </script>
 </body>
