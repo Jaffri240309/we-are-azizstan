@@ -899,8 +899,99 @@ h3 { font-size: 1.25rem; }
 
 /* ====== School Map Section ====== */
 .school-map-section {
-  padding: 50px 0;
-  background: linear-gradient(160deg, #f0f4ff 0%, #fce8f0 100%);
+  padding: 80px 0 60px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.school-map-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(232, 58, 117, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.map-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.map-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(232, 58, 117, 0.15), rgba(232, 58, 117, 0.05));
+  border: 1px solid rgba(232, 58, 117, 0.25);
+  border-radius: 100px;
+  color: #f472b6;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.map-badge i {
+  font-size: 1.1rem;
+}
+
+.map-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.map-header p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.05rem;
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.map-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.06);
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .school-map-section {
+    padding: 50px 0 40px;
+  }
+  .map-header h2 {
+    font-size: 1.5rem;
+  }
+  .map-header p {
+    font-size: 0.95rem;
+  }
+  .map-frame {
+    border-radius: 14px;
+  }
+}
+
+/* ====== Footer ====== */
   position: relative;
   overflow: hidden;
 }

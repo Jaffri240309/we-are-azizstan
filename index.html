@@ -200,29 +200,16 @@
   <!-- แผนผังโรงเรียน -->
   <section class="school-map-section">
     <div class="container">
-      <div class="map-card">
-        <div class="map-card-left">
-          <span class="map-badge"><i class="ph-fill ph-map-trifold"></i> แผนผัง</span>
-          <h2>แผนผังโรงเรียน</h2>
-          <p>ดูตำแหน่งอาคารเรียน สนามกีฬา ห้องสมุด และสิ่งอำนวยความสะดวกต่างๆ ภายในโรงเรียนมูลนิธิอาซิซสถาน</p>
-          <button class="btn btn-map" onclick="openMapLightbox()">
-            <i class="ph ph-magnifying-glass-plus"></i> ดูแผนผังเต็มจอ
-          </button>
-        </div>
-        <div class="map-card-right" onclick="openMapLightbox()">
-          <img src="assets/school-map.png" alt="แผนผังโรงเรียน" loading="lazy">
-        </div>
+      <div class="map-header">
+        <span class="map-badge"><i class="ph-fill ph-map-trifold"></i> แผนผังโรงเรียน</span>
+        <h2>แผนผังภายในโรงเรียนมูลนิธิอาซิซสถาน</h2>
+        <p>ดูตำแหน่งอาคารเรียน สนามกีฬา ห้องสมุด และสิ่งอำนวยความสะดวกต่างๆ ภายในโรงเรียน</p>
+      </div>
+      <div class="map-frame" id="mapFrame">
+        <img src="assets/school-map.png" alt="แผนผังโรงเรียนมูลนิธิอาซิซสถาน" class="map-image" loading="lazy">
       </div>
     </div>
   </section>
-
-  <!-- Lightbox -->
-  <div id="mapLightbox" style="display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,0.93); cursor:pointer; overflow:auto; -webkit-overflow-scrolling:touch;" onclick="closeMapLightbox()">
-    <button onclick="closeMapLightbox()" style="position:fixed; top:16px; right:16px; z-index:10001; background:rgba(255,255,255,0.15); border:none; color:#fff; width:44px; height:44px; border-radius:50%; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center;" aria-label="ปิด">✕</button>
-    <div style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px;" onclick="event.stopPropagation()">
-      <img src="assets/school-map.png" alt="แผนผังโรงเรียน" style="max-width:95vw; max-height:90vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
-    </div>
-  </div>
 
   <footer class="footer">
     <div class="container">
@@ -357,19 +344,6 @@
     }
 
     loadHomeData();
-
-    // ====== Lightbox แผนผังโรงเรียน ======
-    function openMapLightbox() {
-      document.getElementById('mapLightbox').style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMapLightbox() {
-      document.getElementById('mapLightbox').style.display = 'none';
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeMapLightbox();
-    });
   </script>
 </body>
 </html>
